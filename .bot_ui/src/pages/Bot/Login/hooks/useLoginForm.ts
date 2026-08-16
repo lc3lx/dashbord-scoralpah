@@ -46,11 +46,13 @@ export function useLoginForm() {
       setInfo(null);
       await authService.login(values);
       const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-      const destination = routeAfterAuth(status.botAccess, me.isAdmin);
+      const destination = routeAfterAuth(status.botAccess, me.isAdmin, me.role);
       debugLog('H1+H5', 'useLoginForm.ts:handleSubmit', 'post-login navigate', {
         botAccess: status.botAccess ?? null,
         isAdmin: Boolean(me.isAdmin),
+        role: me.role ?? null,
         destination,
+        baseUrl: String(import.meta.env.BASE_URL ?? ''),
         viaRouteAfterAuth: true,
       });
       navigate(destination, { replace: true });
@@ -77,7 +79,7 @@ export function useLoginForm() {
     try {
       await authService.loginWithTelegram();
       const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-      navigate(routeAfterAuth(status.botAccess, me.isAdmin), { replace: true });
+      navigate(routeAfterAuth(status.botAccess, me.isAdmin, me.role), { replace: true });
     } catch (err) {
       const message =
         err && typeof err === 'object' && 'message' in err

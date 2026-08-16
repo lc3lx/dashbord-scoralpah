@@ -19,7 +19,7 @@ export function useActivationForm() {
   useEffect(() => {
     void Promise.all([accountApi.status(), meApi.get()])
       .then(([status, me]) => {
-        navigate(routeAfterAuth(status.botAccess, me.isAdmin), { replace: true });
+        navigate(routeAfterAuth(status.botAccess, me.isAdmin, me.role), { replace: true });
       })
       .catch(() => {
         navigate(ROUTES.login, { replace: true });
@@ -28,7 +28,7 @@ export function useActivationForm() {
 
   const handleSubmit = useCallback(async (_values: ActivationFormValues) => {
     const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-    navigate(routeAfterAuth(status.botAccess, me.isAdmin));
+    navigate(routeAfterAuth(status.botAccess, me.isAdmin, me.role));
   }, [navigate]);
 
   const form = useAuthForm<ActivationFormValues>({

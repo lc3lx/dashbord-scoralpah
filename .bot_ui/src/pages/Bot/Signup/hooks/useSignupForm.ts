@@ -48,10 +48,11 @@ export function useSignupForm() {
         await binollaApi.connect({ ssid, accountType: 'Demo' });
       }
       const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-      const destination = routeAfterAuth(status.botAccess, me.isAdmin);
+      const destination = routeAfterAuth(status.botAccess, me.isAdmin, me.role);
       debugLog('H1+H5', 'useSignupForm.ts:handleSubmit', 'post-signup navigate', {
         botAccess: status.botAccess ?? null,
         isAdmin: Boolean(me.isAdmin),
+        role: me.role ?? null,
         destination,
       });
       navigate(destination, { replace: true });
@@ -72,7 +73,7 @@ export function useSignupForm() {
   const continueWithTelegram = useCallback(async () => {
     await authService.loginWithTelegram();
     const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-    navigate(routeAfterAuth(status.botAccess, me.isAdmin), { replace: true });
+    navigate(routeAfterAuth(status.botAccess, me.isAdmin, me.role), { replace: true });
   }, [navigate]);
 
   return {

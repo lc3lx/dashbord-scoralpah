@@ -47,7 +47,7 @@ export function useSplashBootstrap() {
         }
 
         const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
-        const destination = routeAfterAuth(status.botAccess, me.isAdmin);
+        const destination = routeAfterAuth(status.botAccess, me.isAdmin, me.role);
         // #region agent log
         fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
           method: 'POST',
@@ -63,6 +63,7 @@ export function useSplashBootstrap() {
             data: {
               botAccess: status.botAccess ?? null,
               isAdmin: Boolean(me.isAdmin),
+              role: me.role ?? null,
               destination,
             },
             timestamp: Date.now(),

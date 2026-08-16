@@ -21,14 +21,30 @@ export function GuestOnly() {
         }
         return;
       }
-      let destination: string = ROUTES.home;
+      let destination: string = ROUTES.login;
       let isAdmin = false;
+      let role: string | null = null;
       try {
         const me = await meApi.get();
-        isAdmin = Boolean(me.isAdmin);
+        isAdmin =
+          Boolean(me.isAdmin) || String(me.role ?? '').toLowerCase() === 'admin';
+        role = me.role ?? null;
         if (isAdmin) destination = ROUTES.admin;
+        else {
+          tokenStore.clear();
+          if (!cancelled) {
+            setAuthed(false);
+            setReady(true);
+          }
+          return;
+        }
       } catch {
-        destination = ROUTES.home;
+        tokenStore.clear();
+        if (!cancelled) {
+          setAuthed(false);
+          setReady(true);
+        }
+        return;
       }
       // #region agent log
       fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
@@ -39,10 +55,11 @@ export function GuestOnly() {
         },
         body: JSON.stringify({
           sessionId: '1892a4',
-          hypothesisId: 'H3',
+          runId: 'post-fix',
+          hypothesisId: 'H3+H6',
           location: 'GuestOnly.tsx',
           message: 'guest-only authed redirect',
-          data: { isAdmin, destination, pathname: location.pathname },
+          data: { isAdmin, role, destination, pathname: location.pathname },
           timestamp: Date.now(),
         }),
       }).catch(() => {});

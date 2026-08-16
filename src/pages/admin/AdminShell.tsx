@@ -24,7 +24,8 @@ export default function AdminShell() {
     (async () => {
       try {
         const me = await meApi.get();
-        const isAdmin = Boolean(me.isAdmin);
+        const isAdmin =
+          Boolean(me.isAdmin) || String(me.role ?? '').toLowerCase() === 'admin';
         // #region agent log
         fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
           method: 'POST',
@@ -34,10 +35,11 @@ export default function AdminShell() {
           },
           body: JSON.stringify({
             sessionId: '1892a4',
+            runId: 'post-fix',
             hypothesisId: 'H4+H5',
             location: 'AdminShell.tsx',
             message: 'admin shell gate',
-            data: { isAdmin, allowed: isAdmin },
+            data: { isAdmin, role: me.role ?? null, allowed: isAdmin },
             timestamp: Date.now(),
           }),
         }).catch(() => {});
@@ -64,7 +66,7 @@ export default function AdminShell() {
   }
 
   if (!allowed) {
-    return <Navigate to={ROUTES.settings} replace />;
+    return <Navigate to={ROUTES.login} replace />;
   }
 
   return (

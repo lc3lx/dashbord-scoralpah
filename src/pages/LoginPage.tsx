@@ -4,14 +4,14 @@
  */
 import { AuthBrand, AuthHero, AuthLegalFooter, AuthShell } from '@features/Auth';
 import { SecurityNotice } from '@components/molecules/SecurityNotice';
-import { useLoginForm } from '@pages/Bot/Login/hooks/useLoginForm';
+import { useDashboardLoginForm } from './hooks/useDashboardLoginForm';
 import { LoginFormSection } from '@pages/Bot/Login/sections/LoginFormSection';
 import { getLoginCopy } from '@pages/Bot/Login/data/login.mock';
 import styles from '@pages/Bot/Login/LoginPage.module.css';
 
 export default function DashboardLoginPage() {
   const copy = getLoginCopy();
-  const form = useLoginForm();
+  const form = useDashboardLoginForm();
 
   return (
     <AuthShell

@@ -1,6 +1,12 @@
 import { lazy } from 'react';
 import { Navigate, type RouteObject } from 'react-router-dom';
-import { AppShell, AuthLayout, BotLayout, GuestOnly, RequireAuth } from '@layouts/index';
+import {
+  AppShell,
+  AuthLayout,
+  DashboardBotLayout,
+  GuestOnly,
+  RequireAuth,
+} from '@layouts/index';
 import { FIGMA_NODES, ROUTES } from '@constants/routes';
 
 const LoginPage = lazy(() => import('../pages/LoginPage'));
@@ -89,7 +95,7 @@ export const appRoutes: RouteObject[] = [
         ],
       },
       {
-        element: <BotLayout />,
+        element: <DashboardBotLayout />,
         children: [
           {
             index: true,
