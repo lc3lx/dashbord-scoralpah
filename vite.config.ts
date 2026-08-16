@@ -114,7 +114,16 @@ export default defineConfig({
     },
   },
   preview: {
+    host: '0.0.0.0',
     port: 4174,
+    // Behind nginx (www.scaralphaai.com → :4174)
+    allowedHosts: [
+      'scaralphaai.com',
+      'www.scaralphaai.com',
+      'www1.scaralphaai.com',
+      'localhost',
+      '127.0.0.1',
+    ],
     proxy: {
       '/api': {
         target: backendTarget,
