@@ -1,0 +1,91 @@
+.shell {
+  min-height: 100%;
+  min-height: 100dvh;
+  height: 100%;
+  height: 100dvh;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  overscroll-behavior-x: none;
+  touch-action: manipulation;
+  background-color: var(--app-background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(196, 54, 54, 0.18), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(40, 20, 20, 0.55), transparent 50%);
+}
+
+.viewport {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: var(--layout-viewport-width);
+  max-width: var(--layout-viewport-max-width);
+  min-height: 0;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  border-radius: var(--app-screen-radius);
+  background-color: var(--color-bg-primary);
+  padding-top: env(safe-area-inset-top, 0px);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+/* Phone: full-bleed like the bot Mini App */
+@media (max-width: 640px) {
+  .shell {
+    justify-content: flex-start;
+    align-items: stretch;
+    background-image: none;
+  }
+
+  .viewport {
+    max-width: 100%;
+    width: 100%;
+    min-height: 0;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+/* Laptop / desktop: taller column, soft frame */
+@media (min-width: 641px) {
+  .shell {
+    padding: 24px 16px;
+  }
+
+  .viewport {
+    flex: 0 1 auto;
+    height: min(920px, calc(100dvh - 48px));
+    max-height: calc(100dvh - 48px);
+    width: 100%;
+  }
+}
+
+.shellAdmin {
+  justify-content: flex-start;
+  align-items: stretch;
+  padding: 0 !important;
+  background-image: none;
+}
+
+.viewportAdmin {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  overflow: auto !important;
+}

@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "@constants/routes": ["src/constants/routes.ts"],
+      "@layouts/*": ["src/layouts/*"],
+      "@router/*": ["src/router/*"],
+      "@/*": ["../bot_telegram_webapp/src/*"],
+      "@assets/*": ["../bot_telegram_webapp/src/assets/*"],
+      "@components/*": ["../bot_telegram_webapp/src/components/*"],
+      "@constants/*": ["../bot_telegram_webapp/src/constants/*"],
+      "@hooks/*": ["../bot_telegram_webapp/src/hooks/*"],
+      "@pages/*": ["../bot_telegram_webapp/src/pages/*"],
+      "@features/*": ["../bot_telegram_webapp/src/features/*"],
+      "@services/*": ["../bot_telegram_webapp/src/services/*"],
+      "@shared/*": ["../bot_telegram_webapp/src/shared/*"],
+      "@styles/*": ["../bot_telegram_webapp/src/styles/*"],
+      "@types/*": ["../bot_telegram_webapp/src/types/*"],
+      "@utils/*": ["../bot_telegram_webapp/src/utils/*"]
+    }
+  },
+  "include": ["src", "../bot_telegram_webapp/src"]
+}

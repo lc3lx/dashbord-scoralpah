@@ -1,0 +1,170 @@
+.pageTitle {
+  margin: 0 0 4px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.pageSub {
+  margin: 0 0 20px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.9rem;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.input,
+.select,
+.textarea {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+}
+
+.input {
+  min-width: 180px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  background: rgba(196, 54, 54, 0.85);
+  color: #fff;
+}
+
+.btnSecondary {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btnDanger {
+  background: rgba(160, 40, 40, 0.9);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tableWrap {
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: top;
+}
+
+.table th {
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.muted {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.error {
+  color: #ff8a8a;
+  margin: 8px 0;
+}
+
+.panel {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.link {
+  color: #ff9b9b;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.pager {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.badgeOk {
+  background: rgba(40, 140, 80, 0.35);
+}
+
+.badgeWarn {
+  background: rgba(180, 120, 30, 0.4);
+}
+
+.badgeBad {
+  background: rgba(160, 40, 40, 0.4);
+}
+
+.rowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+}

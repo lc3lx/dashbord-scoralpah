@@ -1,0 +1,35 @@
+/**
+ * Website dashboard responsive tokens.
+ * Loaded after bot theme tokens so these overrides win on larger screens.
+ */
+
+@media (max-width: 640px) {
+  :root {
+    --layout-viewport-max-width: 100%;
+    --layout-viewport-min-height: 100dvh;
+    --layout-content-max-width: 100%;
+  }
+}
+
+@media (min-width: 641px) {
+  :root {
+    --layout-viewport-max-width: 480px;
+    --layout-content-max-width: 440px;
+    --layout-viewport-min-height: 0;
+    --app-screen-radius: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layout-viewport-max-width: 560px;
+    --layout-content-max-width: 520px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --layout-viewport-max-width: 640px;
+    --layout-content-max-width: 600px;
+  }
+}
