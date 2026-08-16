@@ -136,12 +136,15 @@ main() {
     restart)
       ensure_pm2
       export DASHBOARD_PORT
+      # Full recreate so vite.config.ts (allowedHosts, etc.) is reloaded
       if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
-        pm2 restart "$APP_NAME" --update-env
-      else
-        build_dash
-        pm2_start_or_restart
+        pm2 delete "$APP_NAME" >/dev/null 2>&1 || true
       fi
+      pm2 start "$ROOT/ecosystem.config.cjs" --update-env
+      pm2 save
+      ok "Dashboard recreated"
+      sleep 1
+      curl -fsSI "http://127.0.0.1:${DASHBOARD_PORT}/dashboard/" | head -n 5 || echo "WARN: check pm2 logs $APP_NAME"
       ;;
     stop)
       ensure_pm2

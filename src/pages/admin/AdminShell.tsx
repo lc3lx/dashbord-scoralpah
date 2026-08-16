@@ -24,8 +24,26 @@ export default function AdminShell() {
     (async () => {
       try {
         const me = await meApi.get();
+        const isAdmin = Boolean(me.isAdmin);
+        // #region agent log
+        fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Debug-Session-Id': '1892a4',
+          },
+          body: JSON.stringify({
+            sessionId: '1892a4',
+            hypothesisId: 'H4+H5',
+            location: 'AdminShell.tsx',
+            message: 'admin shell gate',
+            data: { isAdmin, allowed: isAdmin },
+            timestamp: Date.now(),
+          }),
+        }).catch(() => {});
+        // #endregion
         if (!cancelled) {
-          setAllowed(Boolean(me.isAdmin));
+          setAllowed(isAdmin);
           setChecking(false);
         }
       } catch {

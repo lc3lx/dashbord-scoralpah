@@ -1,8 +1,8 @@
 import { useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
-import { accountApi } from '@shared/api';
-import { routeForBotAccess } from '@shared/access/botAccess';
+import { accountApi, meApi } from '@shared/api';
+import { routeAfterAuth } from '@shared/access/botAccess';
 import {
   useAuthForm,
   validateActivationForm,
@@ -17,10 +17,9 @@ export function useActivationForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    void accountApi
-      .status()
-      .then((status) => {
-        navigate(routeForBotAccess(status.botAccess), { replace: true });
+    void Promise.all([accountApi.status(), meApi.get()])
+      .then(([status, me]) => {
+        navigate(routeAfterAuth(status.botAccess, me.isAdmin), { replace: true });
       })
       .catch(() => {
         navigate(ROUTES.login, { replace: true });
@@ -28,8 +27,8 @@ export function useActivationForm() {
   }, [navigate]);
 
   const handleSubmit = useCallback(async (_values: ActivationFormValues) => {
-    const status = await accountApi.status();
-    navigate(routeForBotAccess(status.botAccess));
+    const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
+    navigate(routeAfterAuth(status.botAccess, me.isAdmin));
   }, [navigate]);
 
   const form = useAuthForm<ActivationFormValues>({

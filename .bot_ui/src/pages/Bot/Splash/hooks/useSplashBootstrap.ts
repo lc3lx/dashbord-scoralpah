@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '@constants/routes';
-import { accountApi, ApiClientError } from '@shared/api';
+import { accountApi, ApiClientError, meApi } from '@shared/api';
 import { tokenStore } from '@shared/auth/tokenStore';
 import { authService } from '@features/Auth';
 import { t } from '@shared/i18n';
 import { isOnboardingDone } from '@shared/onboarding/onboardingStorage';
-import { routeForBotAccess } from '@shared/access/botAccess';
+import { routeAfterAuth } from '@shared/access/botAccess';
 import { bootstrapTelegramWebApp, hasTelegramInitData } from '@shared/telegram/telegramWebApp';
 
 const SPLASH_MIN_MS = 1200;
@@ -46,8 +46,30 @@ export function useSplashBootstrap() {
           }
         }
 
-        const status = await accountApi.status();
-        await finish(routeForBotAccess(status.botAccess));
+        const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
+        const destination = routeAfterAuth(status.botAccess, me.isAdmin);
+        // #region agent log
+        fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Debug-Session-Id': '1892a4',
+          },
+          body: JSON.stringify({
+            sessionId: '1892a4',
+            hypothesisId: 'H2+H5',
+            location: 'useSplashBootstrap.ts',
+            message: 'splash post-auth navigate',
+            data: {
+              botAccess: status.botAccess ?? null,
+              isAdmin: Boolean(me.isAdmin),
+              destination,
+            },
+            timestamp: Date.now(),
+          }),
+        }).catch(() => {});
+        // #endregion
+        await finish(destination);
       } catch (err) {
         tokenStore.clear();
         const message =
