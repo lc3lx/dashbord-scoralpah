@@ -1,0 +1,59 @@
+.iconTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: var(--gradient-brand-tile);
+  border-radius: var(--trading-brand-icon-radius);
+}
+
+.iconTileHeader {
+  width: var(--trading-brand-icon-size);
+  height: var(--trading-brand-icon-size);
+}
+
+.iconTileSignal {
+  width: var(--trading-signal-icon-size);
+  height: var(--trading-signal-icon-size);
+}
+
+.sIcon {
+  display: block;
+  width: 17.84px;
+  height: 14.31px;
+  object-fit: contain;
+}
+
+.wordmark {
+  position: relative;
+  display: block;
+  width: var(--trading-brand-text-width);
+  height: var(--trading-brand-text-height);
+  flex-shrink: 0;
+}
+
+.scar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 76.21px;
+  height: 13.06px;
+  object-fit: contain;
+}
+
+.alphaAi {
+  position: absolute;
+  top: 17.54px;
+  left: 1.14px;
+  display: block;
+  width: 73.82px;
+  height: 7.31px;
+  object-fit: contain;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}

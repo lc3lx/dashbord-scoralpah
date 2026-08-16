@@ -1,0 +1,11 @@
+/**
+ * Progress bar tokens — Onboarding (node 82:346).
+ */
+:root {
+  --progress-dot-height: 3.983px;
+  --progress-dot-active-width: 23.992px;
+  --progress-dot-inactive-width: 9.995px;
+  --progress-dot-gap: 6px;
+  --progress-dot-active-color: var(--color-red-primary);
+  --progress-dot-inactive-color: rgba(255, 255, 255, 0.6);
+}

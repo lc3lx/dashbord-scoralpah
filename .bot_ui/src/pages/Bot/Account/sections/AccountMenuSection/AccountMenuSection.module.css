@@ -1,0 +1,86 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.card,
+.logoutCard {
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--account-card-radius);
+  background: var(--color-bg-surface-dark);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-4);
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: transparent;
+  cursor: pointer;
+  text-align: start;
+}
+
+.row[data-last='true'] {
+  border-bottom: none;
+}
+
+.row:focus-visible,
+.logoutCard:focus-visible {
+  outline: 2px solid var(--color-red-primary);
+  outline-offset: -2px;
+}
+
+.leading,
+.logoutLeading {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  min-width: 0;
+}
+
+.iconWrap,
+.logoutIconWrap {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--account-row-icon-size);
+  height: var(--account-row-icon-size);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.logoutIconWrap {
+  background: rgba(251, 44, 54, 0.1);
+}
+
+.trailing {
+  display: flex;
+  flex-shrink: 0;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.label,
+.logoutLabel {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.chevron {
+  opacity: 0.8;
+}
+
+.logoutCard {
+  display: flex;
+  width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  cursor: pointer;
+}

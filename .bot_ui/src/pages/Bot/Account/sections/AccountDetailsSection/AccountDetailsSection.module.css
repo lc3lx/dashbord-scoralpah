@@ -1,0 +1,52 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  overflow: hidden;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--account-card-radius);
+  background: var(--color-bg-surface-dark);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.row[data-last='true'] {
+  border-bottom: none;
+}
+
+.iconWrap {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--account-row-icon-size);
+  height: var(--account-row-icon-size);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.label {
+  color: #666;
+  font-size: 11px;
+  line-height: 16.5px;
+}
+
+.value {
+  font-size: 13px;
+  line-height: 19.5px;
+}

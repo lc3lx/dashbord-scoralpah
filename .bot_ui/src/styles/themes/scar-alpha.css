@@ -1,0 +1,14 @@
+/**
+ * Scar Alpha Bot — application theme (maps tokens to semantic roles).
+ */
+@import '../tokens/index.css';
+
+:root {
+  /* Semantic aliases */
+  --app-background: var(--color-bg-primary);
+  --app-text: var(--color-text-primary);
+  --app-font: var(--font-family-primary);
+  --app-max-width: var(--layout-viewport-max-width);
+  --app-content-width: var(--layout-content-width);
+  --app-screen-radius: var(--radius-screen);
+}

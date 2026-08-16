@@ -1,0 +1,73 @@
+.page {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-screen);
+}
+
+.header {
+  position: relative;
+  z-index: var(--z-header);
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.skipRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: var(--onboarding-skip-row-padding-top) var(--onboarding-skip-inset-right) 0
+    var(--layout-page-padding-x);
+}
+
+.skipButton {
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.skipLabel {
+  display: block;
+  font-family: var(--font-family-primary);
+  font-size: var(--onboarding-skip-font-size);
+  line-height: var(--onboarding-skip-line-height);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-skip);
+}
+
+.body {
+  position: relative;
+  z-index: var(--z-elevated);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  padding-top: var(--onboarding-content-top-gap);
+}
+
+.bodyStepTwo {
+  padding-top: var(--onboarding-step-two-content-top-gap);
+}
+
+.bodyStepThree {
+  padding-top: var(--onboarding-step-three-content-top-gap);
+}
+
+@media (max-width: 480px) {
+  .page {
+    border-radius: 0;
+  }
+}

@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: var(--home-limit-card-height);
+  padding: var(--space-9);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--card-border-radius);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.label {
+  font-size: var(--font-size-xs);
+}
+
+.value {
+  padding-top: var(--space-1);
+  font-size: var(--font-size-lg);
+  line-height: 27px;
+  letter-spacing: -0.45px;
+}
+
+.valueProfit {
+  color: var(--color-success-light);
+}
+
+.valueLoss {
+  color: var(--color-red-link);
+}
+
+.hint {
+  color: var(--color-text-caption);
+  font-size: var(--font-size-2xs);
+  line-height: 15px;
+}

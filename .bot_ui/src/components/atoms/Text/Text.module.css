@@ -1,0 +1,164 @@
+.text {
+  margin: 0;
+}
+
+.variantDisplay {
+  font-family: var(--font-family-primary);
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 32.2px;
+  letter-spacing: -0.56px;
+}
+
+.variantH1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-8xl);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.variantH2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-7xl);
+  letter-spacing: -0.5px;
+}
+
+.variantH3 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  line-height: var(--line-height-7xl);
+  letter-spacing: -0.56px;
+}
+
+.variantBody {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-2xl);
+}
+
+.variantBodySm {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-lg);
+}
+
+.variantCaption {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+}
+
+.variantCaptionXs {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-xs);
+}
+
+.variantLabel {
+  font-family: var(--font-family-primary);
+  font-size: var(--input-label-font-size);
+  font-weight: var(--input-label-font-weight);
+  line-height: var(--input-label-line-height);
+  letter-spacing: var(--input-label-letter-spacing);
+}
+
+.variantNav {
+  font-family: var(--font-family-primary);
+  font-size: var(--nav-label-font-size);
+  font-weight: var(--nav-label-font-weight);
+  line-height: var(--nav-label-line-height);
+}
+
+.tonePrimary {
+  color: var(--color-text-primary);
+}
+
+.toneSecondary {
+  color: var(--color-text-secondary);
+}
+
+.toneBody {
+  color: var(--color-text-body);
+}
+
+.toneMuted {
+  color: var(--color-text-muted);
+}
+
+.tonePlaceholder {
+  color: var(--color-text-placeholder);
+}
+
+.toneCaption {
+  color: var(--color-text-caption);
+}
+
+.toneFooter {
+  color: var(--color-text-footer);
+}
+
+.toneLink {
+  color: var(--color-red-link);
+}
+
+.toneSuccess {
+  color: var(--color-success-light);
+}
+
+.toneDanger {
+  color: var(--color-red-primary);
+}
+
+.toneWarning {
+  color: var(--color-yellow-warning);
+}
+
+.toneInfo {
+  color: var(--color-info-light);
+}
+
+.toneNavActive {
+  color: var(--color-text-nav-active);
+}
+
+.toneOnboarding {
+  color: var(--color-text-onboarding);
+}
+
+.toneSkip {
+  color: var(--color-text-skip);
+}
+
+.toneConnector {
+  color: var(--color-text-connector);
+}
+
+.toneDisclaimer {
+  color: var(--color-text-disclaimer);
+}
+
+.alignLeft {
+  text-align: start;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: end;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

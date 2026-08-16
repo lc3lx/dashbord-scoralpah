@@ -1,0 +1,86 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--color-border-default);
+  border-radius: var(--radius-panel);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 10px 12px 11.18px;
+  border-bottom: var(--card-border-width) solid var(--color-border-default);
+}
+
+.pairInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.chartIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19.99px;
+  height: 19.99px;
+  background: var(--color-text-primary);
+  border-radius: var(--space-1);
+  flex-shrink: 0;
+}
+
+.timer {
+  font-weight: var(--font-weight-semibold);
+  flex-shrink: 0;
+}
+
+.chartWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 15px;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  max-width: 339px;
+  height: auto;
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-5);
+  padding: 12px;
+}
+
+.tradeButton {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.upButton {
+  background: var(--color-success);
+}
+
+.downButton {
+  background: var(--color-red-primary);
+}
+
+.tradeLabel {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-base);
+}

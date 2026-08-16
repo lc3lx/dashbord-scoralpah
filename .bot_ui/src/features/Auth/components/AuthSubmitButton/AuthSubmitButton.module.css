@@ -1,0 +1,15 @@
+.submit {
+  transition: opacity 0.15s ease;
+}
+
+.loading {
+  opacity: var(--auth-submit-loading-opacity);
+}
+
+.success {
+  opacity: 1;
+}
+
+.error {
+  opacity: 1;
+}

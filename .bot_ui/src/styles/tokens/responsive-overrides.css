@@ -1,0 +1,27 @@
+/**
+ * Must load after other token files so media-query overrides win the cascade.
+ */
+
+@media (max-width: 360px) {
+  :root {
+    --layout-page-padding-x: 12px;
+    --layout-bottom-nav-item-width: 52px;
+    --layout-bottom-nav-item-height: 70px;
+    --nav-bottom-item-padding-x: 4px;
+    --nav-bottom-item-padding-y: 10px;
+    --nav-bottom-item-gap: 2px;
+    --nav-bottom-column-gap: 2px;
+    --nav-bottom-fab-zone-width: 68px;
+    --nav-bottom-inset-left: 4px;
+    --nav-bottom-inset-right: 4px;
+    --nav-label-font-size: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --layout-viewport-max-width: 100%;
+    --layout-viewport-min-height: 100dvh;
+    --layout-content-max-width: 100%;
+  }
+}

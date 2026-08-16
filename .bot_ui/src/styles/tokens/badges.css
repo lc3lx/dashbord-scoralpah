@@ -1,0 +1,22 @@
+/**
+ * Badge / status pill tokens — Activation, Home, Trade cards.
+ */
+:root {
+  --badge-dot-size: var(--chip-dot-size);
+  --badge-padding-x: var(--space-3);
+  --badge-padding-y: 3px;
+  --badge-gap: 6px;
+  --badge-font-size: 10px;
+  --badge-line-height: 15px;
+  --badge-font-weight: var(--font-weight-medium);
+  --badge-border-width: 1.18px;
+  --badge-border-radius: var(--radius-chip);
+
+  /* Solid chip */
+  --chip-solid-padding-x: var(--space-3);
+  --chip-solid-padding-y: 3px;
+
+  /* Outlined chip */
+  --chip-outlined-padding-x: 9.18px;
+  --chip-outlined-padding-y: 4.18px;
+}

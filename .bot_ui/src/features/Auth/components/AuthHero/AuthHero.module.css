@@ -1,0 +1,19 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.inset {
+  padding-inline: var(--login-hero-inset-x);
+}
+
+.title {
+  width: 100%;
+}
+
+.description {
+  width: 100%;
+  padding-top: var(--login-description-padding-top);
+}

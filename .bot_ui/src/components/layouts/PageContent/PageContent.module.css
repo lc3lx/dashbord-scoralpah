@@ -1,0 +1,14 @@
+.content {
+  width: 100%;
+  max-width: var(--layout-content-max-width);
+  min-width: 0;
+  margin-inline: auto;
+  padding-inline: var(--layout-page-padding-x);
+  box-sizing: border-box;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

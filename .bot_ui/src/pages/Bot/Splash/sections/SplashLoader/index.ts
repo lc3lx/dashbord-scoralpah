@@ -1,0 +1,1 @@
+export { SplashLoader } from './SplashLoader';

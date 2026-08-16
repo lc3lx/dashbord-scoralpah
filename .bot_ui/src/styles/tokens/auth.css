@@ -1,0 +1,22 @@
+/**
+ * Shared authentication tokens — Login / Signup / Activation.
+ */
+:root {
+  --auth-logo-icon-width: 65.365px;
+  --auth-logo-icon-height: 52.353px;
+  --auth-logo-alpha-width: 92.178px;
+  --auth-logo-alpha-height: 15.733px;
+  --auth-logo-scar-width: 89.324px;
+  --auth-logo-scar-height: 8.827px;
+  --auth-logo-gap-icon-alpha: 5.244px;
+  --auth-logo-gap-alpha-scar: 5.417px;
+
+  --auth-content-max-width: calc(
+    var(--layout-content-max-width) + (2 * var(--layout-page-padding-x))
+  );
+  --auth-field-error-padding-top: var(--space-2);
+  --auth-field-error-font-size: var(--font-size-2xs);
+  --auth-field-error-line-height: var(--line-height-xs);
+  --auth-server-error-padding-top: var(--space-3);
+  --auth-submit-loading-opacity: 0.85;
+}

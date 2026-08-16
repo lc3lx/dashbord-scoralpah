@@ -1,0 +1,24 @@
+.body {
+  padding-top: var(--signup-content-top-gap);
+}
+
+.brandSection {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.heroSection {
+  width: 100%;
+  padding-top: var(--signup-brand-to-hero-gap);
+}
+
+.heroDescription {
+  min-height: var(--signup-description-height);
+  box-sizing: border-box;
+}
+
+.formSection {
+  width: 100%;
+  padding-top: var(--signup-form-padding-top);
+}

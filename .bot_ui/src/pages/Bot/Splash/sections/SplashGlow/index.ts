@@ -1,0 +1,1 @@
+export { SplashGlow } from './SplashGlow';

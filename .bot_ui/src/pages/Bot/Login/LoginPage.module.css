@@ -1,0 +1,19 @@
+.body {
+  padding-top: var(--login-content-top-gap);
+}
+
+.brandSection {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.heroSection {
+  width: 100%;
+  padding-top: var(--login-brand-to-hero-gap);
+}
+
+.securitySection {
+  width: 100%;
+  padding-top: var(--login-security-padding-top);
+}

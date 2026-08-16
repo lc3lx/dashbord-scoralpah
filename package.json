@@ -4,9 +4,13 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "sync:bot-ui": "node scripts/sync-bot-ui.mjs",
+    "prebuild": "node scripts/ensure-bot-ui.mjs",
+    "predev": "node scripts/ensure-bot-ui.mjs",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
+    "start:pm2": "bash ./start-dashboard-pm2.sh",
     "typecheck": "tsc -b --pretty false"
   },
   "dependencies": {

@@ -1,0 +1,35 @@
+.formRoot {
+  width: 100%;
+}
+
+.form {
+  width: 100%;
+}
+
+/* Figma field block = 16pt + 25 label + 51.326 input = 92.326 */
+.form :global(label) {
+  height: var(--signup-label-height);
+  box-sizing: border-box;
+}
+
+.form :global(input) {
+  height: var(--signup-input-height);
+}
+
+.actions {
+  width: 100%;
+  padding-top: var(--signup-actions-padding-top);
+}
+
+.help {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.registerLink {
+  color: #f87171;
+  font-weight: 600;
+  text-decoration: underline;
+}

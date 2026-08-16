@@ -1,0 +1,103 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--trading-signal-card-padding);
+  background: var(--trading-signal-card-gradient);
+  border-radius: var(--trading-card-radius);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 28px;
+}
+
+.freshChip {
+  margin-inline-start: auto;
+  min-height: var(--trading-chip-height);
+  padding: 3px 8px;
+  gap: 6px;
+}
+
+.statsBlock {
+  padding-top: 12px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 12px;
+  row-gap: 8px;
+}
+
+.statCell,
+.marketRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 4px 0 5.18px;
+  border-bottom: var(--trading-card-border-width) solid var(--trading-card-divider-color);
+}
+
+.marketRow {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.statLabel {
+  color: var(--trading-stat-label-color);
+  line-height: 18px;
+  min-width: 0;
+}
+
+.statValue {
+  line-height: 18px;
+  text-align: end;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.signalValue {
+  display: inline-flex;
+  align-items: baseline;
+  color: var(--trading-stat-value-color);
+  white-space: nowrap;
+}
+
+.signalUp {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: 18px;
+}
+
+.signalArrow {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 18px;
+}
+
+.cta {
+  width: 100%;
+  min-height: var(--trading-cta-height);
+  margin-top: 12px;
+  padding: 12px;
+  background: var(--color-text-primary);
+  border: none;
+  border-radius: var(--trading-cta-radius);
+  color: var(--color-red-primary);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 22.5px;
+  letter-spacing: -0.15px;
+}

@@ -1,0 +1,43 @@
+.option {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  width: 100%;
+  min-height: 76px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  background: #171315;
+  text-align: start;
+  cursor: pointer;
+}
+
+.option:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.selected {
+  border-color: rgba(230, 0, 20, 0.72);
+  background: linear-gradient(110deg, rgba(175, 0, 16, 0.24), #171315 65%);
+}
+
+.check {
+  flex-shrink: 0;
+  margin-top: var(--space-1);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  font-size: var(--font-size-xs);
+}

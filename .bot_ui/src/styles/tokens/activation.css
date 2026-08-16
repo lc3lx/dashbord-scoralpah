@@ -1,0 +1,19 @@
+/**
+ * Activation screen tokens — Figma node 113:4335 (design reference at 402px).
+ */
+:root {
+  --activation-content-top-gap: 30px;
+  --activation-brand-to-hero-gap: 26.45px;
+  --activation-description-height: 24px;
+  --activation-card-padding-top: var(--space-10);
+  --activation-form-padding-y: var(--space-10);
+  --activation-panel-min-height: 128.442px;
+  --activation-control-inset-x: var(--space-2);
+  --activation-hint-padding-top: 20px;
+  --activation-content-padding-bottom: 40px;
+  --activation-input-height: 51.326px;
+  --activation-label-height: 25px;
+  --activation-hint-color: var(--color-text-subtle);
+  --activation-hint-font-size: var(--font-size-xs);
+  --activation-hint-line-height: 16.5px;
+}

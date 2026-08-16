@@ -1,0 +1,32 @@
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: var(--gradient-button-primary);
+}
+
+.sm {
+  width: var(--icon-size-trade-container);
+  height: var(--icon-size-trade-container);
+  border-radius: var(--radius-card);
+}
+
+.md {
+  width: var(--icon-size-avatar-tile);
+  height: var(--icon-size-avatar-tile);
+  border-radius: var(--radius-card);
+}
+
+.lg {
+  width: var(--icon-size-avatar-tile);
+  height: var(--icon-size-avatar-tile);
+  border-radius: var(--radius-card);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

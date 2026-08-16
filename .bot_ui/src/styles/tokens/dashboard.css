@@ -1,0 +1,12 @@
+/**
+ * Dashboard (Home tab) tokens — Figma 113:4633
+ */
+:root {
+  --dashboard-scroll-padding-bottom: var(--layout-bot-scroll-padding-bottom);
+  --dashboard-balance-bg: #200e0e;
+  --dashboard-balance-border: rgba(51, 0, 1, 0.7);
+  --dashboard-balance-muted: #bcbcbc;
+  --dashboard-stat-secondary: #9a9a9a;
+  --dashboard-divider: rgba(221, 9, 18, 0.35);
+  --dashboard-header-glow-height: 391px;
+}

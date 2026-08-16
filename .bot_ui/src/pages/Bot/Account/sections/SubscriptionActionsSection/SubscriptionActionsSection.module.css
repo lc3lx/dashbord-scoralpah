@@ -1,0 +1,10 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.secondary {
+  min-height: 47px;
+}

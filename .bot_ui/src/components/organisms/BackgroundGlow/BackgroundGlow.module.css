@@ -1,0 +1,35 @@
+.glow {
+  position: absolute;
+  pointer-events: none;
+  z-index: var(--z-base);
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.center {
+  left: 50%;
+  top: 50%;
+  width: var(--glow-center-size);
+  height: var(--glow-center-size);
+  transform: translate(-50%, -50%);
+}
+
+.topRight {
+  left: calc(50% + 32.71%);
+  top: -37.53%;
+  width: min(var(--glow-shape-width), 92.79vw);
+  height: min(var(--glow-shape-height), 82.84vh);
+  transform: translateX(-50%);
+}
+
+.bottom {
+  left: 50%;
+  top: calc(50% + var(--glow-bottom-offset-y));
+  width: var(--glow-bottom-width);
+  height: var(--glow-bottom-height);
+  transform: translate(-50%, -50%) rotate(90deg);
+}

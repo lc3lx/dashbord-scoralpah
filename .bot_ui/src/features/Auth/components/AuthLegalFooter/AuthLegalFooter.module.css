@@ -1,0 +1,15 @@
+.footer {
+  margin: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xs);
+  line-height: var(--line-height-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-text-footer);
+  text-align: center;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-position: from-font;
+}

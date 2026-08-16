@@ -1,0 +1,31 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--trading-detail-card-bg);
+  border: var(--trading-card-border-width) solid var(--trading-detail-card-border-color);
+  border-radius: var(--trading-card-radius);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  border-bottom: var(--trading-card-border-width) solid var(--trading-card-divider-color);
+}
+
+.row[data-last='true'] {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.row:first-child {
+  padding-top: 0;
+}

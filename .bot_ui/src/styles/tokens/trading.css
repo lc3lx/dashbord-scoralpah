@@ -1,0 +1,60 @@
+/**
+ * Trading screen tokens — Figma nodes 210:614, 222:1810
+ */
+:root {
+  --trading-content-padding-top: 12px;
+  --trading-header-card-gap: 22px;
+  --trading-section-gap: 16px;
+  --trading-scroll-padding-bottom: var(--layout-bot-scroll-padding-bottom);
+  --trading-detail-scroll-padding-bottom: var(--space-6);
+  --trading-top-bar-height: 32px;
+  --trading-brand-icon-size: 33px;
+  --trading-brand-icon-radius: 10px;
+  --trading-brand-text-width: 76.21px;
+  --trading-brand-text-height: 24.85px;
+  --trading-chip-height: 21px;
+  --trading-action-button-size: 32px;
+  --trading-action-button-radius: 10px;
+  --trading-action-button-bg: rgba(255, 255, 255, 0.1);
+  --trading-action-icon-size: 14px;
+  --trading-card-radius: 16px;
+  --trading-card-border-width: 1.18px;
+  --trading-card-border-color: rgba(255, 255, 255, 0.1);
+  --trading-card-divider-color: rgba(255, 255, 255, 0.05);
+  --trading-binolla-card-bg: #0a0405;
+  --trading-binolla-card-height: 420px;
+  --trading-binolla-header-bg: rgba(255, 255, 255, 0.02);
+  --trading-platform-icon-size: 24px;
+  --trading-platform-icon-radius: 4px;
+  --trading-price-color: #00d492;
+  --trading-field-label-color: #666666;
+  --trading-field-label-size: 10px;
+  --trading-field-label-line-height: 15px;
+  --trading-field-height: 43.35px;
+  --trading-field-bg: rgba(255, 255, 255, 0.05);
+  --trading-field-border-color: rgba(255, 255, 255, 0.1);
+  --trading-field-radius: 10px;
+  --trading-chart-height: 160px;
+  --trading-trade-button-height: 45px;
+  --trading-trade-button-radius: 10px;
+  --trading-trade-down-bg: #dd0912;
+  --trading-signal-card-padding: 20px 15px 20px 20px;
+  --trading-signal-card-gradient: linear-gradient(
+    143.07deg,
+    rgba(93, 6, 8, 0.22) 0%,
+    rgb(221, 9, 18) 153.67%
+  );
+  --trading-signal-icon-size: 28px;
+  --trading-signal-icon-radius: 10px;
+  --trading-stat-label-color: #aeaeae;
+  --trading-stat-value-color: #22c55e;
+  --trading-cta-height: 47px;
+  --trading-cta-radius: 14px;
+  --trading-detail-card-bg: #0b0708;
+  --trading-detail-card-border-color: rgba(255, 255, 255, 0.06);
+  --trading-detail-hero-height: 232px;
+  --trading-detail-direction-size: 48px;
+  --trading-detail-direction-radius: 14px;
+  --trading-timeline-dot-wrap-width: 24px;
+  --trading-timeline-dot-size: 10px;
+}

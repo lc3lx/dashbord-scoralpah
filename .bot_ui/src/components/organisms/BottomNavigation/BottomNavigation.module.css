@@ -1,0 +1,107 @@
+.nav {
+  position: relative;
+  flex-shrink: 0;
+  width: 100%;
+  /* Only the visible bar participates in layout. The curved upper part and
+     FAB are painted above it, so they do not leave an empty black block. */
+  height: var(--nav-bottom-bar-height);
+  z-index: var(--z-bottom-nav);
+  background-color: transparent;
+  overflow: visible;
+}
+
+.union {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  width: 100%;
+  height: var(--nav-bottom-height);
+  object-fit: fill;
+  object-position: bottom center;
+  pointer-events: none;
+}
+
+.items {
+  position: absolute;
+  inset-inline-start: var(--nav-bottom-inset-left);
+  inset-inline-end: var(--nav-bottom-inset-right);
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  width: auto;
+  max-width: 100%;
+  min-width: 0;
+  height: var(--nav-bottom-bar-height);
+  overflow: hidden;
+}
+
+.gap {
+  flex: 0 0 auto;
+  width: var(--nav-bottom-column-gap);
+  max-width: var(--nav-bottom-column-gap);
+}
+
+.fabSpacer {
+  flex: 0 1 auto;
+  width: var(--nav-bottom-fab-zone-width);
+  min-width: 56px;
+  max-width: var(--nav-bottom-fab-zone-width);
+}
+
+.tradesIcon {
+  width: var(--nav-icon-size-trades-w);
+  height: var(--nav-icon-size-trades-h);
+}
+
+.fab {
+  position: absolute;
+  top: calc(
+    var(--nav-fab-top) - (var(--nav-bottom-height) - var(--nav-bottom-bar-height))
+  );
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--nav-fab-size);
+  height: var(--nav-fab-size);
+  padding: 0;
+  background: var(--nav-fab-background);
+  border: none;
+  border-radius: var(--radius-fab);
+  box-shadow: var(--nav-fab-shadow);
+  cursor: pointer;
+  transform: translateX(-50%);
+}
+
+.fabIcon {
+  width: var(--nav-fab-icon-width);
+  height: var(--nav-fab-icon-height);
+}
+
+.fabLabel {
+  position: absolute;
+  inset-inline-start: 50%;
+  bottom: 15px;
+  width: var(--nav-bottom-fab-zone-width);
+  overflow: hidden;
+  color: var(--color-text-muted);
+  font-family: var(--font-family-primary);
+  font-size: var(--nav-label-font-size);
+  font-weight: var(--nav-label-font-weight);
+  line-height: var(--nav-label-height);
+  pointer-events: none;
+  text-align: center;
+  text-overflow: ellipsis;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.fabLabelActive {
+  color: var(--color-text-nav-active);
+}
+
+.fab:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,32 @@
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--splash-logo-alpha-width);
+}
+
+.partIcon,
+.partAlpha,
+.partScar {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.partIcon {
+  width: min(var(--splash-logo-icon-width), 33.51vw);
+  aspect-ratio: 134.7055206298828 / 108.01818084716797;
+}
+
+.partAlpha {
+  width: min(var(--splash-logo-alpha-width), 47.26vw);
+  aspect-ratio: 190 / 32.559207916259766;
+  margin-top: var(--splash-logo-gap-icon-alpha);
+}
+
+.partScar {
+  width: min(var(--splash-logo-scar-width), 45.78vw);
+  aspect-ratio: 184.04354858398438 / 18.22515869140625;
+  margin-top: var(--splash-logo-gap-alpha-scar);
+}

@@ -1,0 +1,8 @@
+.header {
+  margin-bottom: var(--space-1);
+}
+
+.markAll {
+  min-width: auto;
+  padding: 0;
+}

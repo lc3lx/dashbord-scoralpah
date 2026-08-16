@@ -1,0 +1,94 @@
+.footer {
+  position: relative;
+  z-index: var(--z-elevated);
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--onboarding-footer-gap);
+  width: 100%;
+  padding: var(--onboarding-footer-padding-top) var(--layout-page-padding-x)
+    var(--onboarding-footer-padding-bottom);
+}
+
+.footerNav {
+  gap: var(--onboarding-footer-nav-gap);
+  padding-top: var(--onboarding-footer-nav-padding-top);
+  padding-bottom: var(--onboarding-footer-nav-padding-bottom);
+}
+
+.navRow {
+  display: flex;
+  align-items: center;
+  gap: var(--onboarding-nav-button-gap);
+  width: 100%;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--onboarding-back-button-gap);
+  width: var(--onboarding-back-button-width);
+  height: var(--button-primary-height);
+  flex-shrink: 0;
+  border-radius: var(--radius-button);
+  font-size: var(--onboarding-next-font-size);
+  line-height: var(--onboarding-next-line-height);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-body);
+}
+
+.backChevron {
+  width: var(--onboarding-next-chevron-width);
+  height: var(--onboarding-next-chevron-height);
+}
+
+.nextButtonCompact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: auto;
+  min-width: 0;
+  height: var(--button-primary-height);
+  flex: 1 1 var(--onboarding-next-button-compact-width);
+  max-width: var(--onboarding-next-button-compact-width);
+  border-radius: var(--onboarding-next-radius);
+  font-size: var(--onboarding-next-font-size);
+  line-height: var(--onboarding-next-line-height);
+  color: var(--color-text-body);
+  background: var(--onboarding-next-gradient);
+  box-shadow: var(--shadow-button-inset);
+}
+
+.nextButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  border-radius: var(--onboarding-next-radius);
+  font-size: var(--onboarding-next-font-size);
+  line-height: var(--onboarding-next-line-height);
+  color: var(--color-text-body);
+  background: var(--onboarding-next-gradient);
+  box-shadow: var(--shadow-button-inset);
+}
+
+.getStartedButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--onboarding-next-radius);
+  font-size: var(--onboarding-get-started-font-size);
+  line-height: var(--onboarding-get-started-line-height);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  background: var(--onboarding-next-gradient);
+  box-shadow: var(--shadow-button-inset);
+}
+
+.nextChevron {
+  width: var(--onboarding-next-chevron-width);
+  height: var(--onboarding-next-chevron-height);
+}

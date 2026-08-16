@@ -1,0 +1,85 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(2, 1, 1, 0);
+  transition: background-color var(--bottom-sheet-duration) var(--bottom-sheet-easing);
+}
+
+.overlayVisible {
+  background: rgba(2, 1, 1, 0.82);
+}
+
+.sheet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* The bot tab bar is rendered in the app shell, while this dialog is
+     viewport-fixed. Keep the sheet completely above that bar instead of
+     letting its last options disappear behind it. */
+  margin-bottom: calc(var(--nav-bottom-bar-height) + env(safe-area-inset-bottom, 0px));
+  max-width: var(--layout-viewport-max-width);
+  max-height: min(82dvh, 760px);
+  padding: 12px var(--layout-page-padding-x) calc(var(--space-11) + env(safe-area-inset-bottom));
+  background: #100e10;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-top-left-radius: var(--radius-screen);
+  border-top-right-radius: var(--radius-screen);
+  outline: none;
+  transform: translateY(100%);
+  transition: transform var(--bottom-sheet-duration) var(--bottom-sheet-easing);
+  will-change: transform;
+}
+
+.sheetVisible {
+  transform: translateY(0);
+}
+
+.handle {
+  width: 38px;
+  height: 4px;
+  margin: 0 auto 14px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius-chip);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.content {
+  min-height: 0;
+  max-height: calc(min(82dvh, 760px) - 92px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.24) transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .sheet {
+    transition: none;
+  }
+}

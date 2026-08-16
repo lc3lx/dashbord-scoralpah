@@ -1,0 +1,27 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--home-option-chip-height);
+  padding: 7.18px var(--home-option-chip-padding-x);
+  border: 1.18px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--home-option-chip-radius);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--color-text-muted);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-base);
+  cursor: pointer;
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.selected {
+  border-color: transparent;
+  background: var(--gradient-button-primary);
+  color: var(--color-text-primary);
+}

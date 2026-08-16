@@ -1,0 +1,53 @@
+/**
+ * Color tokens — sourced from Figma "font and color" page + Login/Splash/Nav screens.
+ * File: 2Xub9DUc8qXvRygoo6mBDv
+ */
+:root {
+  /* Brand palette */
+  --color-bg-primary: #020101;
+  --color-bg-burgundy: #5d0608;
+  --color-red-primary: #dd0912;
+  --color-red-dark: #a10406;
+  --color-red-nav: #dd0101;
+  --color-red-nav-end: #830000;
+  --color-red-light: #ff5c5c;
+  --color-red-link: #ff5a63;
+  --color-gray-mid: #555555;
+  --color-green-success: #12e655;
+  --color-yellow-warning: #f2b813;
+
+  /* Semantic status (Activation, Home, Notifications) */
+  --color-success: #22c55e;
+  --color-success-light: #4ade9a;
+  --color-warning: #f59e0b;
+  --color-info: #60a5fa;
+  --color-info-light: #8fb6f5;
+
+  /* Surfaces */
+  --color-bg-surface: #121011;
+  --color-bg-surface-dark: #0b0708;
+  --color-bg-surface-subtle: rgba(255, 255, 255, 0.02);
+  --color-bg-icon-button: rgba(255, 255, 255, 0.1);
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cecece;
+  --color-text-body: #f5f5f5;
+  --color-text-muted: #8a8688;
+  --color-text-placeholder: #aaaaaa;
+  --color-text-caption: #666666;
+  --color-text-footer: #bfbfbf;
+  --color-text-nav-active: #dd0101;
+  --color-text-hint: #888888;
+  --color-text-subtle: #989898;
+  --color-text-onboarding: #cfcacc;
+  --color-text-keypoint: #e5e1e3;
+  --color-text-disclaimer: #c2c2c2;
+  --color-text-skip: #dfdfdf;
+  --color-text-connector: #6e6a6c;
+  --color-text-chip-neutral: #b8b4b6;
+
+  /* Borders */
+  --color-border-default: rgba(255, 255, 255, 0.06);
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
+}

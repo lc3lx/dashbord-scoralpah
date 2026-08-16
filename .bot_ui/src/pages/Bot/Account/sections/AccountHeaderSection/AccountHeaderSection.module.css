@@ -1,0 +1,10 @@
+.section {
+  width: 100%;
+}
+
+.title {
+  font-size: var(--account-title-size);
+  font-weight: 800;
+  line-height: 32.2px;
+  letter-spacing: -0.56px;
+}

@@ -1,0 +1,32 @@
+/**
+ * Login screen tokens — Figma node 96:4098 (design reference at 402px).
+ */
+:root {
+  --login-content-top-gap: 50px;
+  --login-brand-to-hero-gap: 30px;
+  --login-hero-inset-x: var(--space-2);
+  --login-description-padding-top: var(--space-1);
+  --login-actions-padding-top: 12px;
+  --login-actions-gap: var(--space-5);
+  --login-security-margin-top: var(--space-4);
+  --login-security-padding-top: var(--space-12);
+  --login-footer-padding-bottom: 39.5px;
+  --login-form-margin-top: 11px;
+  --login-forgot-padding-top: var(--space-8);
+  --login-forgot-row-height: 40px;
+
+  --login-logo-icon-width: var(--auth-logo-icon-width);
+  --login-logo-icon-height: var(--auth-logo-icon-height);
+  --login-logo-alpha-width: var(--auth-logo-alpha-width);
+  --login-logo-alpha-height: var(--auth-logo-alpha-height);
+  --login-logo-scar-width: var(--auth-logo-scar-width);
+  --login-logo-scar-height: var(--auth-logo-scar-height);
+  --login-logo-gap-icon-alpha: var(--auth-logo-gap-icon-alpha);
+  --login-logo-gap-alpha-scar: var(--auth-logo-gap-alpha-scar);
+
+  --login-security-icon-size: 19.99px;
+  --login-security-gap: var(--space-5);
+  --login-security-padding: var(--space-9);
+  --login-security-title-color: var(--color-text-primary);
+  --login-security-subtitle-color: var(--color-text-caption);
+}

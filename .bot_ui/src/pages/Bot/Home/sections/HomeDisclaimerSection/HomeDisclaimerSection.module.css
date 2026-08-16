@@ -1,0 +1,13 @@
+.section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: var(--space-7) 0 var(--space-3);
+}
+
+.text {
+  color: var(--home-disclaimer-color);
+  font-size: var(--font-size-2xs);
+  line-height: 15px;
+  text-align: center;
+}

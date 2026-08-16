@@ -1,0 +1,73 @@
+/**
+ * Onboarding screen tokens — Figma node 81:94 (design reference at 402px).
+ */
+:root {
+  --onboarding-content-top-gap: 10px;
+  --onboarding-step-two-content-top-gap: 20px;
+  --onboarding-step-three-content-top-gap: 19px;
+  --onboarding-skip-row-padding-top: 19px;
+  --onboarding-skip-inset-right: 18px;
+  --onboarding-skip-font-size: var(--font-size-base);
+  --onboarding-skip-line-height: var(--line-height-3xl);
+
+  --onboarding-description-line-height: 21.7px;
+  --onboarding-tiles-margin-top: var(--space-11);
+  --onboarding-tiles-gap: var(--space-3);
+  --onboarding-tile-size: 63.992px;
+  --onboarding-tile-radius: var(--radius-panel);
+  --onboarding-tile-border-width: var(--card-border-width);
+  --onboarding-scar-tile-image-width: 43.67px;
+  --onboarding-scar-tile-image-height: 35.018px;
+  --onboarding-binolla-tile-image-width: 27.124px;
+  --onboarding-binolla-tile-image-height: 40.91px;
+  --onboarding-connector-dot-size: 5.993px;
+  --onboarding-connector-padding-top: 31.7px;
+
+  --onboarding-card-margin-top: var(--space-8);
+  --onboarding-keypoints-margin-top: var(--space-10);
+  --onboarding-keypoint-gap: var(--space-3);
+  --onboarding-footnote-margin-top: var(--space-4);
+  --onboarding-footnote-max-width: 310px;
+
+  --onboarding-footer-padding-top: var(--space-10);
+  --onboarding-footer-gap: 30px;
+  --onboarding-footer-padding-bottom: 55px;
+
+  --onboarding-next-radius: 12px;
+  --onboarding-next-font-size: 16px;
+  --onboarding-next-line-height: var(--line-height-2xl);
+  --onboarding-next-chevron-width: 3.997px;
+  --onboarding-next-chevron-height: 7.994px;
+  --onboarding-next-gradient: linear-gradient(
+    90deg,
+    var(--color-red-primary) 0%,
+    var(--color-red-dark) 125.22%
+  );
+
+  --onboarding-footer-nav-padding-top: var(--space-5);
+  --onboarding-footer-nav-gap: 33px;
+  --onboarding-footer-nav-padding-bottom: 60px;
+  --onboarding-back-button-width: 150px;
+  --onboarding-back-button-gap: 5px;
+  --onboarding-next-button-compact-width: 200px;
+  --onboarding-nav-button-gap: var(--space-10);
+  --onboarding-step-two-title-max-width: 260.46px;
+  --onboarding-step-two-description-max-width: 364px;
+  --onboarding-activation-key-letter-spacing: 1.12px;
+
+  --onboarding-step-three-title-max-width: 278.661px;
+  --onboarding-get-started-font-size: 18px;
+  --onboarding-get-started-line-height: 25px;
+  --onboarding-detail-label-color: #bbbbbb;
+  --onboarding-strength-label-color: #e2e2e2;
+  --onboarding-loss-limit-color: #f26770;
+
+  --bot-setup-preview-inner-width: 306.901px;
+  --bot-setup-preview-icon-size: 43.983px;
+  --bot-setup-preview-icon-image-width: 27px;
+  --bot-setup-preview-icon-image-height: 21.651px;
+  --bot-setup-preview-grid-column-gap: 16px;
+  --bot-setup-preview-grid-row-gap: 12px;
+  --bot-setup-preview-details-padding-top: 15.99px;
+  --bot-setup-preview-padding-inline-end: 15px;
+}

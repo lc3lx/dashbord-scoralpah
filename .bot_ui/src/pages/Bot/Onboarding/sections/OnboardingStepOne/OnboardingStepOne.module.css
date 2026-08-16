@@ -1,0 +1,64 @@
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+}
+
+.description {
+  width: 100%;
+  max-width: 342px;
+  padding-top: var(--space-3);
+  font-size: var(--font-size-md);
+  line-height: var(--onboarding-description-line-height);
+  font-weight: var(--font-weight-regular);
+}
+
+.tilesSection {
+  width: 100%;
+  padding-top: var(--onboarding-tiles-margin-top);
+}
+
+.referralCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-4);
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #dd0912 0%, #5d0608 100%);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.referralCta:hover {
+  filter: brightness(1.08);
+}
+
+.cardSection {
+  width: 100%;
+  padding-top: var(--onboarding-card-margin-top);
+}
+
+.keyPoints {
+  display: flex;
+  flex-direction: column;
+  gap: var(--onboarding-keypoint-gap);
+  width: 100%;
+  margin: 0;
+  padding: var(--onboarding-keypoints-margin-top) 0 0;
+  list-style: none;
+}
+
+.footnote {
+  width: 100%;
+  max-width: var(--onboarding-footnote-max-width);
+  padding-top: var(--onboarding-footnote-margin-top);
+}

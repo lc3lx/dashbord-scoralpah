@@ -1,0 +1,25 @@
+.section {
+  width: 100%;
+  padding-top: var(--home-section-gap);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-content-gap);
+  padding: var(--space-9);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--color-border-default);
+  border-radius: var(--radius-panel);
+}
+
+.label {
+  font-size: var(--font-size-xs);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+}

@@ -1,0 +1,40 @@
+.notice {
+  display: flex;
+  align-items: center;
+  gap: var(--login-security-gap);
+  width: 100%;
+  padding: var(--login-security-padding);
+  background: var(--card-background);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--radius-input);
+}
+
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--login-security-icon-size);
+  height: var(--login-security-icon-size);
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 14.993px;
+  height: 18.327px;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.title {
+  color: var(--login-security-title-color);
+  line-height: var(--line-height-base);
+}
+
+.subtitle {
+  color: var(--login-security-subtitle-color);
+}

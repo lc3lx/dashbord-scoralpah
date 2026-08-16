@@ -1,0 +1,66 @@
+.chartHost {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.chart {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+  background: #131722;
+  user-select: none;
+  touch-action: none;
+}
+
+.axisLabel {
+  user-select: none;
+  pointer-events: none;
+}
+
+.liveBody {
+  filter: brightness(1.12);
+}
+
+.zoomBar {
+  position: absolute;
+  top: 8px;
+  inset-inline-start: 8px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: auto;
+}
+
+.zoomBtn {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 1px solid rgba(120, 123, 134, 0.45);
+  border-radius: 6px;
+  background: rgba(19, 23, 34, 0.88);
+  color: #d1d4dc;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.zoomBtn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.zoomBtn:not(:disabled):active {
+  background: rgba(42, 46, 57, 0.95);
+}

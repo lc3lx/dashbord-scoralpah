@@ -1,0 +1,27 @@
+/**
+ * Input variant tokens — Login screen (nodes 81:307, 81:313).
+ */
+:root {
+  --input-label-font-size: var(--font-size-xs);
+  --input-label-font-weight: var(--font-weight-medium);
+  --input-label-line-height: var(--line-height-sm);
+  --input-label-letter-spacing: var(--letter-spacing-label);
+  --input-label-color: var(--color-text-muted);
+  --input-label-padding-x: var(--space-1);
+  --input-label-padding-bottom: var(--space-3);
+
+  --input-field-height: 51px;
+  --input-field-padding-x: var(--space-9);
+  --input-field-padding-y: var(--space-7);
+  --input-field-font-size: var(--font-size-md);
+  --input-field-font-weight: var(--font-weight-medium);
+  --input-field-line-height: var(--line-height-2xl);
+  --input-field-color: var(--color-text-placeholder);
+  --input-field-background: var(--color-bg-surface);
+  --input-field-border-width: 1.18px;
+  --input-field-border-color: var(--color-border-default);
+  --input-field-border-radius: var(--radius-input);
+
+  --input-stack-gap: var(--space-8);
+  --input-group-padding-top: var(--space-10);
+}

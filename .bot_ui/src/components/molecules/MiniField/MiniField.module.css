@@ -1,0 +1,23 @@
+.field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: var(--space-5);
+}
+
+.field:first-child {
+  padding-top: 0;
+}
+
+.label {
+  color: var(--color-text-hint);
+}
+
+.labelPrimary {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-label);
+  color: var(--color-text-primary);
+}

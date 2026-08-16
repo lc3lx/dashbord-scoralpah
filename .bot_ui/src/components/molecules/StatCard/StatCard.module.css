@@ -1,0 +1,20 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--card-stat-width);
+  min-width: 0;
+  height: var(--card-stat-height);
+  padding: var(--card-padding);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--card-border-radius);
+}
+
+.value {
+  padding-top: var(--card-stat-value-padding-top);
+  font-size: var(--card-stat-value-font-size);
+  line-height: var(--card-stat-value-line-height);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.44px;
+}

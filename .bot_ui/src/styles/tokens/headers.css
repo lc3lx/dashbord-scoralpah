@@ -1,0 +1,22 @@
+/**
+ * Page header tokens — Notifications, Edit Profile, Trades.
+ */
+:root {
+  --header-back-button-size: 35.998px;
+  --header-back-icon-size: 17.999px;
+  --header-back-border-width: 1.18px;
+  --header-back-border-color: var(--color-red-primary);
+  --header-back-background: var(--color-bg-icon-button);
+  --header-title-font-size: var(--font-size-xl);
+  --header-title-font-weight: var(--font-weight-semibold);
+  --header-title-line-height: var(--line-height-5xl);
+  --header-title-letter-spacing: -0.16px;
+  --header-action-font-size: var(--font-size-xs);
+  --header-action-line-height: var(--line-height-base);
+
+  --home-header-title-font-size: 28px;
+  --home-header-title-line-height: 32.2px;
+  --home-header-title-letter-spacing: -0.56px;
+  --home-header-subtitle-font-size: var(--font-size-xs);
+  --home-header-subtitle-line-height: var(--line-height-base);
+}

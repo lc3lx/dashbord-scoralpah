@@ -1,0 +1,39 @@
+/**
+ * Spacing tokens — measured from Figma Bot screens (Login, Splash, Navigation).
+ */
+:root {
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 7px;
+  --space-3: 8px;
+  --space-4: 10px;
+  --space-5: 12px;
+  --space-6: 13.18px;
+  --space-7: 15.18px;
+  --space-8: 16px;
+  --space-9: 17.18px;
+  --space-10: 20px;
+  --space-11: 24px;
+  --space-12: 32px;
+
+  /* Layout — fluid values defined in responsive.css */
+  --layout-page-padding-x: 16px;
+  --layout-bottom-nav-height: 107px;
+  --layout-bottom-nav-bar-height: 75px;
+  --layout-bottom-nav-item-width: 70px;
+  --layout-bottom-nav-item-height: 75px;
+  --layout-fab-size: 55px;
+  --layout-fab-ellipse-size: 72px;
+  /* Breathing room at end of scroll content — nav is in-flow, not overlaid. */
+  --layout-bot-scroll-padding-bottom: var(--space-8);
+
+  /* Background glow */
+  --glow-center-size: 259px;
+  --glow-shape-width: 373px;
+  --glow-shape-height: 724px;
+  --glow-shape-offset-x: 131.5px;
+  --glow-shape-offset-y: -328px;
+  --glow-bottom-width: 100%;
+  --glow-bottom-height: 216px;
+  --glow-bottom-offset-y: 521px;
+}

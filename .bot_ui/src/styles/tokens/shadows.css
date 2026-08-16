@@ -1,0 +1,8 @@
+/**
+ * Shadow tokens — from Figma Navigation FAB (node 113:5460).
+ */
+:root {
+  --shadow-fab: 0px 4px 6px rgba(221, 9, 18, 0.2);
+  --shadow-button-inset: inset 0px 1px 0px rgba(255, 255, 255, 0.12);
+  --shadow-none: none;
+}

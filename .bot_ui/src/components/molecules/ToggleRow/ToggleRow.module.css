@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  width: 100%;
+  min-height: 54px;
+  padding: var(--space-9);
+  border: 1.18px solid var(--color-border-default);
+  border-radius: var(--radius-panel);
+  background: var(--color-bg-surface-dark);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+}

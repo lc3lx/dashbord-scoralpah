@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.chartWrap {
+  width: 100%;
+  min-height: 160px;
+  overflow: hidden;
+}
+
+.empty {
+  display: block;
+  padding: var(--space-6) var(--space-4);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-height: 74.964px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  border-radius: 10px;
+}
+
+.statLabel {
+  font-size: var(--font-size-2xs);
+  line-height: 15px;
+}
+
+.statValue {
+  font-weight: var(--font-weight-medium);
+}

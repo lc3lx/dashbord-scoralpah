@@ -1,0 +1,28 @@
+/**
+ * Card variant tokens — Login security notice + Home stat cards.
+ */
+:root {
+  /* Default card */
+  --card-padding: var(--space-9);
+  --card-border-width: 1.18px;
+  --card-border-color: var(--color-border-subtle);
+  --card-border-radius: var(--radius-card);
+  --card-background: var(--color-bg-surface-subtle);
+
+  /* Stat card (Home — node 207:775) */
+  --card-stat-width: 107.07052612304688px;
+  --card-stat-height: 83.31806182861328px;
+  --card-stat-label-font-size: var(--font-size-xs);
+  --card-stat-label-line-height: var(--line-height-md);
+  --card-stat-value-font-size: var(--font-size-3xl);
+  --card-stat-value-line-height: var(--line-height-6xl);
+  --card-stat-value-padding-top: var(--space-3);
+
+  /* Notification card (node 209:136) */
+  --card-notification-height: 70.35926055908203px;
+  --card-notification-icon-size: 35.99753189086914px;
+  --card-notification-gap: var(--space-5);
+
+  /* Trade history card (node 207:448) */
+  --card-trade-height: 120.3604965209961px;
+}

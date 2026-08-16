@@ -1,0 +1,48 @@
+/**
+ * Typography tokens — Cairo (UI).
+ */
+:root {
+  --font-family-primary: 'Cairo', sans-serif;
+
+  /* Font sizes (px) */
+  --font-size-2xs: 11px;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 21px;
+  --font-size-3xl: 23px;
+  --font-size-4xl: 26px;
+  --font-size-5xl: 30px;
+  --font-size-6xl: 33px;
+
+  /* Line heights (px) */
+  --line-height-2xs: 15px;
+  --line-height-xs: 16.5px;
+  --line-height-sm: 16.8px;
+  --line-height-md: 17px;
+  --line-height-base: 18px;
+  --line-height-lg: 19.5px;
+  --line-height-xl: 20px;
+  --line-height-2xl: 21px;
+  --line-height-3xl: 22px;
+  --line-height-4xl: 22.5px;
+  --line-height-5xl: 23px;
+  --line-height-6xl: 27px;
+  --line-height-7xl: 30px;
+  --line-height-8xl: 39px;
+
+  /* Font weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Letter spacing */
+  --letter-spacing-tight: -0.65px;
+  --letter-spacing-snug: -0.15px;
+  --letter-spacing-label: 0.12px;
+}

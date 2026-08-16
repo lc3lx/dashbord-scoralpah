@@ -1,0 +1,53 @@
+.control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 72px;
+  padding: var(--space-5);
+  background: transparent;
+  border: 1.18px solid;
+  border-radius: var(--radius-card);
+  cursor: pointer;
+}
+
+.control:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
+}
+
+.label {
+  font-weight: var(--font-weight-medium);
+}
+
+.start {
+  border-color: rgba(34, 197, 94, 0.35);
+  color: var(--color-success);
+}
+
+.pause {
+  border-color: rgba(242, 184, 19, 0.35);
+  color: var(--color-yellow-warning);
+}
+
+.stop {
+  border-color: rgba(221, 9, 18, 0.35);
+  color: var(--color-red-primary);
+}
+
+.apply {
+  border-color: rgba(96, 165, 250, 0.35);
+  color: var(--color-info);
+}
+
+.pressed {
+  background: rgba(34, 197, 94, 0.13);
+  border-color: var(--color-success);
+}
+
+.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

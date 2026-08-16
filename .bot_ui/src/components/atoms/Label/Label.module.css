@@ -1,0 +1,10 @@
+.label {
+  display: block;
+  padding: 0 var(--input-label-padding-x) var(--input-label-padding-bottom);
+  font-family: var(--font-family-primary);
+  font-size: var(--input-label-font-size);
+  font-weight: var(--input-label-font-weight);
+  line-height: var(--input-label-line-height);
+  letter-spacing: var(--input-label-letter-spacing);
+  color: var(--input-label-color);
+}

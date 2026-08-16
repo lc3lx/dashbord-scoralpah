@@ -1,0 +1,26 @@
+.section {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-content);
+  width: 100%;
+  padding-bottom: var(--space-2);
+  background: linear-gradient(180deg, var(--color-bg-primary) 75%, transparent 100%);
+}
+
+.scroll {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  padding-inline-end: var(--space-5);
+  scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex-shrink: 0;
+}

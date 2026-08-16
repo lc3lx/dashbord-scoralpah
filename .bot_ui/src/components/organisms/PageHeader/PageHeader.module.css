@@ -1,0 +1,19 @@
+.header {
+  display: grid;
+  grid-template-columns: var(--header-back-button-size) 1fr var(--header-back-button-size);
+  align-items: center;
+  width: 100%;
+  min-height: var(--header-back-button-size);
+}
+
+.title {
+  font-size: var(--header-title-font-size);
+  font-weight: var(--header-title-font-weight);
+  line-height: var(--header-title-line-height);
+  letter-spacing: var(--header-title-letter-spacing);
+}
+
+.spacer {
+  width: var(--header-back-button-size);
+  height: var(--header-back-button-size);
+}

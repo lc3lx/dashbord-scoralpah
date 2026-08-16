@@ -1,0 +1,13 @@
+.section {
+  width: 100%;
+}
+
+.notificationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-panel);
+  background: var(--color-bg-icon-button);
+}

@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  width: 100%;
+  padding-top: var(--space-5);
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--home-header-title-font-size);
+  line-height: var(--home-header-title-line-height);
+  letter-spacing: var(--home-header-title-letter-spacing);
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: var(--home-header-subtitle-font-size);
+  line-height: var(--home-header-subtitle-line-height);
+}
+
+.action {
+  flex-shrink: 0;
+}

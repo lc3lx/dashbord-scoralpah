@@ -1,0 +1,35 @@
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: var(--trading-top-bar-height);
+  margin-bottom: calc(var(--trading-header-card-gap) - var(--trading-section-gap));
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.connectionChip {
+  min-height: var(--trading-chip-height);
+  padding: 3px 8px;
+  gap: 6px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--trading-action-button-size);
+  height: var(--trading-action-button-size);
+  background: var(--trading-action-button-bg);
+  border-radius: var(--trading-action-button-radius);
+}
+
+.actionIcon {
+  width: var(--trading-action-icon-size);
+  height: var(--trading-action-icon-size);
+}

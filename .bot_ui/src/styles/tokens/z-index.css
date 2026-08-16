@@ -1,0 +1,12 @@
+/**
+ * Z-index scale
+ */
+:root {
+  --z-base: 0;
+  --z-elevated: 10;
+  --z-header: 20;
+  --z-bottom-nav: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+}

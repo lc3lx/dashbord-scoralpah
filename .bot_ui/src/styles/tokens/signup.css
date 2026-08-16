@@ -1,0 +1,23 @@
+/**
+ * Signup screen tokens — Figma node 96:4250 (design reference at 402px).
+ */
+:root {
+  --signup-content-top-gap: 30px;
+  --signup-brand-to-hero-gap: 20px;
+  --signup-form-padding-top: var(--space-8);
+  --signup-hero-height: 54px;
+  --signup-description-height: 24px;
+  --signup-label-height: 25px;
+  --signup-input-height: 51.326px;
+  --signup-field-block-height: 92.326px;
+  --signup-actions-padding-top: 24.4px;
+  --signup-divider-padding-top: 19.54px;
+  --signup-signin-padding-top: 20px;
+  --signup-content-padding-bottom: 40px;
+  --signup-or-color: rgba(218, 218, 218, 0.6);
+  --signup-or-font-size: var(--font-size-md);
+  --signup-or-line-height: var(--line-height-3xl);
+  --signup-divider-color: rgba(255, 255, 255, 0.12);
+  --signup-prompt-color: var(--color-text-secondary);
+  --signup-link-color: var(--color-red-primary);
+}

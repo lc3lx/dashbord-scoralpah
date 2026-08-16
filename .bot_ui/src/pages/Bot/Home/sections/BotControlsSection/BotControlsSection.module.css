@@ -1,0 +1,24 @@
+.section {
+  width: 100%;
+  padding-top: var(--home-section-gap);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-5);
+  padding: var(--space-6);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--color-border-default);
+  border-radius: var(--radius-panel);
+}
+
+.control {
+  min-height: 59px;
+}
+
+.soonNote {
+  display: block;
+  margin-top: var(--space-4);
+  opacity: 0.85;
+}

@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: var(--layout-content-width);
+  padding-top: var(--input-group-padding-top);
+}
+
+.spacingNone {
+  padding-top: 0;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

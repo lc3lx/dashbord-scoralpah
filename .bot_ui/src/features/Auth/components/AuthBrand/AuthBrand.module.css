@@ -1,0 +1,30 @@
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.partIcon,
+.partAlpha,
+.partScar {
+  display: block;
+  height: auto;
+}
+
+.partIcon {
+  width: var(--auth-logo-icon-width);
+  aspect-ratio: 65.365 / 52.353;
+}
+
+.partAlpha {
+  width: var(--auth-logo-alpha-width);
+  aspect-ratio: 92.178 / 15.733;
+  margin-top: var(--auth-logo-gap-icon-alpha);
+}
+
+.partScar {
+  width: var(--auth-logo-scar-width);
+  aspect-ratio: 89.324 / 8.827;
+  margin-top: var(--auth-logo-gap-alpha-scar);
+}

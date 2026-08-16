@@ -1,0 +1,39 @@
+.page {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  background-color: var(--color-bg-primary);
+}
+
+.scroll {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: var(--home-scroll-padding-bottom);
+}
+
+.loading {
+  margin: 48px 16px;
+  text-align: center;
+  color: var(--color-text-secondary, #9aa3b2);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-md);
+}

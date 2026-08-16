@@ -1,0 +1,33 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--layout-page-padding-x);
+  background: rgba(2, 1, 1, 0.72);
+}
+
+.modal {
+  width: 100%;
+  max-width: var(--layout-content-width);
+  padding: var(--space-9);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--radius-card);
+  outline: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}

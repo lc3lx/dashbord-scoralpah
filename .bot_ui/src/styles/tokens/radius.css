@@ -1,0 +1,13 @@
+/**
+ * Border radius tokens — from Figma Login, Splash, Navigation.
+ */
+:root {
+  --radius-screen: 20px;
+  --radius-input: 14px;
+  --radius-button: 14px;
+  --radius-card: 14px;
+  --radius-panel: 16px;
+  --radius-chip: 999px;
+  --radius-fab: 50px;
+  --radius-pill: 500px;
+}

@@ -1,0 +1,12 @@
+/**
+ * History + Notifications tokens — Figma nodes 213:1219, 209:179
+ */
+:root {
+  --activity-section-gap: var(--space-3);
+  --activity-list-gap: var(--space-3);
+  --activity-scroll-padding-bottom: var(--layout-bot-scroll-padding-bottom);
+  --activity-header-height: 36px;
+  --activity-history-title-size: 28px;
+  --activity-filter-button-size: 36px;
+  --activity-empty-min-height: 240px;
+}

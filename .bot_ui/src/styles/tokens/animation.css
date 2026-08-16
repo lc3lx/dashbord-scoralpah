@@ -1,0 +1,33 @@
+/**
+ * Animation duration tokens
+ */
+:root {
+  --duration-instant: 0ms;
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --bottom-sheet-duration: var(--duration-normal);
+  --bottom-sheet-easing: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,50 @@
+.statusSection {
+  width: 100%;
+  padding-top: var(--activation-card-padding-top);
+}
+
+.statusPanel {
+  /* Figma card outer height @ 402 — locks form start when 1.18px borders snap to 1px */
+  min-height: var(--activation-panel-min-height);
+  box-sizing: border-box;
+}
+
+.formRoot {
+  width: 100%;
+}
+
+.fieldBlock {
+  width: 100%;
+  box-sizing: border-box;
+  padding-block: var(--activation-form-padding-y);
+  padding-inline: var(--activation-control-inset-x);
+}
+
+.field {
+  width: 100%;
+}
+
+.field :global(label) {
+  height: var(--activation-label-height);
+  box-sizing: border-box;
+}
+
+.field :global(input) {
+  height: var(--activation-input-height);
+}
+
+.actions {
+  width: 100%;
+  padding-inline: var(--activation-control-inset-x);
+}
+
+.hint {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding-top: var(--activation-hint-padding-top);
+  font-size: var(--activation-hint-font-size);
+  line-height: var(--activation-hint-line-height);
+  color: var(--activation-hint-color);
+  text-align: center;
+}

@@ -1,0 +1,152 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--badge-gap);
+  border-radius: var(--badge-border-radius);
+  font-family: var(--font-family-primary);
+  font-size: var(--badge-font-size);
+  font-weight: var(--badge-font-weight);
+  line-height: var(--badge-line-height);
+  white-space: nowrap;
+}
+
+.dot {
+  width: var(--badge-dot-size);
+  height: var(--badge-dot-size);
+  border-radius: var(--radius-chip);
+  flex-shrink: 0;
+}
+
+.label {
+  display: inline-block;
+}
+
+/* Solid variants */
+.toneSuccessSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-success);
+  color: var(--color-text-primary);
+}
+
+.toneWarningSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-warning);
+  color: var(--color-text-primary);
+}
+
+.toneDangerSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-red-primary);
+  color: var(--color-text-primary);
+}
+
+.toneNeutralSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+.toneInfoSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-info);
+  color: var(--color-text-primary);
+}
+
+.toneActiveSolid {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(16, 185, 129, 0.08);
+  border: var(--badge-border-width) solid rgba(16, 185, 129, 0.22);
+  color: var(--color-success-light);
+}
+
+.toneAwaitingSolid {
+  padding: var(--chip-solid-padding-y) var(--chip-solid-padding-x);
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+}
+
+/* Outlined variants */
+.toneSuccessOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(34, 197, 94, 0.08);
+  border: var(--badge-border-width) solid rgba(34, 197, 94, 0.22);
+  color: var(--color-success);
+}
+
+.toneWarningOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(242, 184, 19, 0.08);
+  border: var(--badge-border-width) solid rgba(242, 184, 19, 0.22);
+  color: var(--color-yellow-warning);
+}
+
+.toneDangerOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(221, 9, 18, 0.08);
+  border: var(--badge-border-width) solid rgba(221, 9, 18, 0.22);
+  color: var(--color-red-primary);
+}
+
+.toneNeutralOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--badge-border-width) solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-chip-neutral);
+}
+
+.toneInfoOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(96, 165, 250, 0.08);
+  border: var(--badge-border-width) solid rgba(96, 165, 250, 0.22);
+  color: var(--color-info-light);
+}
+
+.toneActiveOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(16, 185, 129, 0.08);
+  border: var(--badge-border-width) solid rgba(16, 185, 129, 0.22);
+  color: var(--color-success-light);
+}
+
+.toneAwaitingOutlined {
+  padding: var(--chip-outlined-padding-y) var(--chip-outlined-padding-x);
+  background: rgba(255, 255, 255, 0.04);
+  border: var(--badge-border-width) solid rgba(255, 255, 255, 0.08);
+  color: var(--color-text-chip-neutral);
+}
+
+.dotSuccess {
+  background: var(--color-text-primary);
+}
+
+.toneSuccessSolid .dotSuccess {
+  background: var(--color-text-primary);
+}
+
+.toneSuccessOutlined .dotSuccess {
+  background: var(--color-success);
+}
+
+.dotWarning {
+  background: var(--color-text-primary);
+}
+
+.dotDanger {
+  background: var(--color-red-primary);
+}
+
+.dotNeutral {
+  background: var(--color-text-muted);
+}
+
+.dotInfo {
+  background: var(--color-info);
+}
+
+.dotActive {
+  background: var(--color-success);
+}
+
+.dotAwaiting {
+  background: var(--color-bg-primary);
+}

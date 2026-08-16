@@ -1,0 +1,12 @@
+/**
+ * Account / Settings tokens — Figma nodes 222:3050, 233:3106, 233:3347, 233:3369, 233:3391
+ */
+:root {
+  --account-section-gap: var(--space-3);
+  --account-scroll-padding-bottom: var(--layout-bot-scroll-padding-bottom);
+  --account-title-size: 28px;
+  --account-card-radius: 16px;
+  --account-row-icon-size: 32px;
+  --account-profile-avatar-size: 64px;
+  --account-form-gap: var(--space-4);
+}

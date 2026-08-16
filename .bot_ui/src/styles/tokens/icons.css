@@ -1,0 +1,14 @@
+/**
+ * Icon size tokens.
+ */
+:root {
+  --icon-size-xs: 11.987px;
+  --icon-size-sm: 17.999px;
+  --icon-size-md: 19.99px;
+  --icon-size-lg: 24px;
+  --icon-size-trade: 19.99px;
+  --icon-size-trade-container: 39.999px;
+  --icon-size-avatar-tile: 61px;
+  --icon-size-loader-width: 55px;
+  --icon-size-loader-height: 54.662px;
+}

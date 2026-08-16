@@ -1,0 +1,12 @@
+/**
+ * Chip / Badge tokens — Login activation + Home status chips.
+ */
+:root {
+  --chip-height: 21px;
+  --chip-padding-x: 8px;
+  --chip-dot-size: 3.9833333492279053px;
+  --chip-font-size: 15px;
+  --chip-line-height: 15px;
+  --chip-label-offset-x: 17.983333587646484px;
+  --chip-label-offset-y: 3px;
+}

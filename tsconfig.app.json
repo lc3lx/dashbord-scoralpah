@@ -22,19 +22,19 @@
       "@constants/routes": ["src/constants/routes.ts"],
       "@layouts/*": ["src/layouts/*"],
       "@router/*": ["src/router/*"],
-      "@/*": ["../bot_telegram_webapp/src/*"],
-      "@assets/*": ["../bot_telegram_webapp/src/assets/*"],
-      "@components/*": ["../bot_telegram_webapp/src/components/*"],
-      "@constants/*": ["../bot_telegram_webapp/src/constants/*"],
-      "@hooks/*": ["../bot_telegram_webapp/src/hooks/*"],
-      "@pages/*": ["../bot_telegram_webapp/src/pages/*"],
-      "@features/*": ["../bot_telegram_webapp/src/features/*"],
-      "@services/*": ["../bot_telegram_webapp/src/services/*"],
-      "@shared/*": ["../bot_telegram_webapp/src/shared/*"],
-      "@styles/*": ["../bot_telegram_webapp/src/styles/*"],
-      "@types/*": ["../bot_telegram_webapp/src/types/*"],
-      "@utils/*": ["../bot_telegram_webapp/src/utils/*"]
+      "@/*": [".bot_ui/src/*", "../bot_telegram_webapp/src/*"],
+      "@assets/*": [".bot_ui/src/assets/*", "../bot_telegram_webapp/src/assets/*"],
+      "@components/*": [".bot_ui/src/components/*", "../bot_telegram_webapp/src/components/*"],
+      "@constants/*": [".bot_ui/src/constants/*", "../bot_telegram_webapp/src/constants/*"],
+      "@hooks/*": [".bot_ui/src/hooks/*", "../bot_telegram_webapp/src/hooks/*"],
+      "@pages/*": [".bot_ui/src/pages/*", "../bot_telegram_webapp/src/pages/*"],
+      "@features/*": [".bot_ui/src/features/*", "../bot_telegram_webapp/src/features/*"],
+      "@services/*": [".bot_ui/src/services/*", "../bot_telegram_webapp/src/services/*"],
+      "@shared/*": [".bot_ui/src/shared/*", "../bot_telegram_webapp/src/shared/*"],
+      "@styles/*": [".bot_ui/src/styles/*", "../bot_telegram_webapp/src/styles/*"],
+      "@types/*": [".bot_ui/src/types/*", "../bot_telegram_webapp/src/types/*"],
+      "@utils/*": [".bot_ui/src/utils/*", "../bot_telegram_webapp/src/utils/*"]
     }
   },
-  "include": ["src", "../bot_telegram_webapp/src"]
+  "include": ["src", ".bot_ui/src", "../bot_telegram_webapp/src"]
 }

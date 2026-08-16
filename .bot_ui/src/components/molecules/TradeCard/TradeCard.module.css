@@ -1,0 +1,84 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: var(--card-trade-height);
+  padding: var(--card-padding);
+  background: var(--color-bg-surface-dark);
+  border: var(--card-border-width) solid var(--card-border-color);
+  border-radius: var(--card-border-radius);
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  gap: var(--card-notification-gap);
+}
+
+.direction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-trade-container);
+  height: var(--icon-size-trade-container);
+  border-radius: var(--radius-card);
+  flex-shrink: 0;
+}
+
+.directionUp {
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.directionDown {
+  background: rgba(221, 9, 18, 0.15);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pairRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.pair {
+  font-size: var(--font-size-base);
+  letter-spacing: -0.4px;
+}
+
+.strategy {
+  padding-top: var(--space-1);
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.liveTimer {
+  letter-spacing: -0.2px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+}
+
+.details {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.detailsIcon {
+  width: var(--icon-size-xs);
+  height: var(--icon-size-xs);
+}

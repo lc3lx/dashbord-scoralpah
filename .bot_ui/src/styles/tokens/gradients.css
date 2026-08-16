@@ -1,0 +1,18 @@
+/**
+ * Gradient tokens — from Figma Login primary button + Navigation FAB.
+ */
+:root {
+  --gradient-button-primary: linear-gradient(180deg, var(--color-red-primary) 0%, var(--color-red-dark) 100%);
+  --gradient-fab: linear-gradient(180deg, var(--color-red-nav) 0%, var(--color-red-nav-end) 71.5%);
+  --gradient-brand-tile: linear-gradient(135deg, var(--color-red-primary) 0%, var(--color-bg-burgundy) 100%);
+  --gradient-activation-promo: linear-gradient(
+    165.95deg,
+    rgba(93, 6, 8, 0.22) 8.4861%,
+    var(--color-red-primary) 58.303%
+  );
+  --gradient-bot-setup-promo: linear-gradient(
+    140.63deg,
+    rgba(93, 6, 8, 0.22) 0%,
+    var(--color-red-primary) 153.67%
+  );
+}

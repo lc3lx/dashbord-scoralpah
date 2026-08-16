@@ -1,0 +1,121 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-block: var(--space-10);
+  padding-inline: var(--space-10) var(--bot-setup-preview-padding-inline-end);
+  background: var(--gradient-bot-setup-promo);
+  border-radius: var(--radius-panel);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+  max-width: var(--bot-setup-preview-inner-width);
+}
+
+.iconTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--bot-setup-preview-icon-size);
+  height: var(--bot-setup-preview-icon-size);
+  flex-shrink: 0;
+  background: var(--gradient-brand-tile);
+  border-radius: var(--radius-input);
+}
+
+.iconImage {
+  width: var(--bot-setup-preview-icon-image-width);
+  height: var(--bot-setup-preview-icon-image-height);
+}
+
+.info {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-2xl);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.16px;
+}
+
+.statusChip {
+  margin-top: var(--space-1);
+}
+
+.strength {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.strengthLabel {
+  color: var(--onboarding-strength-label-color);
+  font-size: 11px;
+  line-height: 15.4px;
+  font-weight: var(--font-weight-regular);
+}
+
+.strengthValue {
+  font-size: var(--font-size-base);
+  line-height: 22.5px;
+  font-weight: var(--font-weight-extrabold);
+}
+
+.details {
+  width: 100%;
+  max-width: var(--bot-setup-preview-inner-width);
+  padding-top: var(--space-8);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--bot-setup-preview-grid-column-gap);
+  row-gap: var(--bot-setup-preview-grid-row-gap);
+  padding-top: var(--bot-setup-preview-details-padding-top);
+  border-top: var(--card-border-width) solid var(--color-border-default);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.fieldLabel {
+  color: var(--onboarding-detail-label-color);
+  font-size: 11px;
+  line-height: 15.4px;
+  font-weight: var(--font-weight-regular);
+}
+
+.fieldValue {
+  padding-top: var(--space-1);
+  font-size: 13px;
+  line-height: 19.5px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-body);
+}
+
+.valueBody {
+  color: var(--color-text-body);
+}
+
+.valueSuccess {
+  color: var(--color-success-light);
+}
+
+.valueLossLimit {
+  color: var(--onboarding-loss-limit-color);
+}

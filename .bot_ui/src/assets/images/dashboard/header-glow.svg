@@ -1,0 +1,20 @@
+<svg width="402" height="391" viewBox="0 0 402 391" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="402" height="391" fill="#1E1E1E"/>
+<g id="Activate Scar Alpha">
+<g clip-path="url(#clip0_1_3)">
+<rect width="402" height="874" rx="20" fill="#020101"/>
+<g id="main container">
+<path id="Union" d="M402 361C402 377.569 388.569 391 372 391H30C13.4315 391 0 377.569 0 361V14C0 6.26801 6.26801 0 14 0H388C395.732 0 402 6.26801 402 14V361Z" fill="url(#paint0_linear_1_3)"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1_3" x1="5.49999" y1="4.19929" x2="374.62" y2="399.753" gradientUnits="userSpaceOnUse">
+<stop stop-color="#740005"/>
+<stop offset="1" stop-color="#DD0912"/>
+</linearGradient>
+<clipPath id="clip0_1_3">
+<rect width="402" height="874" rx="20" fill="white"/>
+</clipPath>
+</defs>
+</svg>

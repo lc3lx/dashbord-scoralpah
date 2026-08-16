@@ -1,11 +1,29 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const botSrc = path.resolve(__dirname, '../bot_telegram_webapp/src');
 const backendTarget = process.env.VITE_DEV_PROXY_TARGET ?? 'http://localhost:5207';
+
+function resolveBotSrc(): string {
+  const candidates = [
+    path.resolve(__dirname, '.bot_ui/src'),
+    path.resolve(__dirname, '../bot_telegram_webapp/src'),
+    process.env.BOT_UI_SRC ? path.resolve(process.env.BOT_UI_SRC) : '',
+  ].filter(Boolean);
+
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+
+  throw new Error(
+    'Bot UI source not found. Run `npm run sync:bot-ui` or deploy `.bot_ui/src` / sibling bot_telegram_webapp.',
+  );
+}
+
+const botSrc = resolveBotSrc();
 
 function redirectRootToDashboard(): Plugin {
   const redirect = (
@@ -35,16 +53,14 @@ function redirectRootToDashboard(): Plugin {
 }
 
 /**
- * Standalone website dashboard.
- * Public URLs are always under /dashboard/* (Vite base + React Router basename).
- * UI source is reused from bot_telegram_webapp for visual parity; entry/routing are independent.
+ * Standalone website dashboard under /dashboard/*.
+ * Bot UI is resolved from `.bot_ui/src` (vendored) or `../bot_telegram_webapp/src` (monorepo).
  */
 export default defineConfig({
   base: '/dashboard/',
   plugins: [react(), redirectRootToDashboard()],
   resolve: {
     alias: [
-      // Dashboard-local route map (home at / → public /dashboard/)
       {
         find: '@constants/routes',
         replacement: path.resolve(__dirname, './src/constants/routes.ts'),
@@ -57,7 +73,6 @@ export default defineConfig({
         find: '@router',
         replacement: path.resolve(__dirname, './src/router'),
       },
-      // Shared bot UI / services (visual + API parity)
       { find: '@', replacement: botSrc },
       { find: '@assets', replacement: path.resolve(botSrc, 'assets') },
       { find: '@components', replacement: path.resolve(botSrc, 'components') },
@@ -82,9 +97,8 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     open: '/dashboard/',
-    // UI/assets are reused from bot_telegram_webapp via aliases.
     fs: {
-      allow: [path.resolve(__dirname, '..')],
+      allow: [path.resolve(__dirname, '..'), path.resolve(__dirname, '.bot_ui')],
     },
     proxy: {
       '/api': {

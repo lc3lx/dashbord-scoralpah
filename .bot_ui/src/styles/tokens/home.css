@@ -1,0 +1,29 @@
+/**
+ * Home / AI Bot screen tokens — Figma node 222:2106
+ */
+:root {
+  --home-section-gap: var(--space-5);
+  --home-content-gap: var(--space-3);
+  --home-stat-grid-gap: var(--space-3);
+  --home-stat-grid-row-gap: var(--space-3);
+  --home-config-row-gap: var(--space-3);
+  --home-scroll-padding-bottom: var(--layout-bot-scroll-padding-bottom);
+  --home-disclaimer-color: #444444;
+  --home-option-chip-height: 32.36px;
+  --home-option-chip-padding-x: 13.18px;
+  --home-option-chip-gap: var(--space-3);
+  --home-option-chip-radius: 10px;
+  --home-toggle-track-width: 40px;
+  --home-toggle-track-height: 24px;
+  --home-toggle-thumb-size: 20px;
+  --home-bot-engine-icon-size: 61px;
+  --home-setting-row-icon-size: 36px;
+  --home-setting-row-gap: var(--space-5);
+  --home-limit-card-width: 165.62px;
+  --home-limit-card-height: 98.31px;
+  --home-bot-engine-gradient: linear-gradient(
+    170.13deg,
+    rgba(93, 6, 8, 0.22) 8.49%,
+    rgba(18, 16, 17, 0.95) 58.3%
+  );
+}

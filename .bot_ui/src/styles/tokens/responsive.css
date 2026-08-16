@@ -1,0 +1,24 @@
+/**
+ * Responsive layout tokens — Figma 402×874 is the design reference, not a hard limit.
+ */
+:root {
+  --layout-design-width: 402px;
+  --layout-design-height: 874px;
+
+  --layout-viewport-width: 100%;
+  --layout-viewport-max-width: var(--layout-design-width);
+  --layout-viewport-height: 100dvh;
+  --layout-viewport-min-height: var(--layout-design-height);
+
+  --layout-content-max-width: 370px;
+  --layout-content-width: min(
+    var(--layout-content-max-width),
+    calc(100% - (2 * var(--layout-page-padding-x)))
+  );
+
+  /* Verification breakpoints (reference widths) */
+  --breakpoint-width-narrow: 360px;
+  --breakpoint-width-medium: 390px;
+  --breakpoint-width-reference: 402px;
+  --breakpoint-width-wide: 430px;
+}

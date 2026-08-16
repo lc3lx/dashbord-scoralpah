@@ -1,0 +1,64 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--account-card-radius);
+  background: var(--color-bg-surface-dark);
+}
+
+.card[data-tone='warning'] {
+  border-color: rgba(224, 168, 60, 0.35);
+  background: linear-gradient(
+    165deg,
+    rgba(224, 168, 60, 0.12) 0%,
+    rgba(18, 16, 17, 0.95) 70%
+  );
+}
+
+.card[data-tone='danger'] {
+  border-color: rgba(221, 9, 18, 0.35);
+  background: linear-gradient(
+    165deg,
+    rgba(221, 9, 18, 0.14) 0%,
+    rgba(18, 16, 17, 0.95) 70%
+  );
+}
+
+.card[data-tone='info'] {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.title {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.body {
+  margin: 0;
+  line-height: 1.45;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-1);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #dd0912 0%, #5d0608 100%);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.link:hover {
+  filter: brightness(1.08);
+}

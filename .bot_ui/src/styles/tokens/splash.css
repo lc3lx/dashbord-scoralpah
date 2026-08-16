@@ -1,0 +1,24 @@
+/**
+ * Splash screen tokens — Figma node 54:2 (design reference at 402px).
+ */
+:root {
+  --splash-glow-size: var(--glow-center-size);
+  --splash-glow-spread: -115.83%;
+
+  --splash-logo-icon-width: 134.7055206298828px;
+  --splash-logo-icon-height: 108.01818084716797px;
+  --splash-logo-alpha-width: 190px;
+  --splash-logo-alpha-height: 32.559207916259766px;
+  --splash-logo-scar-width: 184.04354858398438px;
+  --splash-logo-scar-height: 18.22515869140625px;
+  --splash-logo-gap-icon-alpha: 10.679px;
+  --splash-logo-gap-alpha-scar: 11.163px;
+
+  --splash-loader-width: 55px;
+  --splash-loader-height: 54.66185760498047px;
+  --splash-footer-padding-bottom: 10.45%;
+
+  --splash-loader-rotation-duration: 1s;
+  --splash-loader-rotation-easing: linear;
+  --splash-redirect-delay: 2000ms;
+}

@@ -1,0 +1,21 @@
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--progress-dot-gap);
+}
+
+.dot {
+  height: var(--progress-dot-height);
+  border-radius: var(--radius-chip);
+  flex-shrink: 0;
+}
+
+.active {
+  width: var(--progress-dot-active-width);
+  background: var(--progress-dot-active-color);
+}
+
+.inactive {
+  width: var(--progress-dot-inactive-width);
+  background: var(--progress-dot-inactive-color);
+}

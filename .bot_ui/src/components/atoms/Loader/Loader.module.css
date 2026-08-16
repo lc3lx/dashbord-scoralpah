@@ -1,0 +1,30 @@
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Keyframes must live in this CSS module — Vite hashes animation names locally.
+   Referencing the global `loader-spin` from tokens/animation.css gets rewritten to a
+   non-existent hashed name and the splash indicator stays static. */
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinning {
+  transform-origin: center;
+  animation: loader-spin var(--splash-loader-rotation-duration, 1s)
+    var(--splash-loader-rotation-easing, linear) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinning {
+    animation: none;
+  }
+}

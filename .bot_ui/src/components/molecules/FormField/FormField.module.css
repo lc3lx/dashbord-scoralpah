@@ -1,0 +1,20 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.field + .field,
+.compact + .compact {
+  padding-top: var(--input-stack-gap);
+}
+
+.error {
+  margin: 0;
+  padding-top: var(--auth-field-error-padding-top);
+  font-family: var(--font-family-primary);
+  font-size: var(--auth-field-error-font-size);
+  line-height: var(--auth-field-error-line-height);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-red-primary);
+}

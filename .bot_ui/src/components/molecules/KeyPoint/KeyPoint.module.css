@@ -1,0 +1,33 @@
+.keyPoint {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--card-notification-gap);
+  padding-block: var(--space-1);
+}
+
+.iconWrap,
+.iconWrapWarning {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 19.99px;
+  height: 19.99px;
+  margin-top: var(--space-1);
+  border-radius: var(--radius-chip);
+  flex-shrink: 0;
+}
+
+.iconWrap {
+  background: var(--color-red-primary);
+}
+
+.iconWrapWarning {
+  background: var(--color-warning);
+}
+
+.text {
+  color: var(--color-text-keypoint);
+  font-size: 13.5px;
+  line-height: 20.925px;
+  font-weight: var(--font-weight-medium);
+}

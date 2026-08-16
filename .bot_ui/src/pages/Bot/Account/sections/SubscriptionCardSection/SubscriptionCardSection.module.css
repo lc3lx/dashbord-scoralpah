@@ -1,0 +1,68 @@
+.section {
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--account-card-radius);
+  background: linear-gradient(
+    169.56deg,
+    rgba(93, 6, 8, 0.22) 8.49%,
+    rgba(18, 16, 17, 0.95) 58.3%
+  );
+}
+
+.header {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.iconWrap {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #dd0912 0%, #5d0608 100%);
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.planName {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3) var(--space-4);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.label {
+  color: #666;
+}
+
+.value {
+  text-align: end;
+}

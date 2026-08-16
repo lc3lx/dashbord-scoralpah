@@ -2,6 +2,57 @@
 
 Standalone website under **`/dashboard/*`**. Independent of the Telegram Mini App (`bot_telegram_webapp`).
 
+## Bot UI dependency (standalone deploy)
+
+Dashboard reuses Mini App UI. On the server you must have **one** of:
+
+1. Vendored copy inside this folder: `.bot_ui/src` (preferred for `/home/web/dashbord` alone)
+2. Sibling repo: `../bot_telegram_webapp/src`
+
+From the monorepo machine:
+
+```powershell
+cd dashboard_web
+npm run sync:bot-ui
+```
+
+Then upload **the whole `dashboard_web` folder including `.bot_ui/`** to the server and run `npm i && npm run build`.
+
+Or on the server keep this layout:
+
+```text
+/home/web/bot_telegram_webapp/   # sibling
+/home/web/dashbord/              # this app
+```
+
+## PM2 (VPS — same pattern as Mini App front)
+
+```bash
+cd /home/web/dashbord
+cp .env.production.example .env.production   # VITE_API_BASE_URL=https://www.scaralphaai.com
+chmod +x start-dashboard-pm2.sh
+./start-dashboard-pm2.sh          # sync/build + pm2 start scaralpha-dashboard
+# ./start-dashboard-pm2.sh logs
+# ./start-dashboard-pm2.sh restart
+```
+
+Default port: **4174** (`DASHBOARD_PORT`). App URL: `http://127.0.0.1:4174/dashboard/`  
+Point nginx `location /dashboard/` → this process (or `alias` to `dist/` if you prefer static files only).
+
+## Seed website admin (API host)
+
+On the backend VPS (with `scaralpha.env` + Postgres):
+
+```bash
+cd /home/web/backend   # path to ScarAlpha backend
+set -a && source ./scaralpha.env && set +a
+chmod +x tools/seed-admin/seed-admin.sh
+./tools/seed-admin/seed-admin.sh 'you@example.com' 'YourPassword'
+# then in scaralpha.env:
+#   ADMIN_EMAILS=you@example.com
+./start-backend-pm2.sh restart
+```
+
 ## Run locally
 
 ```powershell

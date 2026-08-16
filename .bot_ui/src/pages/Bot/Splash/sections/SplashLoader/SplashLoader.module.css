@@ -1,0 +1,9 @@
+.loaderArea {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(var(--splash-loader-width), 13.68vw);
+  height: min(var(--splash-loader-height), 13.58vw);
+  max-width: var(--splash-loader-width);
+  max-height: var(--splash-loader-height);
+}

@@ -1,0 +1,11 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-config-row-gap);
+  width: 100%;
+  padding-top: var(--home-section-gap);
+}
+
+.row {
+  width: 100%;
+}

@@ -1,0 +1,62 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.title {
+  letter-spacing: -0.375px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: var(--space-4);
+  background: var(--trading-detail-card-bg);
+  border: var(--trading-card-border-width) solid var(--trading-detail-card-border-color);
+  border-radius: var(--trading-card-radius);
+}
+
+.entry {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.dotWrap {
+  display: flex;
+  justify-content: center;
+  width: var(--trading-timeline-dot-wrap-width);
+  padding-top: var(--space-1);
+}
+
+.dotActive,
+.dotPending {
+  width: var(--trading-timeline-dot-size);
+  height: var(--trading-timeline-dot-size);
+  border-radius: var(--radius-full);
+}
+
+.dotActive {
+  background: var(--color-red-primary);
+  box-shadow: 0 0 8px var(--color-red-primary);
+}
+
+.dotPending {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.entryContent {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.checkIcon {
+  margin-top: var(--space-1);
+}

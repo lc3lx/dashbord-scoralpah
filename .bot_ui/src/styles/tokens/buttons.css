@@ -1,0 +1,45 @@
+/**
+ * Button variant tokens — Login screen (nodes 81:320, 81:322).
+ */
+:root {
+  /* Primary */
+  --button-primary-height: 50px;
+  --button-primary-padding-y: 12.46px;
+  --button-primary-font-size: var(--font-size-base);
+  --button-primary-font-weight: var(--font-weight-semibold);
+  --button-primary-line-height: var(--line-height-4xl);
+  --button-primary-letter-spacing: var(--letter-spacing-snug);
+  --button-primary-color: var(--color-text-primary);
+  --button-primary-background: var(--gradient-button-primary);
+  --button-primary-border-radius: var(--radius-button);
+
+  /* Ghost / Secondary */
+  --button-ghost-height: 48px;
+  --button-ghost-padding-y: 10.91px;
+  --button-ghost-font-size: var(--font-size-md);
+  --button-ghost-font-weight: var(--font-weight-medium);
+  --button-ghost-line-height: var(--line-height-2xl);
+  --button-ghost-color: var(--color-text-body);
+  --button-ghost-background: var(--color-bg-surface);
+  --button-ghost-border-width: 1.18px;
+  --button-ghost-border-color: var(--color-border-default);
+  --button-ghost-border-radius: var(--radius-button);
+
+  /* Small chip-style (trade amount / duration — node 207:913) */
+  --button-chip-height: 32.36px;
+  --button-chip-padding-x: 13.18px;
+  --button-chip-padding-y: 7.18px;
+  --button-chip-font-size: var(--font-size-base);
+  --button-chip-font-weight: var(--font-weight-medium);
+  --button-chip-line-height: var(--line-height-base);
+
+  /* Icon button (header actions — node 207:144) */
+  --button-icon-size: 35.99753189086914px;
+  --button-icon-inner-size: 15.988699913024902px;
+
+  /* Text link button (Forgot password — node 81:316) */
+  --button-text-link-font-size: var(--font-size-xs);
+  --button-text-link-font-weight: var(--font-weight-medium);
+  --button-text-link-line-height: var(--line-height-base);
+  --button-text-link-color: var(--color-red-link);
+}

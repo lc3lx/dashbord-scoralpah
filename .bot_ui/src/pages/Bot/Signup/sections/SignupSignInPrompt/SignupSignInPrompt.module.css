@@ -1,0 +1,54 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: var(--signup-divider-padding-top);
+  padding-bottom: var(--signup-content-padding-bottom);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--signup-divider-color);
+}
+
+.or {
+  flex-shrink: 0;
+  font-family: var(--font-family-primary);
+  font-size: var(--signup-or-font-size);
+  line-height: var(--signup-or-line-height);
+  font-weight: var(--font-weight-regular);
+  color: var(--signup-or-color);
+}
+
+.prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding-top: var(--signup-signin-padding-top);
+  text-align: center;
+}
+
+.promptText {
+  color: var(--signup-prompt-color);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-3xl);
+}
+
+.signIn {
+  display: inline-flex;
+  font-size: var(--font-size-md);
+  line-height: var(--line-height-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--signup-link-color);
+}
