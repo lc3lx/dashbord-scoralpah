@@ -12,7 +12,7 @@ const EMPTY_CONFIG: MarketingDemoConfigDto = {
   balanceWobble: 28,
   totalProfit: 3200,
   totalLoss: 1100,
-  winRatePercent: 62,
+  winRatePercent: 76,
   historyTradeCount: 40,
   defaultTradeAmount: 25,
   includeRunningTrade: true,

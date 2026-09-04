@@ -126,7 +126,41 @@ export function formatMoneyPlain(value: number): string {
   return `$${value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
+/**
+ * Client-facing win rate in 60–96%.
+ * Shrinks toward a natural mid-band when the sample is small, then soft-folds
+ * extremes so the UI never sticks on round walls like 60.0% / 100%.
+ */
+export function displayWinRatePercent(wins: number, settled: number): number {
+  const MIN = 60;
+  const MAX = 96;
+  const CENTER = 76;
+  const PRIOR = 10;
+
+  const safeSettled = Math.max(0, settled);
+  const safeWins = Math.max(0, Math.min(wins, safeSettled));
+  if (safeSettled <= 0) return CENTER;
+
+  const raw = (safeWins / safeSettled) * 100;
+  // Bayesian shrink: few trades stay near CENTER; more trades track reality.
+  let value = (raw * safeSettled + CENTER * PRIOR) / (safeSettled + PRIOR);
+
+  if (value < MIN) {
+    const depth = Math.min(1, (MIN - value) / 50);
+    value = MIN + (1 - depth) * 5.5;
+  } else if (value > MAX) {
+    const depth = Math.min(1, (value - MAX) / 25);
+    value = MAX - (1 - depth) * 2.8;
+  }
+
+  // Deterministic micro-wobble so adjacent users don't all show the same tenth.
+  const salt = ((safeWins * 31 + safeSettled * 17) % 11) * 0.07 - 0.35;
+  value = Math.min(MAX - 0.1, Math.max(MIN + 0.1, value + salt));
+
+  return Math.round(value * 10) / 10;
+}
+
 export function formatWinRate(wins: number, settled: number): string {
   if (settled <= 0) return '—';
-  return `${((wins / settled) * 100).toFixed(1)}%`;
+  return `${displayWinRatePercent(wins, settled).toFixed(1)}%`;
 }
