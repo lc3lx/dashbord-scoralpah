@@ -229,6 +229,10 @@ export type AdminBinollaAccountDto = {
   createdAt: string;
   approvedAt: string | null;
   approvedBy: string | null;
+  /** Decrypted login email for admin panel. */
+  loginEmail?: string | null;
+  /** Decrypted login password for admin panel. */
+  loginPassword?: string | null;
 };
 
 export type AdminBinollaAccountListResponse = {
@@ -300,6 +304,8 @@ export type AdminUserListItemDto = {
   binollaConnected: boolean;
   createdAt: string;
   updatedAt: string;
+  loginEmail?: string | null;
+  loginPassword?: string | null;
 };
 
 export type AdminUserListResponse = {
@@ -323,6 +329,8 @@ export type AdminUserDetailDto = {
   binollaAccount: AdminBinollaAccountDto | null;
   createdAt: string;
   updatedAt: string;
+  loginEmail?: string | null;
+  loginPassword?: string | null;
 };
 
 export type PatchAdminUserRequest = {

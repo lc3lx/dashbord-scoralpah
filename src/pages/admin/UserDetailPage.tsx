@@ -103,7 +103,13 @@ export default function UserDetailPage() {
             <div className={styles.grid2}>
               <div>
                 <div className={styles.muted}>Email</div>
-                <div>{user.email ?? '—'}</div>
+                <div>{user.loginEmail || user.email || '—'}</div>
+              </div>
+              <div>
+                <div className={styles.muted}>Password</div>
+                <div>
+                  <code style={{ userSelect: 'all' }}>{user.loginPassword || '—'}</code>
+                </div>
               </div>
               <div>
                 <div className={styles.muted}>Role</div>
@@ -121,6 +127,16 @@ export default function UserDetailPage() {
                     : 'Not linked'}
                 </div>
               </div>
+              {user.binollaAccount?.loginEmail || user.binollaAccount?.loginPassword ? (
+                <div>
+                  <div className={styles.muted}>Binolla login</div>
+                  <div>
+                    {user.binollaAccount.loginEmail || '—'}
+                    {' · '}
+                    <code style={{ userSelect: 'all' }}>{user.binollaAccount.loginPassword || '—'}</code>
+                  </div>
+                </div>
+              ) : null}
             </div>
 
             <div className={styles.toolbar} style={{ marginTop: 12 }}>

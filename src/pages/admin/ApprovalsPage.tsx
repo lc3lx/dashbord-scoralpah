@@ -135,6 +135,7 @@ export default function ApprovalsPage() {
           <thead>
             <tr>
               <th>User</th>
+              <th>Login</th>
               <th>Telegram</th>
               <th>Binolla</th>
               <th>Status</th>
@@ -154,6 +155,10 @@ export default function ApprovalsPage() {
                   <Link className={styles.link} to={ROUTES.adminUserDetail.replace(':userId', row.userId)}>
                     User
                   </Link>
+                </td>
+                <td>
+                  <div>{row.loginEmail || row.email || '—'}</div>
+                  <code style={{ fontSize: '0.75rem', userSelect: 'all' }}>{row.loginPassword || '—'}</code>
                 </td>
                 <td>{row.telegramUserId ?? '—'}</td>
                 <td>{row.binollaAccountIdentifier ?? '—'}</td>
@@ -193,7 +198,7 @@ export default function ApprovalsPage() {
             ))}
             {!loading && items.length === 0 ? (
               <tr>
-                <td colSpan={6} className={styles.muted}>
+                <td colSpan={7} className={styles.muted}>
                   No accounts
                 </td>
               </tr>
@@ -227,6 +232,16 @@ export default function ApprovalsPage() {
       {detail ? (
         <div className={styles.panel} style={{ marginTop: 16 }}>
           <h3>Account detail</h3>
+          <div className={styles.grid2} style={{ marginBottom: 12 }}>
+            <div>
+              <div className={styles.muted}>Login email</div>
+              <div>{detail.loginEmail || detail.email || '—'}</div>
+            </div>
+            <div>
+              <div className={styles.muted}>Login password</div>
+              <code style={{ userSelect: 'all' }}>{detail.loginPassword || '—'}</code>
+            </div>
+          </div>
           <pre style={{ whiteSpace: 'pre-wrap', fontSize: '0.8rem' }}>{JSON.stringify(detail, null, 2)}</pre>
           <button type="button" className={`${styles.btn} ${styles.btnSecondary}`} onClick={() => setDetail(null)}>
             Close

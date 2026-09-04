@@ -105,6 +105,7 @@ export default function UsersPage() {
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th>Password</th>
               <th>Telegram</th>
               <th>Role</th>
               <th>Demo</th>
@@ -120,7 +121,12 @@ export default function UsersPage() {
                     {u.fullName || u.username || u.id.slice(0, 8)}
                   </Link>
                 </td>
-                <td>{u.email ?? '—'}</td>
+                <td>
+                  <div>{u.loginEmail || u.email || '—'}</div>
+                </td>
+                <td>
+                  <code style={{ fontSize: '0.8rem', userSelect: 'all' }}>{u.loginPassword || '—'}</code>
+                </td>
                 <td>{u.telegramUserId ?? '—'}</td>
                 <td>{u.role}</td>
                 <td>
@@ -135,6 +141,13 @@ export default function UsersPage() {
                 <td>{new Date(u.createdAt).toLocaleDateString()}</td>
               </tr>
             ))}
+            {!loading && items.length === 0 ? (
+              <tr>
+                <td colSpan={8} className={styles.muted}>
+                  No users
+                </td>
+              </tr>
+            ) : null}
           </tbody>
         </table>
       </div>
