@@ -60,7 +60,30 @@ export default function ApprovalsPage() {
 
   async function openDetail(id: string) {
     try {
-      setDetail(await adminApi.getAccount(id));
+      const account = await adminApi.getAccount(id);
+      // #region agent log
+      fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '281dcf' },
+        body: JSON.stringify({
+          sessionId: '281dcf',
+          runId: 'pre-fix',
+          hypothesisId: 'C',
+          location: 'ApprovalsPage.tsx:openDetail',
+          message: 'admin_account_detail_keys',
+          data: {
+            id,
+            keys: Object.keys(account as object),
+            hasBinollaLoginEmail: Object.prototype.hasOwnProperty.call(account, 'binollaLoginEmail'),
+            hasBinollaLoginPassword: Object.prototype.hasOwnProperty.call(account, 'binollaLoginPassword'),
+            hasEmail: Boolean((account as { email?: string | null }).email),
+            hasBinollaId: Boolean((account as { binollaAccountIdentifier?: string | null }).binollaAccountIdentifier),
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
+      setDetail(account);
     } catch (err) {
       setError(err instanceof ApiClientError ? err.message : 'Failed to load detail');
     }

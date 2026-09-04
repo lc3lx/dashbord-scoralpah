@@ -23,6 +23,8 @@ module.exports = {
       autorestart: true,
       watch: false,
       max_memory_restart: '256M',
+      kill_timeout: 8000,
+      kill_retry_time: 100,
       error_file: path.join(__dirname, 'logs', 'pm2-error.log'),
       out_file: path.join(__dirname, 'logs', 'pm2-out.log'),
       merge_logs: true,

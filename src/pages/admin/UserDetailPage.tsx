@@ -21,6 +21,28 @@ export default function UserDetailPage() {
         adminApi.getUser(userId),
         adminApi.listAudit({ userId, page: 1, pageSize: 20 }),
       ]);
+      // #region agent log
+      const ba = detail.binollaAccount as Record<string, unknown> | null;
+      fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '281dcf' },
+        body: JSON.stringify({
+          sessionId: '281dcf',
+          runId: 'pre-fix',
+          hypothesisId: 'C',
+          location: 'UserDetailPage.tsx:load',
+          message: 'admin_user_detail_credentials',
+          data: {
+            userId,
+            hasBinollaAccount: Boolean(ba),
+            binollaKeys: ba ? Object.keys(ba) : [],
+            hasBinollaLoginEmail: Boolean(ba && 'binollaLoginEmail' in ba),
+            hasBinollaLoginPassword: Boolean(ba && 'binollaLoginPassword' in ba),
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
       setUser(detail);
       setTg(detail.telegramUserId?.toString() ?? '');
       setAudit(auditRes.items);

@@ -11,10 +11,12 @@ export function AuthLegalFooter({ prefix, linkLabel, suffix, href }: AuthLegalFo
   return (
     <p className={styles.footer}>
       <span>{prefix}</span>
-      <a className={styles.link} href={href} target="_blank" rel="noreferrer">
-        {linkLabel}
-      </a>
-      <span>{suffix}</span>
+      {linkLabel ? (
+        <a className={styles.link} href={href} target="_blank" rel="noreferrer">
+          {linkLabel}
+        </a>
+      ) : null}
+      {suffix ? <span>{suffix}</span> : null}
     </p>
   );
 }
