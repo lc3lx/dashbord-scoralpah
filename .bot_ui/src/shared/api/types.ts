@@ -300,6 +300,8 @@ export type AdminUserListItemDto = {
   telegramUserId: number | null;
   role: string;
   isMarketingDemo: boolean;
+  /** Admin has unlocked the Binolla demo balance for this user. */
+  demoAllowed: boolean;
   binollaApprovalStatus: string | null;
   binollaConnected: boolean;
   createdAt: string;
@@ -325,6 +327,8 @@ export type AdminUserDetailDto = {
   role: string;
   isAdmin: boolean;
   isMarketingDemo: boolean;
+  /** Admin has unlocked the Binolla demo balance for this user. */
+  demoAllowed: boolean;
   marketingConfig: MarketingDemoConfigDto | null;
   binollaAccount: AdminBinollaAccountDto | null;
   createdAt: string;
@@ -335,6 +339,8 @@ export type AdminUserDetailDto = {
 
 export type PatchAdminUserRequest = {
   isMarketingDemo?: boolean;
+  /** Unlock/lock the Binolla demo balance. Omit to leave unchanged. */
+  demoAllowed?: boolean;
   telegramUserId?: number | null;
   clearTelegramUserId?: boolean;
   config?: MarketingDemoConfigDto;

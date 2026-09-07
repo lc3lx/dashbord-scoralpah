@@ -66,6 +66,24 @@ export default function UserDetailPage() {
     }
   }
 
+  /**
+   * Unlocks or re-locks this user's Binolla DEMO balance.
+   *
+   * Everyone trades live by default; demo is only reachable once an admin turns it on
+   * here. Separate from the marketing-demo flag above, which only changes what the app
+   * displays and never touches which balance is traded.
+   */
+  async function setDemoAllowed(allow: boolean) {
+    if (!userId) return;
+    try {
+      await adminApi.patchUser(userId, { demoAllowed: allow });
+      setMessage(allow ? 'Demo balance unlocked' : 'Demo balance locked — user trades live');
+      await load();
+    } catch (err) {
+      setError(err instanceof ApiClientError ? err.message : 'Update failed');
+    }
+  }
+
   async function saveTelegram() {
     if (!userId) return;
     try {
@@ -120,6 +138,10 @@ export default function UserDetailPage() {
                 <div>{user.isMarketingDemo ? 'Yes' : 'No'}</div>
               </div>
               <div>
+                <div className={styles.muted}>Binolla balance</div>
+                <div>{user.demoAllowed ? 'Demo unlocked' : 'Live only'}</div>
+              </div>
+              <div>
                 <div className={styles.muted}>Binolla</div>
                 <div>
                   {user.binollaAccount
@@ -164,6 +186,19 @@ export default function UserDetailPage() {
                   </button>
                 )
               ) : null}
+              {user.demoAllowed ? (
+                <button
+                  type="button"
+                  className={`${styles.btn} ${styles.btnDanger}`}
+                  onClick={() => void setDemoAllowed(false)}
+                >
+                  Lock demo balance
+                </button>
+              ) : (
+                <button type="button" className={styles.btn} onClick={() => void setDemoAllowed(true)}>
+                  Unlock demo balance
+                </button>
+              )}
               {user.binollaAccount ? (
                 <Link className={styles.link} to={ROUTES.adminApprovals}>
                   Open approvals
