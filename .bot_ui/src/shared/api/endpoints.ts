@@ -29,6 +29,8 @@ import type {
   AdminBinollaAccountDto,
   AdminBinollaAccountListResponse,
   AdminBotControlRequest,
+  AdminFleetActionResponse,
+  AdminMaintenanceRequest,
   AdminBotListResponse,
   AdminBotRuntimeDto,
   AdminNotificationListResponse,
@@ -134,7 +136,7 @@ export const binollaApi = {
   connect(body: BinollaConnectRequest): Promise<BinollaConnectResponse> {
     return apiRequest<BinollaConnectResponse>('/api/binolla/connect', {
       method: 'POST',
-      body: { ssid: body.ssid, accountType: body.accountType ?? 'Demo' },
+      body: { ssid: body.ssid, accountType: body.accountType ?? 'Real' },
     });
   },
   login(body: BinollaCredentialRequest): Promise<BinollaConnectResponse> {
@@ -143,7 +145,7 @@ export const binollaApi = {
       body: {
         email: body.email,
         password: body.password,
-        accountType: body.accountType ?? 'Demo',
+        accountType: body.accountType ?? 'Real',
       },
       signal: timedSignal(BINOLLA_LOGIN_MS),
     });
@@ -154,7 +156,7 @@ export const binollaApi = {
       body: {
         email: body.email,
         password: body.password,
-        accountType: body.accountType ?? 'Demo',
+        accountType: body.accountType ?? 'Real',
       },
       signal: timedSignal(BINOLLA_LOGIN_MS),
     });
@@ -366,6 +368,19 @@ export const adminApi = {
       body,
     });
   },
+  /** Current global bot stop state. */
+  getBotFleet(): Promise<AdminFleetActionResponse> {
+    return apiRequest<AdminFleetActionResponse>('/api/admin/bots/fleet');
+  },
+
+  /** Stops or resumes the trading bot for every user at once. */
+  setBotFleet(body: AdminMaintenanceRequest): Promise<AdminFleetActionResponse> {
+    return apiRequest<AdminFleetActionResponse>('/api/admin/bots/fleet', {
+      method: 'POST',
+      body,
+    });
+  },
+
   listAudit(params: {
     userId?: string;
     action?: string;

@@ -265,7 +265,7 @@ export const accountService = {
     const connectedLabel = t('account.value.connected');
     const notConnectedLabel = t('account.value.notConnected');
     if (ssid && ssid !== connectedLabel && ssid !== notConnectedLabel && ssid !== lastSsidHint) {
-      await binollaApi.connect({ ssid, accountType: 'Demo' });
+      await binollaApi.connect({ ssid, accountType: 'Real' });
       lastSsidHint = connectedLabel;
     }
 

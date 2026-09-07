@@ -411,6 +411,10 @@ export type AdminBotRuntimeDto = {
   dailyLossLimit: number;
   updatedAt: string;
   isMarketingDemo: boolean;
+  /** Pairs the bot watches. */
+  assets?: string[];
+  /** Strategy the bot runs (rsi, ema, alt5, smart…). */
+  strategyId?: string | null;
 };
 
 export type AdminBotListResponse = {
@@ -421,6 +425,10 @@ export type AdminBotListResponse = {
 };
 
 export type AdminBotControlRequest = {
+  /** Strategy to run (rsi, ema, alt5, smart…). Omit to keep the current one. */
+  strategyId?: string;
+  /** Pairs to trade. Required by `start`. */
+  assets?: string[];
   action: 'start' | 'pause' | 'stop' | 'apply' | string;
   asset?: string;
   amount?: number;
@@ -488,4 +496,18 @@ export type NotificationDto = {
 export type NotificationListResponse = {
   items: NotificationDto[];
   unreadCount: number;
+};
+
+/** Global bot stop, as the admin panel sees it. */
+export type AdminFleetActionResponse = {
+  maintenanceActive: boolean;
+  message: string | null;
+  since: string | null;
+  /** Bots stopped/started by the action, or currently running for a plain read. */
+  botsAffected: number;
+};
+
+export type AdminMaintenanceRequest = {
+  active: boolean;
+  message?: string | null;
 };

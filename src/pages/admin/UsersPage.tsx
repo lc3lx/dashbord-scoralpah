@@ -16,6 +16,28 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(false);
   const pageSize = 25;
 
+  /**
+   * Unlocks or re-locks a user's Binolla DEMO balance, straight from the list.
+   *
+   * Everyone trades live by default; demo is only reachable once an admin turns it on.
+   * This lives here rather than only on the detail page so granting it does not require
+   * opening each user first.
+   */
+  const toggleDemoAllowed = useCallback(async (user: AdminUserListItemDto) => {
+    setError(null);
+    try {
+      await adminApi.patchUser(user.id, { demoAllowed: !user.demoAllowed });
+      // Reflect it immediately; the row is re-fetched right after.
+      setItems((current) =>
+        current.map((row) =>
+          row.id === user.id ? { ...row, demoAllowed: !user.demoAllowed } : row,
+        ),
+      );
+    } catch (err) {
+      setError(err instanceof ApiClientError ? err.message : 'Update failed');
+    }
+  }, []);
+
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
@@ -109,6 +131,7 @@ export default function UsersPage() {
               <th>Telegram</th>
               <th>Role</th>
               <th>Demo</th>
+              <th>Demo balance</th>
               <th>Binolla</th>
               <th>Created</th>
             </tr>
@@ -135,6 +158,20 @@ export default function UsersPage() {
                   </span>
                 </td>
                 <td>
+                  <button
+                    type="button"
+                    className={styles.btn}
+                    onClick={() => void toggleDemoAllowed(u)}
+                    title={
+                      u.demoAllowed
+                        ? 'Demo balance is unlocked — click to lock it and force live trading'
+                        : 'Demo balance is locked — click to allow this user to switch to demo'
+                    }
+                  >
+                    {u.demoAllowed ? 'Unlocked · Lock' : 'Live only · Unlock'}
+                  </button>
+                </td>
+                <td>
                   {u.binollaApprovalStatus ?? '—'}
                   {u.binollaConnected ? ' · connected' : ''}
                 </td>
@@ -143,7 +180,7 @@ export default function UsersPage() {
             ))}
             {!loading && items.length === 0 ? (
               <tr>
-                <td colSpan={8} className={styles.muted}>
+                <td colSpan={9} className={styles.muted}>
                   No users
                 </td>
               </tr>

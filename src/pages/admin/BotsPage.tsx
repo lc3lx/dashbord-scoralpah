@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { adminApi, ApiClientError } from '@shared/api';
-import type { AdminBotRuntimeDto } from '@shared/api/types';
+import type { AdminBotRuntimeDto, AdminFleetActionResponse } from '@shared/api/types';
 import { ROUTES } from '@constants/routes';
 import styles from './admin.module.css';
 
@@ -14,6 +14,8 @@ export default function BotsPage() {
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
   const [startAsset, setStartAsset] = useState('EURUSD');
+  const [fleet, setFleet_] = useState<AdminFleetActionResponse | null>(null);
+  const [fleetBusy, setFleetBusy] = useState(false);
   const pageSize = 25;
 
   const load = useCallback(async () => {
@@ -33,8 +35,37 @@ export default function BotsPage() {
   }, [state, q, page]);
 
   useEffect(() => {
+    // The banner must reflect reality on arrival, not only after an action.
+    void adminApi.getBotFleet().then(setFleet_).catch(() => setFleet_(null));
+  }, []);
+
+  useEffect(() => {
     void load();
   }, [load]);
+
+  /**
+   * Stops or resumes the trading bot for EVERY user at once.
+   *
+   * Stopping also raises the maintenance flag, so users see the "we'll be right back"
+   * notice on their bot page and cannot simply press Start again. Resuming clears it and
+   * restarts only the bots this switch stopped.
+   */
+  async function setFleet(active: boolean) {
+    const note = active
+      ? window.prompt('Optional message to show users (leave blank for the default):') ?? ''
+      : '';
+    setError(null);
+    setFleetBusy(true);
+    try {
+      const next = await adminApi.setBotFleet({ active, message: note.trim() || null });
+      setFleet_(next);
+      await load();
+    } catch (err) {
+      setError(err instanceof ApiClientError ? err.message : 'Fleet update failed');
+    } finally {
+      setFleetBusy(false);
+    }
+  }
 
   async function control(userId: string, action: string, asset?: string) {
     setBusyId(userId);
@@ -62,6 +93,36 @@ export default function BotsPage() {
       <p className={styles.pageSub}>
         Monitor and control any user’s bot (start / pause / stop) across the live server.
       </p>
+
+      <div className={styles.toolbar}>
+        <span className={styles.badge + (fleet?.maintenanceActive ? ` ${styles.badgeWarn}` : '')}>
+          {fleet?.maintenanceActive
+            ? `All bots STOPPED${fleet.since ? ` since ${new Date(fleet.since).toLocaleString()}` : ''}`
+            : `Trading active · ${fleet?.botsAffected ?? 0} bot(s) running`}
+        </span>
+
+        {fleet?.maintenanceActive ? (
+          <button
+            type="button"
+            className={styles.btn}
+            disabled={fleetBusy}
+            onClick={() => void setFleet(false)}
+            title="Clear the maintenance notice and restart the bots this switch stopped"
+          >
+            Start bots for everyone
+          </button>
+        ) : (
+          <button
+            type="button"
+            className={`${styles.btn} ${styles.btnDanger}`}
+            disabled={fleetBusy}
+            onClick={() => void setFleet(true)}
+            title="Stop every user's bot and show them the maintenance notice"
+          >
+            Stop bots for everyone
+          </button>
+        )}
+      </div>
 
       <div className={styles.toolbar}>
         <select

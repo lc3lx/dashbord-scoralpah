@@ -45,7 +45,7 @@ export function useSignupForm() {
       const ssid = values.binollaAccount?.trim();
       if (ssid) {
         const { binollaApi } = await import('@shared/api');
-        await binollaApi.connect({ ssid, accountType: 'Demo' });
+        await binollaApi.connect({ ssid, accountType: 'Real' });
       }
       const [status, me] = await Promise.all([accountApi.status(), meApi.get()]);
       const destination = routeAfterAuth(status.botAccess, me.isAdmin, me.role);
