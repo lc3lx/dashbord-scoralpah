@@ -54,7 +54,10 @@ function mapMessage(code: string, fallback: string): string {
     case 'NOT_ELIGIBLE':
       return t('api.notEligible');
     case 'FORBIDDEN':
-      return t('api.forbidden');
+      // Keep the server's reason when it gave one — it names the actual blocker
+      // (unapproved account, no Binolla link, admin role) and the generic sentence
+      // hides it, leaving an admin with nothing to act on.
+      return fallback?.trim() ? fallback : t('api.forbidden');
     case 'MARKET_UNAVAILABLE':
       return t('api.marketUnavailable');
     case 'INSUFFICIENT_BALANCE':
