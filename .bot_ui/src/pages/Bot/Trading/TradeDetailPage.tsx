@@ -54,7 +54,11 @@ export default function TradeDetailPage() {
             statusTone={detail.statusTone}
             onBack={() => navigate(-1)}
           />
-          <TradeDetailHeroSection content={detail.hero} candleData={detail.candleData} />
+          <TradeDetailHeroSection
+            content={detail.hero}
+            candleData={detail.candleData}
+            statusTone={detail.statusTone}
+          />
           <TradeDetailsSection rows={detail.detailRows} />
           <TradeTimelineSection
             title={detail.timelineTitle}

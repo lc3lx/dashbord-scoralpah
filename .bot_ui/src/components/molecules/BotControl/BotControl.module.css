@@ -11,6 +11,11 @@
   border: 1.18px solid;
   border-radius: var(--radius-card);
   cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard),
+    opacity var(--duration-fast) var(--easing-standard);
 }
 
 .control:focus-visible {
@@ -20,6 +25,15 @@
 
 .label {
   font-weight: var(--font-weight-medium);
+}
+
+.control:not(.disabled):hover,
+.control:not(.disabled):focus-visible {
+  transform: translateY(-1px);
+}
+
+.control:not(.disabled):active {
+  transform: translateY(0);
 }
 
 .start {

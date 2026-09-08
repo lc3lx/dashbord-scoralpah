@@ -46,7 +46,7 @@ export function NotificationCard({
       <Icon src={iconMap[variant]} size="notification" decorative />
       <div className={styles.content}>
         <div className={styles.header}>
-          <Text variant="body-sm" tone="primary" className={styles.title}>
+          <Text variant="caption" tone="primary" className={styles.title}>
             {title}
           </Text>
           <Text variant="caption-xs" tone="caption" className={styles.timestamp}>

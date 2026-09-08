@@ -14,6 +14,7 @@ export * from './SecurityNotice';
 export * from './NavigationItem';
 export * from './OptionChip';
 export * from './LimitCard';
+export * from './PerformanceChart';
 export * from './SelectionOption';
 export * from './ToggleRow';
 export * from './IndicatorOptionCard';

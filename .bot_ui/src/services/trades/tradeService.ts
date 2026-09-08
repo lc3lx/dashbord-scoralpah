@@ -27,12 +27,30 @@ function notifyListeners(): void {
   listeners.forEach((listener) => listener());
 }
 
-function mapStatus(status: string): TradeStatus {
+function mapStatus(
+  status: string,
+  pnl?: number | null,
+  createdAt?: string,
+  durationSeconds?: number,
+): TradeStatus {
   const s = status.toLowerCase();
-  if (s === 'running' || s === 'pending') return 'running';
   if (s === 'profit' || s === 'tie') return 'profit';
-  if (s === 'loss' || s === 'failed' || s === 'cancelled' || s === 'unknown') return 'loss';
-  return 'running';
+  if (s === 'loss') return 'loss';
+  if (typeof pnl === 'number') {
+    if (pnl > 0) return 'profit';
+    if (pnl < 0) return 'loss';
+    return 'profit';
+  }
+  if (s === 'running' || s === 'pending') {
+    if (createdAt) {
+      const opened = Date.parse(createdAt);
+      const dur = (durationSeconds && durationSeconds > 0 ? durationSeconds : 60) + 90;
+      if (Number.isFinite(opened) && Date.now() > opened + dur * 1000) return 'unknown';
+    }
+    return 'running';
+  }
+  if (s === 'failed' || s === 'cancelled' || s === 'unknown') return 'unknown';
+  return 'unknown';
 }
 
 function mapDirection(direction: string): TradeDirection {
@@ -72,8 +90,15 @@ function formatPnl(pnl: number | null, status: string): string | undefined {
 }
 
 function mapTrade(dto: TradeDto): TradeRecord {
-  const status = mapStatus(dto.status);
+  const status = mapStatus(dto.status, dto.pnl, dto.createdAt, dto.durationSeconds);
   const pnlLabel = formatPnl(dto.pnl, dto.status);
+  const openedAt = new Date(dto.createdAt).getTime() || Date.now();
+  const durationSec = dto.durationSeconds > 0 ? dto.durationSeconds : 60;
+  const remaining =
+    status === 'running'
+      ? Math.max(0, Math.ceil((openedAt + durationSec * 1000 - Date.now()) / 1000))
+      : undefined;
+  const isBot = (dto.strategyId ?? 'rsi').toLowerCase() === 'rsi';
   return {
     id: dto.id,
     pair: dto.asset,
@@ -81,21 +106,22 @@ function mapTrade(dto: TradeDto): TradeRecord {
     strategy: 'RSI',
     indicator: 'RSI',
     duration: formatDuration(dto.durationSeconds),
+    durationSeconds: durationSec,
     direction: mapDirection(dto.direction),
     amount: dto.amount,
     stakeLabel: `$${dto.amount}`,
     result: pnlLabel,
     resultTone: dto.pnl !== null && dto.pnl >= 0 ? 'success' : dto.pnl !== null ? 'danger' : undefined,
     status,
-    source: 'user',
+    source: isBot ? 'bot' : 'user',
     timeLabel: formatTime(dto.createdAt),
     isToday: isToday(dto.createdAt),
-    liveTimerSeconds: status === 'running' ? dto.durationSeconds : undefined,
+    liveTimerSeconds: remaining,
     entryTime: formatTime(dto.createdAt),
     exitTime: status === 'running' ? undefined : formatTime(dto.updatedAt),
     signalStrength: '—',
     candleData: [],
-    openedAt: new Date(dto.createdAt).getTime() || Date.now(),
+    openedAt,
   };
 }
 
@@ -119,6 +145,7 @@ function buildTradeRef(trade: TradeRecord): string {
 function formatTradeStatusValue(status: TradeRecord['status']): string {
   if (status === 'running') return t('history.status.running');
   if (status === 'profit') return t('history.status.profit');
+  if (status === 'unknown') return t('history.status.unknown');
   return t('history.status.loss');
 }
 
@@ -177,13 +204,21 @@ function buildTimeline(trade: TradeRecord): TradeDetailContent['timeline'] {
 
 function buildDetailContent(trade: TradeRecord): TradeDetailContent {
   const statusTone =
-    trade.status === 'running' ? 'warning' : trade.status === 'profit' ? 'success' : 'danger';
+    trade.status === 'running'
+      ? 'warning'
+      : trade.status === 'profit'
+        ? 'success'
+        : trade.status === 'unknown'
+          ? 'neutral'
+          : 'danger';
   const statusLabel =
     trade.status === 'running'
       ? t('trade.detail.statusLive')
       : trade.status === 'profit'
         ? t('trade.detail.statusWon')
-        : t('trade.detail.statusLost');
+        : trade.status === 'unknown'
+          ? t('trade.detail.statusUnknown')
+          : t('trade.detail.statusLost');
 
   return {
     id: trade.id,
@@ -248,6 +283,39 @@ export const tradeService = {
       });
 
       let items = response.items.map(mapTrade);
+      // #region agent log
+      fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Debug-Session-Id': '1892a4',
+        },
+        body: JSON.stringify({
+          sessionId: '1892a4',
+          runId: 'trade-settle',
+          hypothesisId: 'H3',
+          location: 'tradeService.ts:listTrades',
+          message: 'history list',
+          data: {
+            filter,
+            page,
+            pageSize,
+            total: response.total,
+            itemCount: response.items.length,
+            mappedCount: items.length,
+            hasMore: response.page * response.pageSize < response.total,
+            sample: response.items.slice(0, 5).map((t) => ({
+              id: t.id?.slice?.(0, 8),
+              status: t.status,
+              pnl: t.pnl,
+              mapped: mapStatus(t.status, t.pnl, t.createdAt, t.durationSeconds),
+              durationSeconds: t.durationSeconds,
+            })),
+          },
+          timestamp: Date.now(),
+        }),
+      }).catch(() => {});
+      // #endregion
       if (filter === 'today') {
         items = items.filter((trade) => trade.isToday);
       } else if (filter === 'all' || filter === 'live' || filter === 'profit' || filter === 'loss') {
@@ -265,6 +333,26 @@ export const tradeService = {
       if (error instanceof ApiClientError) throw error;
       throw new ApiClientError('REQUEST_FAILED', t('history.loadFailed'), 0);
     }
+  },
+
+  async listAllTrades(filter: TradeListFilter = 'all'): Promise<PaginatedResult<TradeRecord>> {
+    const backendFilter: TradeListFilter = filter === 'today' ? 'all' : filter;
+    const pageSize = 100;
+    const first = await tradeService.listTrades({ filter: backendFilter, page: 1, pageSize });
+    const items = [...first.items];
+    const totalPages = Math.max(1, Math.ceil((first.total || 0) / (first.pageSize || pageSize)));
+    for (let page = 2; page <= totalPages; page += 1) {
+      const next = await tradeService.listTrades({ filter: backendFilter, page, pageSize });
+      items.push(...next.items);
+    }
+    const filtered = filter === 'today' ? items.filter((trade) => trade.isToday) : items;
+    return {
+      items: filtered,
+      total: filter === 'today' ? filtered.length : first.total,
+      page: 1,
+      pageSize,
+      hasMore: false,
+    };
   },
 
   async getTradeById(tradeId: string): Promise<TradeRecord | null> {

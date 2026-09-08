@@ -15,6 +15,7 @@ function resolvePlatform(trade: TradeRecord): { label: string; tone: ChipTone } 
 function resolveStatus(trade: TradeRecord): { label: string; tone: ChipTone } {
   if (trade.status === 'running') return { label: t('history.status.running'), tone: 'warning' };
   if (trade.status === 'profit') return { label: t('history.status.profit'), tone: 'success' };
+  if (trade.status === 'unknown') return { label: t('history.status.unknown'), tone: 'neutral' };
   return { label: t('history.status.loss'), tone: 'danger' };
 }
 

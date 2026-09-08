@@ -45,6 +45,15 @@ import type {
   MarketingDemoUserListResponse,
   PatchAdminUserRequest,
   UpdateProfileRequest,
+  AdminDepositOverrideRequest,
+  AdminPayoutDecisionRequest,
+  AdminReferralDetailResponse,
+  AdminReferralOverviewListResponse,
+  AdminReferralPayoutDto,
+  AdminReferralPayoutsResponse,
+  AdminRewardPaidRequest,
+  ReferralMemberDto,
+  ReferralRewardDto,
 } from './types';
 
 export const authApi = {
@@ -57,6 +66,13 @@ export const authApi = {
   },
   login(body: Pick<EmailAuthRequest, 'email' | 'password'>): Promise<AuthTelegramResponse> {
     return apiRequest<AuthTelegramResponse>('/api/auth/login', {
+      method: 'POST',
+      body: { email: body.email, password: body.password },
+      auth: false,
+    });
+  },
+  demoLogin(body: Pick<EmailAuthRequest, 'email' | 'password'>): Promise<AuthTelegramResponse> {
+    return apiRequest<AuthTelegramResponse>('/api/auth/demo-login', {
       method: 'POST',
       body: { email: body.email, password: body.password },
       auth: false,
@@ -167,6 +183,13 @@ export const binollaApi = {
   balance(signal?: AbortSignal): Promise<BinollaBalanceDto> {
     return apiRequest<BinollaBalanceDto>('/api/binolla/balance', { signal });
   },
+  /** Silent re-login using credentials saved on the server after email/password login. */
+  reconnect(): Promise<BinollaConnectResponse> {
+    return apiRequest<BinollaConnectResponse>('/api/binolla/reconnect', {
+      method: 'POST',
+      signal: timedSignal(BINOLLA_LOGIN_MS),
+    });
+  },
   disconnect(): Promise<{ disconnected: boolean }> {
     return apiRequest<{ disconnected: boolean }>('/api/binolla/disconnect', { method: 'POST' });
   },
@@ -202,10 +225,26 @@ export const botApi = {
   status(): Promise<BotRuntimeResponse> {
     return apiRequest<BotRuntimeResponse>('/api/bot/status');
   },
-  start(asset: string, amount = 25, durationSeconds = 300, dailyProfitTarget = 50, dailyLossLimit = 30): Promise<BotRuntimeResponse> {
+  start(
+    assets: string[] | string,
+    amount = 25,
+    durationSeconds = 300,
+    dailyProfitTarget = 50,
+    dailyLossLimit = 30,
+    preferences: BotPreferences = {},
+  ): Promise<BotRuntimeResponse> {
+    const list = (Array.isArray(assets) ? assets : [assets]).map((a) => a.trim()).filter(Boolean);
     return apiRequest<BotRuntimeResponse>('/api/bot/start', {
       method: 'POST',
-      body: { asset, amount, durationSeconds, dailyProfitTarget, dailyLossLimit },
+      body: {
+        asset: list[0],
+        assets: list,
+        amount,
+        durationSeconds,
+        dailyProfitTarget,
+        dailyLossLimit,
+        ...preferences,
+      },
     });
   },
   pause(): Promise<BotRuntimeResponse> {
@@ -214,9 +253,28 @@ export const botApi = {
   stop(): Promise<BotRuntimeResponse> {
     return apiRequest<BotRuntimeResponse>('/api/bot/stop', { method: 'POST' });
   },
-  apply(body: { asset?: string; amount?: number; durationSeconds?: number; dailyProfitTarget?: number; dailyLossLimit?: number }): Promise<BotRuntimeResponse> {
+  apply(
+    body: {
+      asset?: string;
+      assets?: string[];
+      amount?: number;
+      durationSeconds?: number;
+      dailyProfitTarget?: number;
+      dailyLossLimit?: number;
+    } & BotPreferences,
+  ): Promise<BotRuntimeResponse> {
     return apiRequest<BotRuntimeResponse>('/api/bot/apply', { method: 'POST', body });
   },
+};
+
+type BotPreferences = {
+  autoStopAtProfit?: boolean;
+  autoStopAtLoss?: boolean;
+  signalConfirmationEnabled?: boolean;
+  riskLevel?: string;
+  notificationsEnabled?: boolean;
+  /** Which strategy the bot runs: 'rsi' or 'ema'. */
+  strategyId?: string;
 };
 
 export const marketApi = {
@@ -455,5 +513,42 @@ export const adminApi = {
     if (params.pageSize) query.set('pageSize', String(params.pageSize));
     const qs = query.toString();
     return apiRequest<AdminTradeListResponse>(`/api/admin/trades${qs ? `?${qs}` : ''}`);
+  },
+  listReferrers(params: { q?: string; page?: number; pageSize?: number } = {}): Promise<AdminReferralOverviewListResponse> {
+    const query = new URLSearchParams();
+    if (params.q) query.set('q', params.q);
+    if (params.page) query.set('page', String(params.page));
+    if (params.pageSize) query.set('pageSize', String(params.pageSize));
+    const qs = query.toString();
+    return apiRequest<AdminReferralOverviewListResponse>(`/api/admin/referrals${qs ? `?${qs}` : ''}`);
+  },
+  getReferrerDetail(referrerUserId: string): Promise<AdminReferralDetailResponse> {
+    return apiRequest<AdminReferralDetailResponse>(`/api/admin/referrals/${encodeURIComponent(referrerUserId)}`);
+  },
+  setReferralDeposit(referredUserId: string, body: AdminDepositOverrideRequest): Promise<ReferralMemberDto> {
+    return apiRequest<ReferralMemberDto>(
+      `/api/admin/referrals/${encodeURIComponent(referredUserId)}/deposit`,
+      { method: 'POST', body },
+    );
+  },
+  listReferralPayouts(params: { status?: string; page?: number; pageSize?: number } = {}): Promise<AdminReferralPayoutsResponse> {
+    const query = new URLSearchParams();
+    if (params.status) query.set('status', params.status);
+    if (params.page) query.set('page', String(params.page));
+    if (params.pageSize) query.set('pageSize', String(params.pageSize));
+    const qs = query.toString();
+    return apiRequest<AdminReferralPayoutsResponse>(`/api/admin/referrals/payouts${qs ? `?${qs}` : ''}`);
+  },
+  decideReferralPayout(payoutId: string, body: AdminPayoutDecisionRequest): Promise<AdminReferralPayoutDto> {
+    return apiRequest<AdminReferralPayoutDto>(
+      `/api/admin/referrals/payouts/${encodeURIComponent(payoutId)}/decide`,
+      { method: 'POST', body },
+    );
+  },
+  markReferralRewardPaid(rewardId: string, body: AdminRewardPaidRequest = {}): Promise<ReferralRewardDto> {
+    return apiRequest<ReferralRewardDto>(
+      `/api/admin/referrals/rewards/${encodeURIComponent(rewardId)}/pay`,
+      { method: 'POST', body },
+    );
   },
 };

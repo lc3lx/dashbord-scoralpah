@@ -75,6 +75,12 @@
 
 .chevron {
   opacity: 0.8;
+  width: 6px;
+  height: 10px;
+}
+
+:global(html[dir='rtl']) .chevron {
+  transform: scaleX(-1);
 }
 
 .logoutCard {

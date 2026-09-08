@@ -38,6 +38,8 @@ export const ROUTES = {
   adminAudit: '/admin/audit',
   adminBots: '/admin/bots',
   adminTrades: '/admin/trades',
+  adminReferrals: '/admin/referrals',
+  adminReferralPayouts: '/admin/referrals/payouts',
 } as const;
 
 export type AppRoute = (typeof ROUTES)[keyof typeof ROUTES];

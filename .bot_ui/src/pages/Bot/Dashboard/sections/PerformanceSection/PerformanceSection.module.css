@@ -7,6 +7,7 @@
   background: var(--color-bg-surface-dark);
   border: var(--card-border-width) solid var(--card-border-color);
   border-radius: var(--radius-panel);
+  overflow: hidden;
 }
 
 .top {
@@ -32,6 +33,7 @@
   font-size: 22px;
   font-weight: 700;
   line-height: 25px;
+  overflow-wrap: anywhere;
 }
 
 .tabs {

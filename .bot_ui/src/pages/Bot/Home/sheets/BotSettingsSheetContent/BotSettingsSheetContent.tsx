@@ -1,4 +1,3 @@
-import { Button } from '@components/atoms/Button';
 import { OptionChip } from '@components/molecules/OptionChip';
 import { ToggleRow } from '@components/molecules/ToggleRow';
 import { Text } from '@components/atoms/Text';
@@ -10,18 +9,14 @@ export type BotSettingsSheetContentProps = {
   content: BotSettingsSheetContent;
   onToggleChange: (toggleId: string, enabled: boolean) => void;
   onRiskSelect: (riskId: string) => void;
-  onSave: () => void;
+  onDailyLimitChange: (field: 'dailyProfitTarget' | 'dailyLossLimit', value: number) => void;
+  onSave?: () => void;
 };
-
-function isComingSoonToggle(id: string): boolean {
-  return id.startsWith('auto-') || id === 'signal-confirm';
-}
 
 export function BotSettingsSheetContent({
   content,
   onToggleChange,
-  onRiskSelect: _onRiskSelect,
-  onSave,
+  onRiskSelect,
 }: BotSettingsSheetContentProps) {
   const t = useT();
 
@@ -35,11 +30,8 @@ export function BotSettingsSheetContent({
           <ToggleRow
             key={toggle.id}
             label={toggle.label}
-            checked={isComingSoonToggle(toggle.id) ? false : toggle.enabled}
-            onChange={(enabled) => {
-              if (isComingSoonToggle(toggle.id)) return;
-              onToggleChange(toggle.id, enabled);
-            }}
+            checked={toggle.enabled}
+            onChange={(enabled) => onToggleChange(toggle.id, enabled)}
           />
         ))}
       </div>
@@ -54,18 +46,12 @@ export function BotSettingsSheetContent({
               key={option.id}
               label={option.label}
               selected={option.id === content.selectedRiskId}
-              onSelect={() => {
-                /* Coming Soon — local risk chips do not enforce anything */
-              }}
+              onSelect={() => onRiskSelect(option.id)}
               className={styles.riskChip}
             />
           ))}
         </div>
       </div>
-
-      <Button variant="primary" fullWidth className={styles.saveButton} onClick={onSave}>
-        {content.saveLabel}
-      </Button>
     </div>
   );
 }

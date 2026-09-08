@@ -18,10 +18,18 @@ function resolveConfigValue(
   }
 
   if (row.sheetTarget === 'tradingPair') {
-    const selected = sheets.tradingPair.options.find(
-      (option) => option.id === runtime.tradingPairId,
+    const ids =
+      runtime.tradingPairIds?.length > 0
+        ? runtime.tradingPairIds
+        : runtime.tradingPairId
+          ? [runtime.tradingPairId]
+          : [];
+    if (ids.length === 0) return row.value;
+    const titles = ids.map(
+      (id) => sheets.tradingPair.options.find((option) => option.id === id)?.title ?? id,
     );
-    return selected?.title ?? row.value;
+    if (titles.length === 1) return titles[0] ?? row.value;
+    return `${titles[0]} +${titles.length - 1}`;
   }
 
   if (row.sheetTarget === 'technicalIndicator') {
@@ -48,12 +56,13 @@ export function useHomeData() {
 
   useEffect(() => {
     let active = true;
+    const force = reloadToken > 0;
 
     void loadPageData(
       cacheKey,
       () => homeService.fetchHomeData(),
       PAGE_CACHE_TTL.home,
-      reloadToken > 0,
+      force,
     )
       .then((next) => {
         if (active) setData(next);
@@ -68,10 +77,9 @@ export function useHomeData() {
   }, [cacheKey, reloadToken]);
 
   useEffect(() => {
-    if (data?.runtime.botStatus !== 'running') return;
-    const timer = window.setInterval(() => setReloadToken((n) => n + 1), 10_000);
+    const timer = window.setInterval(() => setReloadToken((n) => n + 1), 2_000);
     return () => window.clearInterval(timer);
-  }, [data?.runtime.botStatus]);
+  }, []);
 
   const configRows = useMemo(() => {
     if (!data) return [];
@@ -120,7 +128,7 @@ export function useHomeData() {
     setData((current) => (current ? { ...current, runtime } : current));
 
     // Pair / strategy changes need a live RSI + candles refresh.
-    if (partial.tradingPairId !== undefined || partial.strategyId !== undefined) {
+    if (partial.tradingPairId !== undefined || partial.tradingPairIds !== undefined || partial.strategyId !== undefined) {
       setReloadToken((n) => n + 1);
     }
 

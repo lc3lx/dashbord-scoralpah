@@ -33,3 +33,7 @@
 .checked .thumb {
   transform: translateX(calc(var(--home-toggle-track-width) - var(--home-toggle-thumb-size) - 4px));
 }
+
+:global(html[dir='rtl']) .checked .thumb {
+  transform: translateX(calc(-1 * (var(--home-toggle-track-width) - var(--home-toggle-thumb-size) - 4px)));
+}

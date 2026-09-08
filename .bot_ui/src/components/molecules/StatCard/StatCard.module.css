@@ -2,10 +2,11 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: var(--card-stat-width);
   min-width: 0;
-  height: var(--card-stat-height);
+  height: auto;
+  min-height: var(--card-stat-height);
   padding: var(--card-padding);
+  overflow: hidden;
   background: var(--color-bg-surface-dark);
   border: var(--card-border-width) solid var(--card-border-color);
   border-radius: var(--card-border-radius);
@@ -13,8 +14,9 @@
 
 .value {
   padding-top: var(--card-stat-value-padding-top);
-  font-size: var(--card-stat-value-font-size);
-  line-height: var(--card-stat-value-line-height);
+  font-size: clamp(16px, 4.2vw, var(--card-stat-value-font-size));
+  line-height: 1.15;
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.44px;
+  overflow-wrap: anywhere;
 }

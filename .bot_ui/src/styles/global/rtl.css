@@ -14,3 +14,8 @@ html[dir='rtl'] [data-ltr-anchor='end'] {
   right: auto;
   left: 0;
 }
+
+/* Flip directional chevrons / back arrows designed for LTR. */
+html[dir='rtl'] [data-flip-rtl='true'] {
+  transform: scaleX(-1);
+}

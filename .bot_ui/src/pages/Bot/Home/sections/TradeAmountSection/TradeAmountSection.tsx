@@ -1,3 +1,5 @@
+import { FormField } from '@components/molecules/FormField';
+import { Input } from '@components/atoms/Input';
 import { OptionChip } from '@components/molecules/OptionChip';
 import { Text } from '@components/atoms/Text';
 import { useT } from '@shared/i18n';
@@ -6,18 +8,30 @@ import styles from './TradeAmountSection.module.css';
 
 export type TradeAmountSectionProps = {
   content: ChipGroupContent;
-  onSelect: (optionId: string) => void;
+  value: string;
+  onValueChange: (value: string) => void;
+  error?: string | null;
 };
 
-export function TradeAmountSection({ content, onSelect }: TradeAmountSectionProps) {
+export function TradeAmountSection({
+  content,
+  value,
+  onValueChange,
+  error = null,
+}: TradeAmountSectionProps) {
   const t = useT();
 
   return (
     <section className={styles.section} aria-label={content.label}>
       <div className={styles.card}>
-        <Text variant="caption" tone="muted" className={styles.label}>
-          {content.label}
-        </Text>
+        <div className={styles.header}>
+          <Text variant="caption" tone="muted" className={styles.label}>
+            {content.label}
+          </Text>
+          <Text variant="caption-xs" tone="caption" className={styles.helper}>
+            {t('home.tradeAmount.helper')}
+          </Text>
+        </div>
         {content.options.length === 0 ? (
           <Text variant="caption" tone="caption">
             {t('home.tradeAmount.empty')}
@@ -25,15 +39,35 @@ export function TradeAmountSection({ content, onSelect }: TradeAmountSectionProp
         ) : (
           <>
             <Text variant="h2" tone="body" className={styles.value}>
-              {content.displayValue}
+              {value ? `$${value}` : content.displayValue}
             </Text>
-            <div className={styles.chips}>
+            <FormField
+              id="bot-trade-amount"
+              label={t('home.tradeAmount.inputLabel')}
+              error={error ?? undefined}
+              className={styles.field}
+              spacing="compact"
+            >
+              <Input
+                id="bot-trade-amount"
+                type="number"
+                min={1}
+                step={1}
+                inputMode="numeric"
+                value={value}
+                hasError={Boolean(error)}
+                placeholder={t('home.tradeAmount.placeholder')}
+                className={styles.input}
+                onChange={(event) => onValueChange(event.target.value)}
+              />
+            </FormField>
+            <div className={styles.chips} aria-label={t('home.tradeAmount.quickSelect')}>
               {content.options.map((option) => (
                 <OptionChip
                   key={option.id}
                   label={option.label}
-                  selected={option.id === content.selectedId}
-                  onSelect={() => onSelect(option.id)}
+                  selected={option.label === `$${value}`}
+                  onSelect={() => onValueChange(option.id.replace('amount-', ''))}
                 />
               ))}
             </div>

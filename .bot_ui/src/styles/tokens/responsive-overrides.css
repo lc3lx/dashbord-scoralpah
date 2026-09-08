@@ -5,16 +5,16 @@
 @media (max-width: 360px) {
   :root {
     --layout-page-padding-x: 12px;
-    --layout-bottom-nav-item-width: 52px;
+    --layout-bottom-nav-item-width: 64px;
     --layout-bottom-nav-item-height: 70px;
-    --nav-bottom-item-padding-x: 4px;
+    --nav-bottom-item-padding-x: 1px;
     --nav-bottom-item-padding-y: 10px;
     --nav-bottom-item-gap: 2px;
-    --nav-bottom-column-gap: 2px;
+    --nav-bottom-column-gap: 1px;
     --nav-bottom-fab-zone-width: 68px;
-    --nav-bottom-inset-left: 4px;
-    --nav-bottom-inset-right: 4px;
-    --nav-label-font-size: 10px;
+    --nav-bottom-inset-left: 0px;
+    --nav-bottom-inset-right: 0px;
+    --nav-label-font-size: 9px;
   }
 }
 

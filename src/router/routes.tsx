@@ -47,6 +47,8 @@ const AuditPage = lazy(() => import('../pages/admin/AuditPage'));
 const NotificationsAdminPage = lazy(() => import('../pages/admin/NotificationsAdminPage'));
 const BotsPage = lazy(() => import('../pages/admin/BotsPage'));
 const TradesAdminPage = lazy(() => import('../pages/admin/TradesAdminPage'));
+const ReferralsAdminPage = lazy(() => import('../pages/admin/ReferralsAdminPage'));
+const ReferralPayoutsAdminPage = lazy(() => import('../pages/admin/ReferralPayoutsAdminPage'));
 
 /**
  * Website-only routes under /dashboard/*.
@@ -235,6 +237,8 @@ export const appRoutes: RouteObject[] = [
           { path: 'audit', element: <AuditPage /> },
           { path: 'bots', element: <BotsPage /> },
           { path: 'trades', element: <TradesAdminPage /> },
+          { path: 'referrals', element: <ReferralsAdminPage /> },
+          { path: 'referrals/payouts', element: <ReferralPayoutsAdminPage /> },
         ],
       },
       {

@@ -11,23 +11,12 @@ import { hasTelegramInitData } from '@shared/telegram/telegramWebApp';
 
 export type BinollaAuthMode = 'login' | 'register';
 
-export function useBinollaPlatformAuth(
-  mode: BinollaAuthMode,
-  onToggleMode?: () => void,
-) {
+export function useBinollaPlatformAuth(mode: BinollaAuthMode = 'login') {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [error, setError] = useState<string | null>(null);
-
-  const goToOtherMode = useCallback(() => {
-    if (onToggleMode) {
-      onToggleMode();
-      return;
-    }
-    navigate(mode === 'login' ? ROUTES.signup : ROUTES.login);
-  }, [mode, navigate, onToggleMode]);
 
   const ensureScarAlphaSession = useCallback(async () => {
     if (tokenStore.isAuthenticated()) return;
@@ -110,7 +99,6 @@ export function useBinollaPlatformAuth(
     setPassword,
     status,
     error,
-    goToOtherMode,
     submitCredentials,
     enterBotWithTelegram,
     canEnterViaTelegram: hasTelegramInitData(),

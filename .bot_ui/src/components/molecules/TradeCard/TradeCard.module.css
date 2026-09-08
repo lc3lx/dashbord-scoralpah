@@ -82,3 +82,7 @@
   width: var(--icon-size-xs);
   height: var(--icon-size-xs);
 }
+
+:global(html[dir='rtl']) .detailsIcon {
+  transform: scaleX(-1);
+}

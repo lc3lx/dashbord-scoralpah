@@ -28,12 +28,10 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  gap: 0;
+  gap: var(--trading-section-gap);
   width: 100%;
-  max-width: none;
-  padding-inline: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+  padding-top: var(--trading-content-padding-top);
+  padding-bottom: var(--trading-scroll-padding-bottom);
 }
 
 .loading {

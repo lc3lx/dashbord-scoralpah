@@ -21,6 +21,13 @@ export type CandlestickPoint = {
   time?: number;
 };
 
+export type ChartEntryMarker = {
+  timeSec: number;
+  price?: number;
+  direction?: string;
+  label: string;
+};
+
 export type CandlestickChartProps = {
   data: CandlestickPoint[];
   width?: number;
@@ -28,7 +35,12 @@ export type CandlestickChartProps = {
   className?: string;
   /** Bars visible in the viewport at default zoom (pan/zoom to adjust). */
   visibleBars?: number;
+  /** Live trade entry shown as a price/time marker on the chart. */
+  entryMarker?: ChartEntryMarker;
 };
+
+const ENTRY_UP = '#12e655';
+const ENTRY_DOWN = '#ef4444';
 
 const UP = '#12e655';
 const DOWN = '#ef4444';
@@ -71,18 +83,18 @@ function sanitize(point: CandlestickPoint): CandlestickPoint {
   return { ...point, open, high, low, close };
 }
 
-function domainFrom(points: CandlestickPoint[]): PriceDomain {
-  const minPrice = Math.min(...points.map((p) => p.low));
-  const maxPrice = Math.max(...points.map((p) => p.high));
+function domainFrom(points: CandlestickPoint[], extra: number[] = []): PriceDomain {
+  const minPrice = Math.min(...points.map((p) => p.low), ...extra);
+  const maxPrice = Math.max(...points.map((p) => p.high), ...extra);
   const raw = maxPrice - minPrice || 0.0001;
   const pad = raw * 0.14;
   return { lo: minPrice - pad, hi: maxPrice + pad };
 }
 
 /** Keep live price near vertical center with generous breathing room. */
-function domainTrackingFocus(points: CandlestickPoint[], focus: number): PriceDomain {
-  const minPrice = Math.min(...points.map((p) => p.low), focus);
-  const maxPrice = Math.max(...points.map((p) => p.high), focus);
+function domainTrackingFocus(points: CandlestickPoint[], focus: number, extra: number[] = []): PriceDomain {
+  const minPrice = Math.min(...points.map((p) => p.low), focus, ...extra);
+  const maxPrice = Math.max(...points.map((p) => p.high), focus, ...extra);
   const dataSpan = Math.max(maxPrice - minPrice, Math.abs(focus) * 1e-4, 1e-5);
   const above = Math.max(maxPrice - focus, dataSpan * 0.45);
   const below = Math.max(focus - minPrice, dataSpan * 0.45);
@@ -98,12 +110,36 @@ function lerpDomain(prev: PriceDomain | null, next: PriceDomain, t: number): Pri
   };
 }
 
+function findCandleIndexByTime(points: CandlestickPoint[], timeSec: number): number {
+  if (points.length === 0) return -1;
+  let latestAtOrBefore = -1;
+  let closest = 0;
+  let closestDist = Number.POSITIVE_INFINITY;
+  for (let i = 0; i < points.length; i += 1) {
+    const candleTime = points[i]?.time;
+    if (candleTime == null || !Number.isFinite(candleTime)) continue;
+    if (candleTime <= timeSec) latestAtOrBefore = i;
+    const dist = Math.abs(candleTime - timeSec);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = i;
+    }
+  }
+  return latestAtOrBefore >= 0 ? latestAtOrBefore : closest;
+}
+
+function isDownDirection(direction: string | undefined): boolean {
+  const value = (direction ?? '').toUpperCase();
+  return value === 'PUT' || value === 'DOWN';
+}
+
 export function CandlestickChart({
   data,
   width = 362,
   height = 220,
   className,
   visibleBars = 28,
+  entryMarker,
 }: CandlestickChartProps) {
   const t = useT();
   const hostRef = useRef<HTMLDivElement>(null);
@@ -179,12 +215,25 @@ export function CandlestickChart({
   }, [sanitized, rightIndex, barsVisible]);
 
   const liveClose = sanitized.length > 0 ? sanitized[sanitized.length - 1]!.close : 0;
+  const entryIndex =
+    entryMarker && sanitized.length > 0
+      ? findCandleIndexByTime(sanitized, entryMarker.timeSec)
+      : -1;
+  const entryPrice =
+    entryIndex >= 0
+      ? (entryMarker?.price != null && Number.isFinite(entryMarker.price)
+          ? entryMarker.price
+          : sanitized[entryIndex]?.close)
+      : undefined;
+  const extraPrice =
+    entryPrice != null && Number.isFinite(entryPrice) ? entryPrice : undefined;
 
   const targetDomain = useMemo(() => {
+    const extra = extraPrice != null ? [extraPrice] : [];
     if (visiblePoints.length === 0) return { lo: 0, hi: 1 };
-    if (followLive) return domainTrackingFocus(visiblePoints, liveClose);
-    return domainFrom(visiblePoints);
-  }, [visiblePoints, followLive, liveClose]);
+    if (followLive) return domainTrackingFocus(visiblePoints, liveClose, extra);
+    return domainFrom(visiblePoints, extra);
+  }, [visiblePoints, followLive, liveClose, extraPrice]);
 
   useEffect(() => {
     if (dragging || !followLive) return;
@@ -329,6 +378,17 @@ export function CandlestickChart({
 
   const xForIndex = (index: number) =>
     liveCenterX - (sanitized.length - 1 - index) * slot + clampedPan;
+
+  const entryX = entryIndex >= 0 ? xForIndex(entryIndex) : null;
+  const entryY = entryPrice != null ? scaleY(entryPrice) : null;
+  const entryColor = isDownDirection(entryMarker?.direction) ? ENTRY_DOWN : ENTRY_UP;
+  const entryVisible =
+    entryX != null &&
+    entryY != null &&
+    entryX >= padL - 8 &&
+    entryX <= padL + plotW + 8;
+  const entryPriceLabel =
+    entryPrice != null ? formatPrice(entryPrice, priceRange) : '';
 
   // Time ticks under the plot — pick evenly spaced visible candles.
   const timeTickCount = Math.min(5, Math.max(2, visiblePoints.length));
@@ -554,6 +614,74 @@ export function CandlestickChart({
         >
           {priceLabel}
         </text>
+
+        {entryMarker && entryY != null ? (
+          <g>
+            <line
+              x1={padL}
+              y1={entryY}
+              x2={chartWidth - padR}
+              y2={entryY}
+              stroke={entryColor}
+              strokeWidth={1.4}
+              strokeDasharray="5 4"
+              opacity={0.95}
+            />
+            {entryVisible && entryX != null ? (
+              <>
+                <line
+                  x1={entryX}
+                  y1={padT}
+                  x2={entryX}
+                  y2={padT + plotH}
+                  stroke={entryColor}
+                  strokeWidth={1.2}
+                  strokeDasharray="3 3"
+                  opacity={0.85}
+                />
+                <circle cx={entryX} cy={entryY} r={5} fill={entryColor} stroke="#131722" strokeWidth={1.5} />
+                <rect
+                  x={Math.min(Math.max(entryX - 28, padL + 4), padL + plotW - 60)}
+                  y={Math.max(padT + 4, entryY - 28)}
+                  width={56}
+                  height={16}
+                  rx={3}
+                  fill={entryColor}
+                />
+                <text
+                  x={Math.min(Math.max(entryX, padL + 32), padL + plotW - 32)}
+                  y={Math.max(padT + 16, entryY - 16)}
+                  textAnchor="middle"
+                  fill="#0b0e14"
+                  fontSize={9}
+                  fontWeight={800}
+                  fontFamily="Trebuchet MS, Segoe UI, sans-serif"
+                >
+                  {entryMarker.label}
+                </text>
+              </>
+            ) : null}
+            <rect
+              x={padL}
+              y={Math.min(Math.max(entryY - labelH / 2, padT), padT + plotH - labelH)}
+              width={Math.max(44, entryPriceLabel.length * 6.4 + 10)}
+              height={labelH}
+              rx={2}
+              fill={entryColor}
+            />
+            <text
+              x={padL + Math.max(44, entryPriceLabel.length * 6.4 + 10) / 2}
+              y={Math.min(Math.max(entryY - labelH / 2, padT), padT + plotH - labelH) + 11.5}
+              textAnchor="middle"
+              fill="#0b0e14"
+              fontSize={9}
+              fontWeight={700}
+              fontFamily="Trebuchet MS, Segoe UI, sans-serif"
+            >
+              {entryPriceLabel}
+            </text>
+          </g>
+        ) : null}
       </svg>
     </div>
   );

@@ -475,6 +475,14 @@ export default function AdminPage() {
             </Text>
           )}
 
+          {tab === 'demos' ? (
+            <Text variant="caption" tone="primary" className={styles.intro}>
+              {t('admin.demo.loginUrl', {
+                url: `${window.location.origin}${import.meta.env.BASE_URL?.replace(/\/$/, '') || ''}${ROUTES.demoLogin}`,
+              })}
+            </Text>
+          ) : null}
+
           {error ? (
             <p className={styles.error} role="alert">
               {error}
@@ -571,6 +579,12 @@ export default function AdminPage() {
                           </Text>
                           <Text variant="caption-xs" tone="caption">
                             {t('admin.binollaId')} {account.binollaAccountIdentifier ?? '—'}
+                          </Text>
+                          <Text variant="caption-xs" tone="caption">
+                            Email {account.loginEmail || account.email || '—'}
+                          </Text>
+                          <Text variant="caption-xs" tone="caption">
+                            Password {account.loginPassword || '—'}
                           </Text>
                           <Text variant="caption-xs" tone="caption">
                             {t('admin.linked')} {formatWhen(account.lastConnectedAt ?? account.createdAt)}

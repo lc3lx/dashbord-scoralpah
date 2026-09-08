@@ -1,16 +1,28 @@
+import { PerformanceChart } from '@components/molecules/PerformanceChart';
 import { StatCard } from '@components/molecules/StatCard';
-import type { HomeStatItem } from '../../types';
+import { useT } from '@shared/i18n';
+import type { HomePerformancePoint, HomeStatItem } from '../../types';
 import styles from './HomeStatsSection.module.css';
 
 export type HomeStatsSectionProps = {
   stats: HomeStatItem[];
+  points?: HomePerformancePoint[];
 };
 
-export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
+export function HomeStatsSection({ stats, points = [] }: HomeStatsSectionProps) {
+  const t = useT();
+  const visibleStats = stats.filter((stat) => stat.id !== 'today-loss');
+
   return (
-    <section className={styles.section} aria-label="Performance stats">
+    <section className={styles.section} aria-label={t('dashboard.performance')}>
+      <PerformanceChart
+        points={points}
+        emptyLabel={
+          points.length === 0 ? t('dashboard.performance.empty') : t('dashboard.performance.fromTrades')
+        }
+      />
       <div className={styles.grid}>
-        {stats.map((stat) => (
+        {visibleStats.map((stat) => (
           <StatCard
             key={stat.id}
             label={stat.label}

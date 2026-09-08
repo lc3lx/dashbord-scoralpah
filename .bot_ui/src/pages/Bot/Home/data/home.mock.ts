@@ -23,19 +23,21 @@ export function getHomeMockContent(): HomePageContent {
       statusLabel: t('home.bot.statusManual'),
       statusTone: 'neutral',
       stats: [
+        { id: 'pair', label: t('home.stat.pair'), value: '—' },
         { id: 'signal', label: t('home.stat.signal'), value: t('common.none') },
         { id: 'strength', label: t('common.rsi'), value: '—' },
+        { id: 'backtest', label: t('home.stat.backtest'), value: '—' },
         { id: 'updated', label: t('home.stat.candle'), value: '—' },
       ],
     },
     stats: [
       { id: 'balance', label: t('home.stat.balance'), value: '—' },
       { id: 'today-gain', label: t('home.stat.todayGain'), value: '—' },
-      { id: 'today-loss', label: t('home.stat.todayLoss'), value: '—' },
       { id: 'net', label: t('home.stat.net'), value: '—' },
       { id: 'active', label: t('home.stat.active'), value: '—' },
       { id: 'win-rate', label: t('home.stat.winRate'), value: '—' },
     ],
+    performancePoints: [],
     controls: ['start', 'pause', 'stop', 'apply'],
     configRows: [
       {
@@ -98,7 +100,6 @@ export function getHomeMockContent(): HomePageContent {
       },
     ],
     actions: [
-      { id: 'show-chart', label: t('home.action.showChart'), sheetTarget: 'chart' },
       { id: 'bot-settings', label: t('home.action.botSettings'), sheetTarget: 'settings' },
     ],
     disclaimer: t('home.disclaimer.default'),
@@ -118,17 +119,17 @@ export function getHomeMockContent(): HomePageContent {
           {
             id: 'auto-profit',
             label: t('home.settings.autoProfit'),
-            enabled: false,
+            enabled: true,
           },
           {
             id: 'auto-loss',
             label: t('home.settings.autoLoss'),
-            enabled: false,
+            enabled: true,
           },
           {
             id: 'signal-confirm',
             label: t('home.settings.signalConfirm'),
-            enabled: false,
+            enabled: true,
           },
           {
             id: 'notifications',
@@ -144,6 +145,10 @@ export function getHomeMockContent(): HomePageContent {
         ],
         selectedRiskId: RISK_MEDIUM_ID,
         saveLabel: t('home.settings.save'),
+        dailyProfitTarget: 50,
+        dailyLossLimit: 30,
+        dailyProfitLabel: t('home.settings.dailyProfit'),
+        dailyLossLabel: t('home.settings.dailyLoss'),
       },
       marketType: {
         title: t('home.sheet.marketType'),
@@ -161,6 +166,7 @@ export function getHomeMockContent(): HomePageContent {
         searchPlaceholder: t('home.sheet.searchPairs'),
         emptySearchMessage: t('home.sheet.noPairs'),
         selectedId: '',
+        selectedIds: [],
         options: [],
       },
       technicalIndicator: {
@@ -199,6 +205,7 @@ function buildHomeInitialRuntime(): HomeRuntimeState {
     botStatus: 'stopped',
     marketTypeId: MARKET_BINOLLA_ID,
     tradingPairId: '',
+    tradingPairIds: [],
     technicalIndicatorId: INDICATOR_RSI_ID,
     strategyId: 'rsi',
     tradeAmountId: '',

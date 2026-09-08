@@ -17,3 +17,7 @@
   width: 100%;
   padding-top: var(--login-security-padding-top);
 }
+
+.secondaryNav {
+  margin-top: var(--space-3);
+}

@@ -6,6 +6,7 @@ import { FIGMA_NODES, ROUTES } from '@constants/routes';
 const SplashPage = lazy(() => import('@pages/Bot/Splash'));
 const OnboardingPage = lazy(() => import('@pages/Bot/Onboarding'));
 const LoginPage = lazy(() => import('@pages/Bot/Login'));
+const DemoLoginPage = lazy(() => import('@pages/Bot/DemoLogin'));
 const SignupPage = lazy(() => import('@pages/Bot/Signup'));
 const LinkBinollaPage = lazy(() => import('@pages/Bot/LinkBinolla'));
 const DashboardPage = lazy(() => import('@pages/Bot/Dashboard'));
@@ -27,9 +28,6 @@ const EditProfilePage = lazy(() =>
 );
 const ChangePasswordPage = lazy(() =>
   import('@pages/Bot/Settings').then((module) => ({ default: module.ChangePasswordPage })),
-);
-const SubscriptionPage = lazy(() =>
-  import('@pages/Bot/Settings').then((module) => ({ default: module.SubscriptionPage })),
 );
 const ActivationHistoryPage = lazy(() =>
   import('@pages/Bot/Settings').then((module) => ({ default: module.ActivationHistoryPage })),
@@ -57,6 +55,11 @@ export const appRoutes: RouteObject[] = [
             path: ROUTES.login,
             element: <LoginPage />,
             handle: { title: 'Login', figmaNodeId: FIGMA_NODES.login },
+          },
+          {
+            path: ROUTES.demoLogin,
+            element: <DemoLoginPage />,
+            handle: { title: 'Marketing demo login' },
           },
           {
             path: ROUTES.signup,
@@ -178,7 +181,7 @@ export const appRoutes: RouteObject[] = [
           },
           {
             path: ROUTES.subscription,
-            element: <SubscriptionPage />,
+            element: <Navigate to={ROUTES.settings} replace />,
             handle: {
               title: 'Subscription',
               figmaNodeId: FIGMA_NODES.subscription,

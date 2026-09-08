@@ -15,6 +15,12 @@
   background: var(--trading-binolla-card-bg);
   border: var(--trading-card-border-width) solid var(--trading-card-border-color);
   border-radius: var(--trading-card-radius);
+  box-sizing: border-box;
+}
+
+.cardLoss {
+  background: linear-gradient(180deg, rgba(221, 9, 18, 0.12), rgba(18, 16, 17, 0.95));
+  border-color: rgba(221, 9, 18, 0.35);
 }
 
 .heroRow {
@@ -30,8 +36,16 @@
   justify-content: center;
   width: var(--trading-detail-direction-size);
   height: var(--trading-detail-direction-size);
-  background: rgba(0, 188, 125, 0.15);
   border-radius: var(--trading-detail-direction-radius);
+  flex-shrink: 0;
+}
+
+.directionUp {
+  background: rgba(0, 188, 125, 0.15);
+}
+
+.directionDown {
+  background: rgba(221, 9, 18, 0.15);
 }
 
 .info {
@@ -68,4 +82,20 @@
 .chart {
   width: 100%;
   height: auto;
+}
+
+.statusChip {
+  --chip-solid-padding-x: 14px;
+  --chip-solid-padding-y: 6px;
+  --badge-font-size: 12px;
+  --badge-line-height: 18px;
+  justify-content: center;
+  align-items: center;
+  min-width: 56px;
+  min-height: 28px;
+  box-sizing: border-box;
+  text-align: center;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

@@ -39,8 +39,8 @@ export function BotEngineCard({
           <Text variant="body" tone="body" className={styles.name}>
             {name}
           </Text>
-          <Chip label={statusLabel} tone={statusTone} style="solid" className={styles.statusChip} />
         </div>
+        <Chip label={statusLabel} tone={statusTone} style="solid" className={styles.statusChip} />
       </header>
 
       <div className={styles.divider} aria-hidden="true" />

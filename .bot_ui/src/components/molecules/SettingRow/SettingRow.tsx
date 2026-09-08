@@ -50,7 +50,7 @@ export function SettingRow({
           {value}
         </Text>
       </span>
-      <Icon src={uiAssets.chevronNav} size="xs" className={styles.chevron} />
+      <Icon src={uiAssets.nextChevron} size="xs" className={styles.chevron} />
     </Component>
   );
 }

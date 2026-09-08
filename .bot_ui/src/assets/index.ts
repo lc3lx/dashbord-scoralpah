@@ -133,6 +133,7 @@ export const imageAssets = {
 export const accountAssets = {
   profileUser: new URL('./icons/account/profile-user.svg', import.meta.url).href,
   editBadge: new URL('./icons/account/edit-badge.svg', import.meta.url).href,
+  email: new URL('./icons/account/email.svg', import.meta.url).href,
   country: new URL('./icons/account/country.svg', import.meta.url).href,
   telegram: new URL('./icons/account/telegram.svg', import.meta.url).href,
   binollaId: new URL('./icons/account/binolla-id.svg', import.meta.url).href,

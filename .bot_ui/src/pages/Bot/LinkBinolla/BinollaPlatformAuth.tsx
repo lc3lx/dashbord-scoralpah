@@ -4,6 +4,7 @@ import { FormField } from '@components/molecules/FormField';
 import { AuthBrand, AuthHero, AuthServerError, AuthShell } from '@features/Auth';
 import { BINOLLA_REFERRAL_SIGNUP_URL } from '@constants/binolla';
 import { useT } from '@shared/i18n';
+import { openExternalLink } from '@shared/telegram/telegramWebApp';
 import {
   useBinollaPlatformAuth,
   type BinollaAuthMode,
@@ -11,13 +12,12 @@ import {
 import styles from './LinkBinollaPage.module.css';
 
 export type BinollaPlatformAuthProps = {
-  mode: BinollaAuthMode;
-  onToggleMode?: () => void;
+  mode?: BinollaAuthMode;
 };
 
-export function BinollaPlatformAuth({ mode, onToggleMode }: BinollaPlatformAuthProps) {
+export function BinollaPlatformAuth({ mode = 'login' }: BinollaPlatformAuthProps) {
   const t = useT();
-  const flow = useBinollaPlatformAuth(mode, onToggleMode);
+  const flow = useBinollaPlatformAuth(mode);
   const isLogin = mode === 'login';
 
   return (
@@ -68,10 +68,6 @@ export function BinollaPlatformAuth({ mode, onToggleMode }: BinollaPlatformAuthP
           />
         </FormField>
 
-        <p className={styles.help}>
-          {t('binolla.auth.help', { url: BINOLLA_REFERRAL_SIGNUP_URL })}
-        </p>
-
         <AuthServerError message={flow.error} />
 
         <div className={styles.actions}>
@@ -102,8 +98,12 @@ export function BinollaPlatformAuth({ mode, onToggleMode }: BinollaPlatformAuthP
             </button>
           ) : null}
 
-          <button type="button" className={styles.secondaryBtn} onClick={flow.goToOtherMode}>
-            {isLogin ? t('binolla.auth.goSignup') : t('binolla.auth.goLogin')}
+          <button
+            type="button"
+            className={styles.secondaryBtn}
+            onClick={() => openExternalLink(BINOLLA_REFERRAL_SIGNUP_URL)}
+          >
+            {t('binolla.auth.goSignup')}
           </button>
         </div>
       </form>

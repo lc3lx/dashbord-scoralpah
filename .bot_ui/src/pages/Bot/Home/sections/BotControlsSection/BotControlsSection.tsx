@@ -12,6 +12,7 @@ export type BotControlsSectionProps = {
   onStop: () => void;
   onApply: () => void;
   isUpdating?: boolean;
+  feedback?: { tone: 'success' | 'danger' | 'warning'; message: string } | null;
   /** Phase 9: auto Start/Pause/Stop is out of scope — show Coming Soon. */
   comingSoon?: boolean;
 };
@@ -34,6 +35,7 @@ export function BotControlsSection({
   onStop,
   onApply,
   isUpdating = false,
+  feedback = null,
   comingSoon = true,
 }: BotControlsSectionProps) {
   const t = useT();
@@ -53,7 +55,11 @@ export function BotControlsSection({
           />
         ))}
       </div>
-      {comingSoon ? (
+      {feedback ? (
+        <Text variant="caption-xs" tone={feedback.tone} align="center" className={styles.soonNote} aria-live="polite">
+          {feedback.message}
+        </Text>
+      ) : comingSoon ? (
         <Text variant="caption-xs" tone="caption" align="center" className={styles.soonNote}>
           {t('home.controls.note')}
         </Text>

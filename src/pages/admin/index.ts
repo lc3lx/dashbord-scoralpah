@@ -7,3 +7,5 @@ export { default as AuditPage } from './AuditPage';
 export { default as NotificationsAdminPage } from './NotificationsAdminPage';
 export { default as BotsPage } from './BotsPage';
 export { default as TradesAdminPage } from './TradesAdminPage';
+export { default as ReferralsAdminPage } from './ReferralsAdminPage';
+export { default as ReferralPayoutsAdminPage } from './ReferralPayoutsAdminPage';

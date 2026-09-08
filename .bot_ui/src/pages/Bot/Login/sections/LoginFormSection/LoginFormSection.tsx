@@ -17,6 +17,8 @@ export type LoginFormSectionProps = {
   serverError: string | null;
   status: FormStatus;
   isSubmitDisabled: boolean;
+  hideCreateAccount?: boolean;
+  hideForgotPassword?: boolean;
   onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onForgotPassword: () => void;
@@ -33,6 +35,8 @@ export function LoginFormSection({
   serverError,
   status,
   isSubmitDisabled,
+  hideCreateAccount = false,
+  hideForgotPassword = false,
   onEmailChange,
   onPasswordChange,
   onForgotPassword,
@@ -45,14 +49,16 @@ export function LoginFormSection({
         className={styles.form}
         footerClassName={styles.forgotRow}
         footer={
-          <Button
-            type="button"
-            variant="text-link"
-            onClick={onForgotPassword}
-            className={styles.forgotButton}
-          >
-            {copy.forgotPasswordLabel}
-          </Button>
+          hideForgotPassword ? null : (
+            <Button
+              type="button"
+              variant="text-link"
+              onClick={onForgotPassword}
+              className={styles.forgotButton}
+            >
+              {copy.forgotPasswordLabel}
+            </Button>
+          )
         }
       >
         <FormField id="login-email" label={copy.emailLabel} error={emailError}>
@@ -90,15 +96,17 @@ export function LoginFormSection({
           status={status}
           disabled={isSubmitDisabled}
         />
-        <Button
-          type="button"
-          variant="ghost"
-          fullWidth
-          onClick={onCreateAccount}
-          className={styles.secondary}
-        >
-          {copy.createAccountLabel}
-        </Button>
+        {hideCreateAccount ? null : (
+          <Button
+            type="button"
+            variant="ghost"
+            fullWidth
+            onClick={onCreateAccount}
+            className={styles.secondary}
+          >
+            {copy.createAccountLabel}
+          </Button>
+        )}
       </div>
     </form>
   );

@@ -16,7 +16,7 @@ export function ToggleRow({ label, checked, onChange, className }: ToggleRowProp
       <Text variant="body-sm" tone="body" className={styles.label}>
         {label}
       </Text>
-      <Toggle checked={checked} onChange={onChange} label={label} />
+      <Toggle checked={checked} onChange={onChange} label={label} className={styles.toggle} />
     </div>
   );
 }

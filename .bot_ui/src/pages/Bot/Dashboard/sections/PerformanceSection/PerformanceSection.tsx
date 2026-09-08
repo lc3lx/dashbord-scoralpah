@@ -1,3 +1,4 @@
+import { PerformanceChart } from '@components/molecules/PerformanceChart';
 import { Text } from '@components/atoms/Text';
 import { useT } from '@shared/i18n';
 import type { DashboardPerformance, DashboardTimeframe } from '../../types';
@@ -16,6 +17,30 @@ export function PerformanceSection({
 }: PerformanceSectionProps) {
   const t = useT();
   const empty = performance.value === '—';
+  const details = [
+    { label: t('dashboard.performance.detail.trades'), value: String(performance.details.trades) },
+    {
+      label: t('dashboard.performance.detail.wins'),
+      value: String(performance.details.wins),
+      tone: 'success' as const,
+    },
+    {
+      label: t('dashboard.performance.detail.losses'),
+      value: String(performance.details.losses),
+      tone: 'danger' as const,
+    },
+    { label: t('dashboard.performance.detail.winRate'), value: performance.details.winRate },
+    {
+      label: t('dashboard.performance.detail.profit'),
+      value: performance.details.profit,
+      tone: 'success' as const,
+    },
+    {
+      label: t('dashboard.performance.detail.loss'),
+      value: performance.details.loss,
+      tone: 'danger' as const,
+    },
+  ];
 
   return (
     <section className={styles.card} aria-label={performance.label}>
@@ -60,9 +85,11 @@ export function PerformanceSection({
         </div>
       </div>
 
-      <Text variant="caption" tone="caption" className={styles.empty}>
-        {empty ? t('dashboard.performance.empty') : t('dashboard.performance.fromTrades')}
-      </Text>
+      <PerformanceChart
+        points={performance.series}
+        details={empty ? [] : details}
+        emptyLabel={empty ? t('dashboard.performance.empty') : t('dashboard.performance.fromTrades')}
+      />
     </section>
   );
 }

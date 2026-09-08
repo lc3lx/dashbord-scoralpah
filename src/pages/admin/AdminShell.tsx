@@ -9,6 +9,8 @@ const NAV = [
   { to: ROUTES.adminBots, label: 'Bots' },
   { to: ROUTES.adminTrades, label: 'Trades' },
   { to: ROUTES.adminApprovals, label: 'Approvals' },
+  { to: ROUTES.adminReferrals, label: 'Referrals' },
+  { to: ROUTES.adminReferralPayouts, label: 'Referral Payouts' },
   { to: ROUTES.adminMarketing, label: 'Marketing' },
   { to: ROUTES.adminNotifications, label: 'Notifications' },
   { to: ROUTES.adminAudit, label: 'Audit' },

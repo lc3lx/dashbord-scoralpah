@@ -36,11 +36,25 @@ export type DashboardBalance = {
   netTodayValue: string;
 };
 
+export type DashboardPerformancePoint = {
+  label: string;
+  net: number;
+};
+
 export type DashboardPerformance = {
   label: string;
   value: string;
   timeframes: Array<{ id: DashboardTimeframe; label: string }>;
   dayLabels: string[];
+  series: DashboardPerformancePoint[];
+  details: {
+    trades: number;
+    wins: number;
+    losses: number;
+    winRate: string;
+    profit: string;
+    loss: string;
+  };
 };
 
 export type DashboardContent = {

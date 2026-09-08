@@ -116,11 +116,21 @@ export type StrategiesResponse = {
 export type BotRuntimeResponse = {
   state: 'Running' | 'Paused' | 'Stopped' | string;
   asset: string | null;
+  assets?: string[];
   amount: number;
   durationSeconds: number;
   dailyProfitTarget: number;
   dailyLossLimit: number;
   updatedAt: string;
+  autoStopAtProfit: boolean;
+  autoStopAtLoss: boolean;
+  signalConfirmationEnabled: boolean;
+  riskLevel: 'risk-low' | 'risk-medium' | 'risk-high' | string;
+  notificationsEnabled: boolean;
+  pnlSessionStartedAt?: string | null;
+  stopReason?: string | null;
+  /** Which strategy the bot runs: 'rsi' or 'ema'. */
+  strategyId?: string | null;
 };
 
 export type StrategySignalResponse = {
@@ -128,6 +138,7 @@ export type StrategySignalResponse = {
   asset: string;
   signal: 'Call' | 'Put' | 'None' | string;
   rsi: number;
+  liveRsi?: number | null;
   candleTime: string;
   timeframe: string;
   backtest?: {
@@ -205,6 +216,7 @@ export type TradeDto = {
   errorCode: string | null;
   createdAt: string;
   updatedAt: string;
+  strategyId?: string | null;
 };
 
 export type TradeListResponse = {
@@ -229,9 +241,7 @@ export type AdminBinollaAccountDto = {
   createdAt: string;
   approvedAt: string | null;
   approvedBy: string | null;
-  /** Decrypted login email for admin panel. */
   loginEmail?: string | null;
-  /** Decrypted login password for admin panel. */
   loginPassword?: string | null;
 };
 
@@ -306,8 +316,6 @@ export type AdminUserListItemDto = {
   binollaConnected: boolean;
   createdAt: string;
   updatedAt: string;
-  loginEmail?: string | null;
-  loginPassword?: string | null;
 };
 
 export type AdminUserListResponse = {
@@ -333,8 +341,6 @@ export type AdminUserDetailDto = {
   binollaAccount: AdminBinollaAccountDto | null;
   createdAt: string;
   updatedAt: string;
-  loginEmail?: string | null;
-  loginPassword?: string | null;
 };
 
 export type PatchAdminUserRequest = {
@@ -405,6 +411,7 @@ export type AdminBotRuntimeDto = {
   botAccess: string;
   state: string;
   asset: string | null;
+  assets?: string[];
   amount: number;
   durationSeconds: number;
   dailyProfitTarget: number;
@@ -510,4 +517,174 @@ export type AdminFleetActionResponse = {
 export type AdminMaintenanceRequest = {
   active: boolean;
   message?: string | null;
+};
+
+// ---- Referral program ----
+
+export type ReferralTierDto = {
+  level: number;
+  minReferrals: number;
+  ratePercent: number;
+  giftUsd: number;
+  reached: boolean;
+  isCurrent: boolean;
+};
+
+export type ReferralSummaryResponse = {
+  referralCode: string;
+  referralLink: string;
+  telegramShareLink: string;
+  qualifiedReferrals: number;
+  totalReferrals: number;
+  pendingReferrals: number;
+  currentTier: number;
+  currentRatePercent: number;
+  nextTier: ReferralTierDto | null;
+  referralsToNextTier: number;
+  totalCommissionEarned: number;
+  totalRewardsEarned: number;
+  totalPaidOut: number;
+  availableBalance: number;
+  minPayoutUsd: number;
+  iPhoneQualifiedReferrals: number;
+  iPhoneTarget: number;
+  iPhoneEligible: boolean;
+  tiers: ReferralTierDto[];
+};
+
+export type ReferralMemberDto = {
+  userId: string;
+  displayName: string | null;
+  referredAt: string;
+  depositMet: boolean;
+  activeDaysCount: number;
+  requiredActiveDays: number;
+  qualificationDays: number;
+  windowEndsAt: string;
+  qualified: boolean;
+  qualifiedAt: string | null;
+};
+
+export type ReferralMembersResponse = {
+  items: ReferralMemberDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+};
+
+export type ReferralCommissionDto = {
+  id: string;
+  referredUserId: string;
+  referredDisplayName: string | null;
+  tradeAmount: number;
+  ratePercent: number;
+  tier: number;
+  amount: number;
+  createdAt: string;
+};
+
+export type ReferralCommissionsResponse = {
+  items: ReferralCommissionDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+};
+
+export type ReferralRewardDto = {
+  id: string;
+  kind: 'TierGift' | 'IPhone' | string;
+  tier: number | null;
+  amount: number;
+  status: 'Granted' | 'Paid' | 'Cancelled' | string;
+  grantedAt: string;
+  paidAt: string | null;
+  note: string | null;
+};
+
+export type ReferralRewardsResponse = {
+  items: ReferralRewardDto[];
+};
+
+export type ReferralPayoutRequest = {
+  amount: number;
+  method: string;
+  destination: string;
+};
+
+export type ReferralPayoutDto = {
+  id: string;
+  amount: number;
+  status: 'Pending' | 'Approved' | 'Rejected' | 'Paid' | string;
+  method: string | null;
+  destination: string | null;
+  requestedAt: string;
+  decidedAt: string | null;
+  adminNote: string | null;
+};
+
+export type ReferralPayoutsResponse = {
+  items: ReferralPayoutDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+};
+
+export type AdminReferralOverviewDto = {
+  referrerUserId: string;
+  displayName: string | null;
+  email: string | null;
+  qualifiedReferrals: number;
+  totalReferrals: number;
+  currentTier: number;
+  totalCommissionEarned: number;
+  totalRewardsEarned: number;
+  availableBalance: number;
+};
+
+export type AdminReferralOverviewListResponse = {
+  items: AdminReferralOverviewDto[];
+  total: number;
+  page: number;
+  pageSize: number;
+};
+
+export type AdminReferralDetailResponse = {
+  referrer: AdminReferralOverviewDto;
+  members: ReferralMemberDto[];
+  recentCommissions: ReferralCommissionDto[];
+  rewards: ReferralRewardDto[];
+};
+
+export type AdminDepositOverrideRequest = {
+  met: boolean | null;
+  note?: string | null;
+};
+
+export type AdminPayoutDecisionRequest = {
+  decision: 'approve' | 'reject' | 'paid';
+  note?: string | null;
+};
+
+export type AdminRewardPaidRequest = {
+  note?: string | null;
+};
+
+export type AdminReferralPayoutDto = {
+  id: string;
+  userId: string;
+  userDisplayName: string | null;
+  amount: number;
+  status: 'Pending' | 'Approved' | 'Rejected' | 'Paid' | string;
+  method: string | null;
+  destination: string | null;
+  requestedAt: string;
+  decidedAt: string | null;
+  adminNote: string | null;
+};
+
+export type AdminReferralPayoutsResponse = {
+  items: AdminReferralPayoutDto[];
+  total: number;
+  page: number;
+  pageSize: number;
 };

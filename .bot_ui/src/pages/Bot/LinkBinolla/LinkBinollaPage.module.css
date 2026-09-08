@@ -140,13 +140,6 @@
   gap: var(--space-3);
 }
 
-.help {
-  margin: 0;
-  font-size: 12px;
-  line-height: 1.4;
-  color: rgba(255, 255, 255, 0.6);
-}
-
 .openedBadge {
   display: inline-flex;
   align-items: center;

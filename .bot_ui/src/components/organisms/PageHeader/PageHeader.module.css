@@ -1,19 +1,45 @@
 .header {
   display: grid;
-  grid-template-columns: var(--header-back-button-size) 1fr var(--header-back-button-size);
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
+  gap: var(--space-3);
   width: 100%;
   min-height: var(--header-back-button-size);
+  box-sizing: border-box;
+}
+
+.backButton {
+  flex-shrink: 0;
+  justify-self: start;
+}
+
+:global(html[dir='rtl']) .backButton :global(img),
+:global(html[dir='rtl']) .backIcon {
+  transform: scaleX(-1);
 }
 
 .title {
+  min-width: 0;
   font-size: var(--header-title-font-size);
   font-weight: var(--header-title-font-weight);
   line-height: var(--header-title-line-height);
   letter-spacing: var(--header-title-letter-spacing);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  justify-self: end;
+  min-width: var(--header-back-button-size);
+  max-width: 46%;
 }
 
 .spacer {
   width: var(--header-back-button-size);
   height: var(--header-back-button-size);
+  flex-shrink: 0;
 }

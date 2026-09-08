@@ -2,12 +2,29 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .toggles {
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  width: 100%;
+  min-width: 0;
+}
+
+.limitsSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.limitField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .riskSection {

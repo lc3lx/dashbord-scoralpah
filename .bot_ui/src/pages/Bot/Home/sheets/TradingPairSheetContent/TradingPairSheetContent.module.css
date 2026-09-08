@@ -8,6 +8,36 @@
   width: 100%;
 }
 
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.hint {
+  padding: 0 var(--space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.selectAllBtn {
+  flex-shrink: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-primary, #3b82f6);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
+}
+
+.selectAllBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .list {
   display: flex;
   flex-direction: column;

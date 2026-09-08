@@ -1,13 +1,14 @@
 .card {
   display: flex;
   gap: var(--card-notification-gap);
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
-  min-height: var(--card-notification-height);
-  padding: 15.18px;
+  min-height: 0;
+  padding: 12px 14px;
   background: var(--color-bg-surface-dark);
   border: var(--card-border-width) solid var(--card-border-color);
   border-radius: var(--card-border-radius);
+  box-sizing: border-box;
 }
 
 .interactive {
@@ -34,7 +35,8 @@
 
 .title {
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-lg);
+  line-height: 1.3;
+  font-size: var(--font-size-sm);
 }
 
 .timestamp {
@@ -43,7 +45,8 @@
 }
 
 .description {
-  padding-top: var(--space-1);
+  padding-top: 2px;
   color: var(--color-text-hint);
   font-weight: var(--font-weight-medium);
+  line-height: 1.35;
 }

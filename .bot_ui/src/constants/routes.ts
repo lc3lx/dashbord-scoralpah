@@ -2,6 +2,7 @@ export const ROUTES = {
   splash: '/',
   onboarding: '/onboarding',
   login: '/login',
+  demoLogin: '/demo-login',
   signup: '/signup',
   linkBinolla: '/link-binolla',
   activation: '/activation',

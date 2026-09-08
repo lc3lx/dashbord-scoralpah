@@ -43,6 +43,21 @@ function formatApprovalStatus(status: string): string {
   }
 }
 
+function formatLocalDateTime(iso: string | null | undefined): string {
+  if (!iso) return t('common.none');
+  const d = new Date(iso);
+  if (!Number.isFinite(d.getTime())) return t('common.none');
+  return d.toLocaleString(undefined, {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+}
+
 function formatBotAccessLabel(botAccess: string): string {
   switch (botAccess) {
     case 'Allowed':
@@ -114,12 +129,6 @@ function buildSnapshotFromApi(): Promise<AccountSnapshot> {
 
     menuItems.push(
       {
-        id: 'subscription',
-        label: t('account.menu.subscription'),
-        iconSrc: accountAssets.expiration,
-        route: ROUTES.subscription,
-      },
-      {
         id: 'activation-history',
         label: t('account.menu.activationHistory'),
         iconSrc: accountAssets.activationHistory,
@@ -169,7 +178,7 @@ function buildSnapshotFromApi(): Promise<AccountSnapshot> {
           id: 'email',
           label: t('account.detail.email'),
           value: email,
-          iconSrc: accountAssets.country,
+          iconSrc: accountAssets.email,
         },
         {
           id: 'telegram',
@@ -187,6 +196,12 @@ function buildSnapshotFromApi(): Promise<AccountSnapshot> {
                 ? connectedLabel
                 : notConnectedLabel,
           iconSrc: accountAssets.binollaId,
+        },
+        {
+          id: 'last-connected',
+          label: t('account.detail.lastConnected'),
+          value: formatLocalDateTime(me.binolla?.lastConnectedAt),
+          iconSrc: accountAssets.expiration,
         },
         {
           id: 'account-type',
@@ -285,6 +300,8 @@ export const accountService = {
     try {
       await binollaApi.disconnect().catch(() => undefined);
     } finally {
+      const { tradingService } = await import('../../Trading/data/tradingService');
+      tradingService.resetRuntime();
       tokenStore.clear();
       cachedSnapshot = null;
       notifyListeners();

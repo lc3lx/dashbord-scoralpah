@@ -77,6 +77,21 @@ export async function login(credentials: LoginCredentials): Promise<AuthSession>
   }
 }
 
+/** Marketing demo accounts only — separate URL from normal /login. */
+export async function loginDemo(credentials: LoginCredentials): Promise<AuthSession> {
+  try {
+    const result = await authApi.demoLogin({
+      email: credentials.email.trim(),
+      password: credentials.password,
+    });
+    const session = storeSession(result);
+    await linkTelegramIfAvailable();
+    return session;
+  } catch (error) {
+    throw toAuthError(error);
+  }
+}
+
 export async function signup(payload: SignupPayload): Promise<AuthSession> {
   try {
     const result = await authApi.register({
@@ -103,6 +118,7 @@ export const authService = {
   loginWithTelegram,
   linkTelegramIfAvailable,
   login,
+  loginDemo,
   signup,
   activate,
 };

@@ -16,8 +16,6 @@ export function HomeHeaderSection({ content }: HomeHeaderSectionProps) {
 
   return (
     <HomeHeader
-      title={content.title}
-      subtitle={content.subtitle}
       className={styles.section}
       action={
         notificationAction ? (

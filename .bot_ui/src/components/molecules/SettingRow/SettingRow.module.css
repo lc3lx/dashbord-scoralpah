@@ -4,10 +4,14 @@
   gap: var(--space-5);
   width: 100%;
   padding: var(--space-9);
-  background: var(--gradient-button-primary);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01));
   border: none;
   border-radius: var(--radius-card);
   text-align: start;
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard);
 }
 
 .interactive {
@@ -21,8 +25,15 @@
 
 .home {
   gap: var(--home-setting-row-gap);
-  background: var(--color-red-nav);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.012));
   border: 1.18px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.interactive:hover,
+.interactive:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.14);
 }
 
 .iconWrap {
@@ -70,9 +81,15 @@
 .homeValue {
   font-size: var(--font-size-md);
   line-height: 21px;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-semibold);
 }
 
 .chevron {
   flex-shrink: 0;
+  width: 6px;
+  height: 10px;
+}
+
+:global(html[dir='rtl']) .chevron {
+  transform: scaleX(-1);
 }

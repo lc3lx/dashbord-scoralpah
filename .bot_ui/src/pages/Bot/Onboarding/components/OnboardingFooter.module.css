@@ -44,6 +44,10 @@
   height: var(--onboarding-next-chevron-height);
 }
 
+:global(html[dir='rtl']) .backChevron {
+  transform: scaleX(-1);
+}
+
 .nextButtonCompact {
   display: inline-flex;
   align-items: center;
@@ -91,4 +95,8 @@
 .nextChevron {
   width: var(--onboarding-next-chevron-width);
   height: var(--onboarding-next-chevron-height);
+}
+
+:global(html[dir='rtl']) .nextChevron {
+  transform: scaleX(-1);
 }

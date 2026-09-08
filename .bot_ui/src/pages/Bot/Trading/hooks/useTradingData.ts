@@ -14,6 +14,7 @@ export function useTradingData() {
   const [data, setData] = useState<TradingData | null>(() => readCachedPageData(cacheKey));
 
   const reload = useCallback(async () => {
+    invalidatePageData(cacheKey);
     const next = await tradingService.fetchTradingData();
     storePageData(cacheKey, next, PAGE_CACHE_TTL.trading);
     setData(next);

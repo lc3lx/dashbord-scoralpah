@@ -6,7 +6,7 @@ import styles from './NotificationsHeaderSection.module.css';
 
 export type NotificationsHeaderSectionProps = {
   onBack: () => void;
-  onMarkAll: () => void;
+  onMarkAll: () => void | Promise<void>;
 };
 
 export function NotificationsHeaderSection({
@@ -20,8 +20,8 @@ export function NotificationsHeaderSection({
       title={content.title}
       onBack={onBack}
       action={
-        <Button variant="text-link" className={styles.markAll} onClick={onMarkAll}>
-          <Text variant="caption-xs" tone="link">
+        <Button variant="text-link" className={styles.markAll} onClick={() => void onMarkAll()}>
+          <Text variant="caption-xs" tone="link" className={styles.markAllLabel}>
             {content.markAllLabel}
           </Text>
         </Button>

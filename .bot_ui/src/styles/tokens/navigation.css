@@ -6,13 +6,13 @@
   --nav-bottom-background: #000000;
   --nav-bottom-height: var(--layout-bottom-nav-height);
   --nav-bottom-bar-height: var(--layout-bottom-nav-bar-height);
-  --nav-bottom-inset-left: 10px;
-  --nav-bottom-inset-right: 11px;
-  --nav-bottom-column-gap: 5px;
+  --nav-bottom-inset-left: 0px;
+  --nav-bottom-inset-right: 0px;
+  --nav-bottom-column-gap: 2px;
   --nav-bottom-fab-zone-width: 91px;
   --nav-bottom-item-width: var(--layout-bottom-nav-item-width);
   --nav-bottom-item-height: var(--layout-bottom-nav-item-height);
-  --nav-bottom-item-padding-x: 15px;
+  --nav-bottom-item-padding-x: 2px;
   --nav-bottom-item-padding-y: 12.5px;
   --nav-bottom-item-gap: 5px;
 
@@ -27,7 +27,7 @@
   --nav-fab-shadow: var(--shadow-fab);
   --nav-fab-background: var(--gradient-fab);
 
-  --nav-label-font-size: var(--font-size-xs);
+  --nav-label-font-size: 9px;
   --nav-label-font-weight: var(--font-weight-bold);
   --nav-label-line-height: normal;
   --nav-label-color-active: var(--color-text-nav-active);

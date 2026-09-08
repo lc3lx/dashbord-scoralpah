@@ -32,10 +32,11 @@
   width: 100%;
   height: var(--nav-label-height);
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: clip;
   white-space: nowrap;
   text-align: center;
   font-weight: var(--font-weight-bold);
   font-size: var(--nav-label-font-size);
   line-height: var(--nav-label-height);
+  letter-spacing: 0;
 }

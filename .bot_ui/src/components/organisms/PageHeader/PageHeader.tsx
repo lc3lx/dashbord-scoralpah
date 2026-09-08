@@ -19,8 +19,13 @@ export function PageHeader({ title, onBack, action, className }: PageHeaderProps
   return (
     <header className={cn(styles.header, className)}>
       {onBack ? (
-        <Button variant="icon" onClick={onBack} aria-label={t('common.goBack')}>
-          <Icon src={uiAssets.back} size="sm" />
+        <Button
+          variant="icon"
+          className={styles.backButton}
+          onClick={onBack}
+          aria-label={t('common.goBack')}
+        >
+          <Icon src={uiAssets.back} size="sm" className={styles.backIcon} />
         </Button>
       ) : (
         <span className={styles.spacer} />
@@ -28,7 +33,7 @@ export function PageHeader({ title, onBack, action, className }: PageHeaderProps
       <Text variant="h2" tone="body" align="center" className={styles.title}>
         {title}
       </Text>
-      {action ?? <span className={styles.spacer} />}
+      <div className={styles.action}>{action ?? <span className={styles.spacer} />}</div>
     </header>
   );
 }

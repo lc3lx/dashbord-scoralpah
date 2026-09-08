@@ -2,6 +2,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
+  max-width: 100%;
   min-height: var(--home-option-chip-height);
   padding: 7.18px var(--home-option-chip-padding-x);
   border: 1.18px solid rgba(255, 255, 255, 0.1);
@@ -12,12 +14,28 @@
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   line-height: var(--line-height-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
   cursor: pointer;
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    background-color var(--duration-fast) var(--easing-standard),
+    border-color var(--duration-fast) var(--easing-standard),
+    color var(--duration-fast) var(--easing-standard);
 }
 
 .chip:focus-visible {
   outline: 2px solid var(--color-text-primary);
   outline-offset: 2px;
+}
+
+.chip:hover,
+.chip:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--color-text-primary);
 }
 
 .selected {

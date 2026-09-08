@@ -1,4 +1,5 @@
 import {
+  bucketPerformance,
   formatMoneyPlain,
   formatSignedMoney,
   formatWinRate,
@@ -115,6 +116,18 @@ function applyTradeAggregates(
   content.performance.value =
     performance.count === 0 ? '—' : formatSignedMoney(performance.net);
   content.performance.dayLabels = [];
+  content.performance.series = bucketPerformance(trades, timeframe).map((bucket) => ({
+    label: bucket.label,
+    net: bucket.net,
+  }));
+  content.performance.details = {
+    trades: performance.count,
+    wins: performance.wins,
+    losses: performance.losses,
+    winRate: formatWinRate(performance.wins, performance.settled),
+    profit: formatSignedMoney(performance.profit),
+    loss: performance.lossAbs > 0 ? formatSignedMoney(-performance.lossAbs) : '$0.00',
+  };
 }
 
 export const dashboardService = {
@@ -178,6 +191,7 @@ export const dashboardService = {
     const next = structuredClone(content);
     if (!next.tradeSnapshot.length) {
       next.performance.value = '—';
+      next.performance.series = [];
       return next;
     }
     applyTradeAggregates(next, next.tradeSnapshot, next.tradeSnapshot.length, timeframe);

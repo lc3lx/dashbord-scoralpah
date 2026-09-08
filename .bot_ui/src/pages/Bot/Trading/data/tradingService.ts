@@ -23,18 +23,21 @@ import {
 import { MARKET_FETCH_MS, timedSignal } from '@shared/api/timedSignal';
 import { getAccountStatusCached } from '@shared/api/botSessionCache';
 import { pickPreferredMarketAsset, isPreferredMarketSymbol } from '@shared/market/preferAsset';
+import { tokenStore } from '@shared/auth/tokenStore';
 import { t } from '@shared/i18n';
 
-const SELECTED_ASSET_KEY = 'scar-alpha-selected-asset';
+const SELECTED_ASSET_KEY_PREFIX = 'scar-alpha-selected-asset';
 
 let runtimeState: TradingRuntimeState = {
   ...TRADING_INITIAL_RUNTIME,
   candlePeriodId: sanitizeCandlePeriodId(TRADING_INITIAL_RUNTIME.candlePeriodId),
 };
 /** Last asset symbol confirmed from Binolla assets API — never invent a pair. */
-let selectedAsset: string | null = readStoredAsset();
+let selectedAsset: string | null = null;
 /** True after the user picks a pair in the UI this session — honor any available sticky. */
 let userChosePair = false;
+/** Bound to tokenStore user so module state never leaks across accounts. */
+let boundUserId: string | null = null;
 /** Prevent overlapping full refreshes from aborting each other. */
 let fetchInFlight: Promise<TradingData> | null = null;
 let livePriceInFlight = false;
@@ -45,9 +48,13 @@ let lastLivePrice: number | null = null;
 /** In-memory candle series from ticks — survives server refreshes that lag a period behind. */
 let liveCandleSeries: CandlestickPoint[] = [];
 
-function readStoredAsset(): string | null {
+function selectedAssetStorageKey(userId: string | null): string {
+  return `${SELECTED_ASSET_KEY_PREFIX}:${userId ?? 'anonymous'}`;
+}
+
+function readStoredAsset(userId: string | null): string | null {
   try {
-    const v = localStorage.getItem(SELECTED_ASSET_KEY);
+    const v = localStorage.getItem(selectedAssetStorageKey(userId));
     return v && v.trim() ? v.trim() : null;
   } catch {
     return null;
@@ -56,11 +63,42 @@ function readStoredAsset(): string | null {
 
 function persistSelectedAsset(symbol: string | null): void {
   try {
-    if (!symbol) localStorage.removeItem(SELECTED_ASSET_KEY);
-    else localStorage.setItem(SELECTED_ASSET_KEY, symbol);
+    const key = selectedAssetStorageKey(boundUserId ?? tokenStore.getUserId());
+    if (!symbol) localStorage.removeItem(key);
+    else localStorage.setItem(key, symbol);
   } catch {
     /* ignore quota / private mode */
   }
+}
+
+/** Drop in-memory candles/pair when the signed-in user changes (or logs out). */
+function ensureUserIsolation(): void {
+  const userId = tokenStore.getUserId();
+  if (userId === boundUserId) return;
+  // #region agent log
+  fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '1892a4' },
+    body: JSON.stringify({
+      sessionId: '1892a4',
+      runId: 'user-iso',
+      hypothesisId: 'ISO1',
+      location: 'tradingService.ts:ensureUserIsolation',
+      message: 'trading_state_reset_for_user',
+      data: { from: boundUserId ? boundUserId.slice(0, 8) : null, to: userId ? userId.slice(0, 8) : null },
+      timestamp: Date.now(),
+    }),
+  }).catch(() => {});
+  // #endregion
+  boundUserId = userId;
+  runtimeState = {
+    ...TRADING_INITIAL_RUNTIME,
+    candlePeriodId: sanitizeCandlePeriodId(TRADING_INITIAL_RUNTIME.candlePeriodId),
+  };
+  selectedAsset = readStoredAsset(userId);
+  userChosePair = false;
+  liveCandleSeries = [];
+  lastLivePrice = null;
 }
 
 function formatPairLabel(symbol: string, name?: string): string {
@@ -369,6 +407,7 @@ export const tradingService = {
   },
 
   async fetchTradingDataInner(): Promise<TradingData> {
+    ensureUserIsolation();
     const content = structuredClone(getTradingMockContent());
     content.binollaCard.candleData = [];
     content.binollaCard.balanceValue = '—';
@@ -455,8 +494,20 @@ export const tradingService = {
       }));
       content.binollaCard.pairOptions = pairOptions;
 
+      // Open Running trade wins: open the chart on that pair when entering Trading.
+      const activeAssetSymbol = content.binollaCard.activeTrade?.asset?.trim() || null;
+      const activeAssetMatch = activeAssetSymbol
+        ? liveAssets.find(
+            (a) =>
+              a.symbol.toLowerCase() === activeAssetSymbol.toLowerCase() ||
+              a.symbol.toLowerCase() === `${activeAssetSymbol}_otc`.toLowerCase() ||
+              a.symbol.replace(/_otc$/i, '').toLowerCase() ===
+                activeAssetSymbol.replace(/_otc$/i, '').toLowerCase(),
+          )
+        : undefined;
+
       const stickyRaw =
-        selectedAsset != null
+        !activeAssetMatch && selectedAsset != null
           ? liveAssets.find(
               (a) =>
                 a.symbol === selectedAsset && (a.available === undefined || a.available),
@@ -482,6 +533,7 @@ export const tradingService = {
             sticky.symbol.replace('/', ''),
           ));
       const preferred =
+        activeAssetMatch ??
         (stickyUsable ? sticky : undefined) ??
         pickPreferredMarketAsset(liveAssets) ??
         liveAssets.find((a) => a.available) ??
@@ -492,29 +544,28 @@ export const tradingService = {
         lastLivePrice = null;
       }
       selectedAsset = firstAsset;
+      if (activeAssetMatch) userChosePair = false;
       persistSelectedAsset(firstAsset);
 
       // #region agent log
       fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '660ec2' },
+        headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '1892a4' },
         body: JSON.stringify({
-          sessionId: '660ec2',
-          runId: 'pairs-debug',
-          hypothesisId: 'H2',
+          sessionId: '1892a4',
+          runId: 'trade-pair',
+          hypothesisId: 'PAIR1',
           location: 'tradingService.ts:fetchTradingDataInner',
           message: 'trading_assets_selected',
           data: {
             browse,
             apiCount: liveAssets.length,
-            availableCount: liveAssets.filter((a) => a.available).length,
-            sample: liveAssets.slice(0, 10).map((a) => a.symbol),
             selected: firstAsset,
+            activeTradeAsset: activeAssetSymbol,
+            followedActive: Boolean(activeAssetMatch),
             stickyHit: Boolean(stickyUsable),
-            stickyRejected: Boolean(sticky && !stickyUsable) ? selectedAsset : null,
-            hasPairSwitcherInPayload: pairOptions.length > 0,
+            userId: (boundUserId ?? '').slice(0, 8) || null,
             assetsErrorCode,
-            marketFetchMs: MARKET_FETCH_MS,
           },
           timestamp: Date.now(),
         }),
@@ -612,7 +663,30 @@ export const tradingService = {
 
         if (rsi) {
           const mapped = formatSignal(rsi.signal);
-          content.signalCard.freshLabel = `RSI ${rsi.rsi.toFixed(2)}`;
+          const liveRsi = Number(rsi.liveRsi ?? rsi.rsi);
+          const liveRsiLabel = Number.isFinite(liveRsi) ? liveRsi.toFixed(2) : '—';
+          // #region agent log
+          fetch('http://127.0.0.1:7892/ingest/aea6d51e-f3e9-4c7e-b6b4-db55c4306e97', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': '1892a4' },
+            body: JSON.stringify({
+              sessionId: '1892a4',
+              runId: 'post-fix',
+              hypothesisId: 'H-E',
+              location: 'tradingService.ts:signalCard',
+              message: 'display_live_rsi',
+              data: {
+                asset: firstAsset,
+                displayed: liveRsiLabel,
+                liveRsi: rsi.liveRsi ?? null,
+                closedRsi: rsi.rsi,
+                signal: rsi.signal,
+              },
+              timestamp: Date.now(),
+            }),
+          }).catch(() => {});
+          // #endregion
+          content.signalCard.freshLabel = `RSI ${liveRsiLabel}`;
           content.signalCard.freshTone =
             rsi.signal.toLowerCase() === 'none' ? 'neutral' : 'success';
           content.signalCard.stats = [
@@ -622,7 +696,7 @@ export const tradingService = {
               value: mapped.value,
               valueTone: mapped.tone,
             },
-            { id: 'strength', label: t('common.rsi'), value: rsi.rsi.toFixed(2) },
+            { id: 'strength', label: t('common.liveRsi'), value: liveRsiLabel },
             { id: 'indicator', label: t('trading.indicator'), value: t('common.rsi') },
             { id: 'strategy', label: t('trading.strategy'), value: t('common.rsi') },
             { id: 'market', label: t('trading.market'), value: firstAsset },
@@ -670,6 +744,7 @@ export const tradingService = {
 
   /** Lightweight tick: update last candle + price from live quote only. */
   async fetchLivePrice(): Promise<number | null> {
+    ensureUserIsolation();
     // Skip until chart has candles — short aborts (~4s) were cancelling quote waits
     // and thrashing asset/change while history was still loading.
     if (!selectedAsset || fetchInFlight || livePriceInFlight || liveCandleSeries.length === 0)
@@ -850,6 +925,9 @@ export const tradingService = {
     runtimeState = { ...TRADING_INITIAL_RUNTIME };
     selectedAsset = null;
     userChosePair = false;
+    liveCandleSeries = [];
+    lastLivePrice = null;
     persistSelectedAsset(null);
+    boundUserId = tokenStore.getUserId();
   },
 };

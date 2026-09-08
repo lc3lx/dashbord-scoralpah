@@ -21,6 +21,21 @@
   flex-shrink: 0;
 }
 
+.avatarButton {
+  position: relative;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.avatarButton:focus-visible {
+  outline: 2px solid var(--color-red-primary);
+  outline-offset: 2px;
+  border-radius: var(--account-card-radius);
+}
+
 .avatar {
   display: flex;
   align-items: center;
@@ -29,11 +44,22 @@
   height: var(--account-profile-avatar-size);
   border-radius: var(--account-card-radius);
   background: var(--color-red-primary);
+  overflow: hidden;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fileInput {
+  display: none;
 }
 
 .editBadge {
   position: absolute;
-  right: -4px;
+  inset-inline-end: -4px;
   bottom: -4px;
   display: flex;
   align-items: center;
@@ -42,6 +68,7 @@
   height: 26px;
   border-radius: 999px;
   background: var(--color-text-primary);
+  pointer-events: none;
 }
 
 .meta {

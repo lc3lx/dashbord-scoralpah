@@ -10,7 +10,7 @@ export type {
   ActivationFormValues,
   FieldErrors,
 } from './types';
-export { authService, login, signup, activate, loginWithTelegram, linkTelegramIfAvailable } from './services/authService';
+export { authService, login, loginDemo, signup, activate, loginWithTelegram, linkTelegramIfAvailable } from './services/authService';
 export { useAuthForm } from './hooks/useAuthForm';
 export type { UseAuthFormOptions, UseAuthFormResult } from './hooks/useAuthForm';
 export {

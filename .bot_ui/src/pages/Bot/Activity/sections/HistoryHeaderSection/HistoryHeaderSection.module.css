@@ -1,7 +1,7 @@
 .section {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
   min-height: 42px;
 }
@@ -11,16 +11,4 @@
   font-weight: var(--font-weight-extrabold);
   line-height: 32.2px;
   letter-spacing: -0.56px;
-}
-
-.filterButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 42px;
-  height: 42px;
-  overflow: hidden;
-  background: var(--color-bg-surface);
-  border: 0;
-  border-radius: 50%;
 }

@@ -26,8 +26,90 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  gap: var(--space-5);
   width: 100%;
   padding-bottom: var(--home-scroll-padding-bottom);
+}
+
+.heroStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  animation: section-enter var(--duration-normal) var(--easing-standard);
+}
+
+.surface,
+.footerPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: var(--space-8);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0))
+    var(--color-bg-surface-dark);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-panel);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  animation: section-enter var(--duration-normal) var(--easing-standard);
+}
+
+.surfaceHeader,
+.footerHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.surfaceCopy {
+  max-width: 44ch;
+}
+
+.configGrid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.footerPanel {
+  position: relative;
+  overflow: hidden;
+}
+
+.footerPanel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(221, 9, 18, 0.12), transparent 42%);
+  pointer-events: none;
+}
+
+.footerButtons {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.footerButton {
+  transition:
+    transform var(--duration-fast) var(--easing-standard),
+    box-shadow var(--duration-fast) var(--easing-standard),
+    opacity var(--duration-fast) var(--easing-standard);
+}
+
+.footerButton:not(:disabled):hover,
+.footerButton:not(:disabled):focus-visible {
+  transform: translateY(-1px);
+}
+
+.footerButton:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.feedback {
+  position: relative;
+  z-index: 1;
+  display: block;
 }
 
 .loading {
@@ -36,4 +118,16 @@
   color: var(--color-text-secondary, #9aa3b2);
   font-family: var(--font-family-primary);
   font-size: var(--font-size-md);
+}
+
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

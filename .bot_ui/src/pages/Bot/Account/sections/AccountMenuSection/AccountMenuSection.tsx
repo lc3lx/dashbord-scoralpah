@@ -42,7 +42,7 @@ export function AccountMenuSection({
               {item.badge && (
                 <Badge label={item.badge.label} tone={item.badge.tone} style="outlined" />
               )}
-              <Icon src={uiAssets.chevronNav} size="xs" decorative className={styles.chevron} />
+              <Icon src={uiAssets.nextChevron} size="xs" decorative className={styles.chevron} />
             </span>
           </button>
         ))}

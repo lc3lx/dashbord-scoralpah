@@ -164,3 +164,90 @@ export function formatWinRate(wins: number, settled: number): string {
   if (settled <= 0) return '—';
   return `${displayWinRatePercent(wins, settled).toFixed(1)}%`;
 }
+
+export type PerformanceBucket = {
+  label: string;
+  net: number;
+  count: number;
+};
+
+function pad2(n: number): string {
+  return String(n).padStart(2, '0');
+}
+
+function lastIndexWhere<T>(items: T[], predicate: (item: T) => boolean): number {
+  for (let i = items.length - 1; i >= 0; i -= 1) {
+    if (predicate(items[i]!)) return i;
+  }
+  return -1;
+}
+
+/** Real P/L buckets from settled server trades — used by the performance chart. */
+export function bucketPerformance(
+  trades: TradeDto[],
+  timeframe: TradeAggTimeframe,
+  now = new Date(),
+): PerformanceBucket[] {
+  const since = timeframeStart(timeframe, now);
+  const sinceMs = since?.getTime();
+  const settled = trades.filter((trade) => {
+    const created = new Date(trade.createdAt).getTime();
+    if (Number.isNaN(created)) return false;
+    if (sinceMs !== undefined && created < sinceMs) return false;
+    return isSettledStatus(trade.status);
+  });
+
+  const buckets = new Map<string, PerformanceBucket & { sort: number }>();
+  const ensure = (key: string, label: string, sort: number) => {
+    const existing = buckets.get(key);
+    if (existing) return existing;
+    const created = { label, net: 0, count: 0, sort };
+    buckets.set(key, created);
+    return created;
+  };
+
+  if (timeframe === 'today') {
+    for (let hour = 0; hour < 24; hour += 1) {
+      ensure(`h-${hour}`, `${pad2(hour)}:00`, hour);
+    }
+    for (const trade of settled) {
+      const hour = new Date(trade.createdAt).getHours();
+      const bucket = ensure(`h-${hour}`, `${pad2(hour)}:00`, hour);
+      bucket.net += trade.pnl ?? 0;
+      bucket.count += 1;
+    }
+    const rows = [...buckets.values()].sort((a, b) => a.sort - b.sort);
+    const first = rows.findIndex((row) => row.count > 0);
+    const last = lastIndexWhere(rows, (row) => row.count > 0);
+    if (first < 0 || last < 0) return [];
+    return rows.slice(first, last + 1).map(({ label, net, count }) => ({ label, net, count }));
+  }
+
+  const start =
+    since ??
+    (() => {
+      const times = settled
+        .map((trade) => new Date(trade.createdAt).getTime())
+        .filter((ms) => Number.isFinite(ms));
+      if (times.length === 0) return startOfLocalDay(now);
+      return startOfLocalDay(new Date(Math.min(...times)));
+    })();
+  const end = startOfLocalDay(now);
+  for (const cursor = new Date(start); cursor.getTime() <= end.getTime(); cursor.setDate(cursor.getDate() + 1)) {
+    const key = `${cursor.getFullYear()}-${pad2(cursor.getMonth() + 1)}-${pad2(cursor.getDate())}`;
+    const label = `${pad2(cursor.getDate())}/${pad2(cursor.getMonth() + 1)}`;
+    ensure(key, label, cursor.getTime());
+  }
+  for (const trade of settled) {
+    const created = new Date(trade.createdAt);
+    const key = `${created.getFullYear()}-${pad2(created.getMonth() + 1)}-${pad2(created.getDate())}`;
+    const bucket = buckets.get(key);
+    if (!bucket) continue;
+    bucket.net += trade.pnl ?? 0;
+    bucket.count += 1;
+  }
+
+  return [...buckets.values()]
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ label, net, count }) => ({ label, net, count }));
+}

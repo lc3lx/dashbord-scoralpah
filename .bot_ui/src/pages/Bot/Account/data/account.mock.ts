@@ -134,13 +134,6 @@ export function getSeedAccountSnapshot(): AccountSnapshot {
         route: ROUTES.changePassword,
       },
       {
-        id: 'subscription',
-        label: t('account.menu.subscription'),
-        iconSrc: accountAssets.expiration,
-        route: ROUTES.subscription,
-        badge: { label: t('common.active'), tone: 'success' },
-      },
-      {
         id: 'activation-history',
         label: t('account.menu.activationHistory'),
         iconSrc: accountAssets.activationHistory,
