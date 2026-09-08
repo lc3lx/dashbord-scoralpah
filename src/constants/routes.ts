@@ -14,6 +14,14 @@ export const ROUTES = {
   onboarding: '/onboarding',
   login: '/login',
   signup: '/signup',
+  /**
+   * Not a real dashboard route — this key exists only because `@constants/routes` is
+   * pinned to this file (see tsconfig.app.json `paths`), which also shadows the vendored
+   * bot UI's own ROUTES for that same alias. Pages vendored from bot_telegram_webapp
+   * (e.g. AdminPage.tsx) reference `ROUTES.demoLogin` to build a share URL string; keep
+   * this in sync with that project's `/demo-login` path so the shared import still compiles.
+   */
+  demoLogin: '/demo-login',
   linkBinolla: '/link-binolla',
   activation: '/activation',
   /** Main dashboard home at /dashboard/ */

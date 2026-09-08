@@ -316,6 +316,10 @@ export type AdminUserListItemDto = {
   binollaConnected: boolean;
   createdAt: string;
   updatedAt: string;
+  /** Decrypted login email for admin panel. */
+  loginEmail?: string | null;
+  /** Decrypted login password for admin panel. */
+  loginPassword?: string | null;
 };
 
 export type AdminUserListResponse = {
@@ -341,6 +345,10 @@ export type AdminUserDetailDto = {
   binollaAccount: AdminBinollaAccountDto | null;
   createdAt: string;
   updatedAt: string;
+  /** Decrypted login email for admin panel. */
+  loginEmail?: string | null;
+  /** Decrypted login password for admin panel. */
+  loginPassword?: string | null;
 };
 
 export type PatchAdminUserRequest = {
@@ -411,6 +419,7 @@ export type AdminBotRuntimeDto = {
   botAccess: string;
   state: string;
   asset: string | null;
+  /** Pairs the bot watches. */
   assets?: string[];
   amount: number;
   durationSeconds: number;
@@ -418,8 +427,6 @@ export type AdminBotRuntimeDto = {
   dailyLossLimit: number;
   updatedAt: string;
   isMarketingDemo: boolean;
-  /** Pairs the bot watches. */
-  assets?: string[];
   /** Strategy the bot runs (rsi, ema, alt5, smart…). */
   strategyId?: string | null;
 };
